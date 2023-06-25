@@ -9,8 +9,11 @@ class RouteGenerator {
       case '/':
         return MaterialPageRoute(builder: (context) => const HomeScreen());
       case '/create_flashcards':
+        var uuid = settings.arguments as String;
         return MaterialPageRoute(
-            builder: (context) => const CreateFlashcardsScreen());
+            builder: (context) => CreateFlashcardsScreen(
+                  collectionUuid: uuid,
+                ));
       default:
         return MaterialPageRoute(
           builder: (context) => const CustomErrorWidget(),

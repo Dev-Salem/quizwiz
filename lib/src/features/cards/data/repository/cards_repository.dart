@@ -10,10 +10,10 @@ class CardsRepository extends BaseCardsRepository {
 
   @override
   EitherUnit addFlashcard(
-      String question, String answer, int collectionId) async {
+      String question, String answer, String collectionUuid) async {
     try {
       final result =
-          await _dataSource.addFlashcard(question, answer, collectionId);
+          await _dataSource.addFlashcard(question, answer, collectionUuid);
       return Right(result);
     } on Exception catch (e) {
       return Left(LocalStorageFailure(message: e.toString()));

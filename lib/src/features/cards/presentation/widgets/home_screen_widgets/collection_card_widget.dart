@@ -37,8 +37,9 @@ class CollectionCardWidget extends StatelessWidget {
                   OutlinedButton(
                       onPressed: () {}, child: const Text('Practice')),
                   FilledButton(
-                      onPressed: () =>
-                          Navigator.of(context).pushNamed('/create_flashcards'),
+                      onPressed: () => Navigator.of(context).pushNamed(
+                          '/create_flashcards',
+                          arguments: collection.uuid),
                       child: const Text("Add Cards"))
                 ],
               ),

@@ -9,7 +9,8 @@ abstract class BaseLocalDataSource {
   Future<List<FlashcardCollection>> getCollections();
 
   Future<Unit> createCollection(String name, {description = ''});
-  Future<Unit> addFlashcard(String question, String answer, int collectionId);
+  Future<Unit> addFlashcard(
+      String question, String answer, String collectionUuid);
 
   Future<Unit> removeCollection(String uuid);
 }
@@ -19,13 +20,17 @@ class IsarDataSource extends BaseLocalDataSource {
   final uuid = const Uuid();
   @override
   Future<Unit> addFlashcard(
-      String question, String answer, int collectionId) async {
+      String question, String answer, String collectionUuid) async {
     final flashcard =
         Flashcard(question: question, answer: answer, uuid: uuid.v4());
     _instance.writeTxn(() async {
-      final collection = await _instance.flashcardCollections.get(collectionId);
-      collection!.cards.add(flashcard);
-      await _instance.flashcardCollections.put(collection);
+      final collection =
+          await _instance.flashcardCollections.getByUuid(collectionUuid);
+      List<Flashcard> cards = [];
+      cards.addAll(collection!.cards);
+      cards.add(flashcard);
+      await _instance.flashcardCollections
+          .put(collection.copyWith(cards: cards));
     }).onError((error, stackTrace) =>
         throw LocalStorageException(message: error.toString()));
     return unit;

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:quizwiz/src/features/cards/controller/controller.dart';
 
 class CreateFlashcardsScreen extends StatefulWidget {
-  const CreateFlashcardsScreen({super.key});
+  final String collectionUuid;
+  const CreateFlashcardsScreen({super.key, required this.collectionUuid});
 
   @override
   State<CreateFlashcardsScreen> createState() => _CreateFlashcardsScreenState();
@@ -26,6 +27,15 @@ class _CreateFlashcardsScreenState extends State<CreateFlashcardsScreen> {
     super.dispose();
   }
 
+  _addFlashcard() {
+    if (key.currentState!.validate()) {
+      context.read<CardsBloc>().add(AddFlashcardsEvent(
+          collectionUuid: widget.collectionUuid,
+          front: frontController.text,
+          back: backController.text));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +44,7 @@ class _CreateFlashcardsScreenState extends State<CreateFlashcardsScreen> {
         ),
         body: LayoutBuilder(
             builder: (context, size) => ListView(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
                   children: [
                     SizedBox(
                       height: size.maxHeight * 0.2,
@@ -74,14 +84,18 @@ class _CreateFlashcardsScreenState extends State<CreateFlashcardsScreen> {
                     SizedBox(height: size.maxHeight * 0.2),
                     FilledButton(
                         onPressed: () {
-                          key.currentState?.validate();
+                          _addFlashcard();
+                          Navigator.of(context).pushNamed('/');
                         },
                         child: const Text("Add Card")),
                     const SizedBox(
                       height: 20,
                     ),
                     FilledButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          _addFlashcard();
+                          Navigator.of(context).pushNamed('/create_flashcards');
+                        },
                         child: const Text("Add Another Card")),
                   ],
                 )));

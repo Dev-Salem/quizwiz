@@ -15,6 +15,7 @@ class CardsBloc extends Bloc<CardsEvents, CollectionState> {
     on<GetCollectionsEvent>(_getCollections);
     on<RemoveCollectionEvent>(_removeCollection);
     on<CreateCollectionsEvent>(_createCollections);
+    on<AddFlashcardsEvent>(_addFlashcards);
     collectionStream.listen((event) {
       add(GetCollectionsEvent());
     });
@@ -48,6 +49,19 @@ class CardsBloc extends Bloc<CardsEvents, CollectionState> {
     emit(state.copyWith(requestState: RequestState.loading));
     final result = await _baseCardsRepository.createCollection(event.name,
         description: event.description);
+    result.fold(
+        (l) => emit(state.copyWith(
+            errorMessage: l.message, requestState: RequestState.error)),
+        (r) => emit(state.copyWith(
+              requestState: RequestState.success,
+            )));
+  }
+
+  _addFlashcards(
+      AddFlashcardsEvent event, Emitter<CollectionState> emit) async {
+    emit(state.copyWith(requestState: RequestState.loading));
+    final result = await _baseCardsRepository.addFlashcard(
+        event.front, event.back, event.collectionUuid);
     result.fold(
         (l) => emit(state.copyWith(
             errorMessage: l.message, requestState: RequestState.error)),
