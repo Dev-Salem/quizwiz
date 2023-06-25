@@ -5,7 +5,9 @@ import 'package:dartz/dartz.dart';
 import 'package:uuid/uuid.dart';
 
 abstract class BaseLocalDataSource {
-  Future<List<Flashcard>> getFlashcards(int collectionId);
+  Future<List<Flashcard>> getDueReviewCards(
+    FlashcardCollection collection,
+  );
   Future<List<FlashcardCollection>> getCollections();
 
   Future<Unit> createCollection(String name, {description = ''});
@@ -59,12 +61,13 @@ class IsarDataSource extends BaseLocalDataSource {
   }
 
   @override
-  Future<List<Flashcard>> getFlashcards(int collectionId) async {
-    final collection = await _instance.flashcardCollections
-        .get(collectionId)
-        .onError((error, stackTrace) =>
-            throw LocalStorageException(message: error.toString()));
-    return collection!.cards;
+  Future<List<Flashcard>> getDueReviewCards(
+      FlashcardCollection collection) async {
+    final cards = collection.cards
+        .where((card) => DateTime.fromMillisecondsSinceEpoch(card.dueTime)
+            .isBefore(DateTime.now()))
+        .toList();
+    return cards;
   }
 
   @override

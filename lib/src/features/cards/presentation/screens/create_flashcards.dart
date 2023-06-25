@@ -27,13 +27,15 @@ class _CreateFlashcardsScreenState extends State<CreateFlashcardsScreen> {
     super.dispose();
   }
 
-  _addFlashcard() {
+  bool _addFlashcard() {
     if (key.currentState!.validate()) {
       context.read<CardsBloc>().add(AddFlashcardsEvent(
           collectionUuid: widget.collectionUuid,
           front: frontController.text,
           back: backController.text));
+      return true; //if card was added successfully, return true to navigate
     }
+    return false;
   }
 
   @override
@@ -84,8 +86,9 @@ class _CreateFlashcardsScreenState extends State<CreateFlashcardsScreen> {
                     SizedBox(height: size.maxHeight * 0.2),
                     FilledButton(
                         onPressed: () {
-                          _addFlashcard();
-                          Navigator.of(context).pushNamed('/');
+                          if (_addFlashcard()) {
+                            Navigator.of(context).pushNamed('/');
+                          }
                         },
                         child: const Text("Add Card")),
                     const SizedBox(
@@ -93,8 +96,11 @@ class _CreateFlashcardsScreenState extends State<CreateFlashcardsScreen> {
                     ),
                     FilledButton(
                         onPressed: () {
-                          _addFlashcard();
-                          Navigator.of(context).pushNamed('/create_flashcards');
+                          if (_addFlashcard()) {
+                            Navigator.of(context).pushReplacementNamed(
+                                '/create_flashcards',
+                                arguments: widget.collectionUuid);
+                          }
                         },
                         child: const Text("Add Another Card")),
                   ],

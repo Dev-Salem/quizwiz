@@ -1,7 +1,10 @@
 import 'package:quizwiz/src/core/core.dart';
+import 'package:quizwiz/src/features/cards/data/data.dart';
 
 abstract class BaseCardsRepository {
-  EitherFlashcards getFlashcards(int collectionId);
+  EitherFlashcards getDueReviewCards(
+    FlashcardCollection collection,
+  );
   EitherCollections getCollections();
   EitherUnit createCollection(String name, {description = ''});
   EitherUnit addFlashcard(

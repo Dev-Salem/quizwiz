@@ -26,8 +26,8 @@ class HomeScreen extends StatelessWidget {
                 return const Center(
                     child: CircularProgressIndicator.adaptive());
               case RequestState.error:
-                return Center(
-                  child: Text(state.errorMessage),
+                return CustomErrorWidget(
+                  errorMessage: state.errorMessage,
                 );
               case RequestState.success:
                 return state.collections.isEmpty

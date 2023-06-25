@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:quizwiz/src/core/core.dart';
 
 class CustomErrorWidget extends StatelessWidget {
-  const CustomErrorWidget({super.key});
+  final String errorMessage;
+  const CustomErrorWidget(
+      {super.key, this.errorMessage = AppStrings.errorMessage});
 
   @override
   Widget build(BuildContext context) {
@@ -12,8 +14,8 @@ class CustomErrorWidget extends StatelessWidget {
           leading: CupertinoButton(
               child: const Icon(Icons.arrow_back_ios_new),
               onPressed: () => Navigator.of(context).pushNamed('/'))),
-      body: const Center(
-        child: Text(AppStrings.errorMessage),
+      body: Center(
+        child: Text(errorMessage),
       ),
     );
   }
