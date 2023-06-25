@@ -58,7 +58,7 @@ class _CreateCollectionDialogState extends State<CreateCollectionDialog> {
           children: [
             TextFormField(
               controller: nameController,
-              maxLength: 25,
+              maxLength: 30,
               decoration: const InputDecoration(
                 label: Text(AppStrings.nameTextFieldLabel),
               ),
@@ -68,7 +68,7 @@ class _CreateCollectionDialogState extends State<CreateCollectionDialog> {
             ),
             TextFormField(
               controller: descriptionController,
-              maxLength: 50,
+              maxLength: 70,
               decoration: const InputDecoration(
                 label: Text(AppStrings.descriptionTextFieldLabel),
               ),

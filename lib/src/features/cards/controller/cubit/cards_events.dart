@@ -2,6 +2,7 @@
 import 'package:equatable/equatable.dart';
 
 abstract class CardsEvents extends Equatable {
+  const CardsEvents();
   @override
   List<Object?> get props => [];
 }
@@ -13,7 +14,7 @@ class GetCollectionsEvent extends CardsEvents {
 
 class RemoveCollectionEvent extends CardsEvents {
   final String uuid;
-  RemoveCollectionEvent({
+  const RemoveCollectionEvent({
     required this.uuid,
   });
   @override
@@ -23,8 +24,19 @@ class RemoveCollectionEvent extends CardsEvents {
 class CreateCollectionsEvent extends CardsEvents {
   final String name;
   final String description;
-  CreateCollectionsEvent({
+  const CreateCollectionsEvent({
     required this.name,
     required this.description,
+  });
+}
+
+class AddFlashcardsEvent extends CardsEvents {
+  final String collectionUuid;
+  final String front;
+  final String back;
+  const AddFlashcardsEvent({
+    required this.collectionUuid,
+    required this.front,
+    required this.back,
   });
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:quizwiz/src/core/core.dart';
+import 'package:quizwiz/src/core/widgets/error_widget.dart';
 import 'package:quizwiz/src/features/cards/controller/controller.dart';
 import 'package:quizwiz/src/features/cards/presentation/presentation.dart';
-import 'package:quizwiz/src/features/cards/presentation/widgets/create_collection_dialog.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -34,7 +34,7 @@ class HomeScreen extends StatelessWidget {
                     ? const NoCollectionScreen()
                     : CollectionsListScreen(collections: state.collections);
               default:
-                return const Text(AppStrings.errorMessage);
+                return const CustomErrorWidget();
             }
           },
         ));
