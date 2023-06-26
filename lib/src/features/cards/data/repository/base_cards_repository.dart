@@ -10,4 +10,9 @@ abstract class BaseCardsRepository {
   EitherUnit addFlashcard(
       String question, String answer, String collectionUuid);
   EitherUnit removeCollection(String uuid);
+  EitherUnit updateDueTime(
+    Flashcard card,
+    String collectionUuid,
+    ReviewResult reviewResult,
+  );
 }

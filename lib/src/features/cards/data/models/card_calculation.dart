@@ -6,7 +6,7 @@ class CardCalculation {
   Flashcard card;
   CardCalculation(this.card);
 
-  update(
+  Flashcard update(
     ReviewResult result,
   ) {
     final now = DateTime.now().millisecondsSinceEpoch;
@@ -35,7 +35,11 @@ class CardCalculation {
         card.dueTime = now + _toMilliseconds(card.interval);
         break;
     }
-    return card.dueTime;
+    return card.copyWith(
+        dueTime: card.dueTime,
+        factor: card.factor,
+        repetitions: card.repetitions,
+        interval: card.interval);
   }
 
   double _calculateInterval(int repetitions, double factor) {

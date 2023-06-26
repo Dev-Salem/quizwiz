@@ -52,4 +52,24 @@ class Flashcard {
     this.factor = 2.5,
     this.repetitions = 0,
   });
+
+  Flashcard copyWith({
+    String? question,
+    String? answer,
+    int? dueTime,
+    double? interval,
+    double? factor,
+    int? repetitions,
+    String? uuid,
+  }) {
+    return Flashcard(
+      question: question ?? this.question,
+      answer: answer ?? this.answer,
+      dueTime: dueTime ?? this.dueTime,
+      interval: interval ?? this.interval,
+      factor: factor ?? this.factor,
+      repetitions: repetitions ?? this.repetitions,
+      uuid: uuid ?? this.uuid,
+    );
+  }
 }

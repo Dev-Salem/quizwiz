@@ -63,4 +63,16 @@ class CardsRepository extends BaseCardsRepository {
       return Left(LocalStorageFailure(message: e.toString()));
     }
   }
+
+  @override
+  EitherUnit updateDueTime(
+      Flashcard card, String collectionUuid, ReviewResult reviewResult) async {
+    try {
+      final result =
+          await _dataSource.updateDueTime(card, collectionUuid, reviewResult);
+      return Right(result);
+    } on Exception catch (e) {
+      return Left(LocalStorageFailure(message: e.toString()));
+    }
+  }
 }

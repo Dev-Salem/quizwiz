@@ -22,7 +22,7 @@ class FlashcardWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 10),
               child: Text(
-                'due review: ${Jiffy.parseFromDateTime(DateTime.fromMillisecondsSinceEpoch(card.dueTime)).MEd}',
+                'review due: ${Jiffy.parseFromDateTime(DateTime.fromMillisecondsSinceEpoch(card.dueTime)).MEd}',
                 style: Theme.of(context).textTheme.bodySmall,
               ),
             )

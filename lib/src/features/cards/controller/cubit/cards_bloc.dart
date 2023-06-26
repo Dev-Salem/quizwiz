@@ -19,6 +19,7 @@ class CardsBloc extends Bloc<CardsEvents, CollectionState> {
     collectionStream.listen((event) {
       add(GetCollectionsEvent());
     });
+    on<UpdateDueTimeEvent>(_updateDueTime);
   }
 
   _getCollections(
@@ -62,6 +63,19 @@ class CardsBloc extends Bloc<CardsEvents, CollectionState> {
     emit(state.copyWith(requestState: RequestState.loading));
     final result = await _baseCardsRepository.addFlashcard(
         event.front, event.back, event.collectionUuid);
+    result.fold(
+        (l) => emit(state.copyWith(
+            errorMessage: l.message, requestState: RequestState.error)),
+        (r) => emit(state.copyWith(
+              requestState: RequestState.success,
+            )));
+  }
+
+  _updateDueTime(
+      UpdateDueTimeEvent event, Emitter<CollectionState> emit) async {
+    emit(state.copyWith(requestState: RequestState.loading));
+    final result = await _baseCardsRepository.updateDueTime(
+        event.card, event.collectionUuid, event.reviewResult);
     result.fold(
         (l) => emit(state.copyWith(
             errorMessage: l.message, requestState: RequestState.error)),

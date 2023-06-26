@@ -1,6 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 
+import 'package:quizwiz/src/core/core.dart';
+import 'package:quizwiz/src/features/cards/data/data.dart';
+
 abstract class CardsEvents extends Equatable {
   const CardsEvents();
   @override
@@ -38,5 +41,16 @@ class AddFlashcardsEvent extends CardsEvents {
     required this.collectionUuid,
     required this.front,
     required this.back,
+  });
+}
+
+class UpdateDueTimeEvent extends CardsEvents {
+  final Flashcard card;
+  final String collectionUuid;
+  final ReviewResult reviewResult;
+  const UpdateDueTimeEvent({
+    required this.card,
+    required this.collectionUuid,
+    required this.reviewResult,
   });
 }
