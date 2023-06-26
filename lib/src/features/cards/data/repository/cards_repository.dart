@@ -75,4 +75,16 @@ class CardsRepository extends BaseCardsRepository {
       return Left(LocalStorageFailure(message: e.toString()));
     }
   }
+
+  @override
+  EitherUnit removeFlashcard(
+      FlashcardCollection collection, String flashcardUuid) async {
+    try {
+      final result =
+          await _dataSource.removeFlashcard(collection, flashcardUuid);
+      return Right(result);
+    } on Exception catch (e) {
+      return Left(LocalStorageFailure(message: e.toString()));
+    }
+  }
 }

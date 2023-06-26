@@ -20,11 +20,11 @@ class CollectionsListScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 10 // 10,
               ),
           child: FocusedMenuHolder(
-            onPressed: () => Navigator.of(context)
-                .pushNamed('/flashcards_list', arguments: collections[index]),
+            onPressed: () => Navigator.of(context).pushNamed('/flashcards_list',
+                arguments: collections[index].uuid),
             menuItems: [
               FocusedMenuItem(
-                  backgroundColor: Theme.of(context).dialogBackgroundColor,
+                  backgroundColor: Theme.of(context).cardColor,
                   title: const Text(
                     AppStrings.delete,
                     style: TextStyle(color: Colors.red),

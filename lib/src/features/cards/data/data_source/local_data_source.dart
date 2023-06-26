@@ -22,6 +22,8 @@ abstract class BaseLocalDataSource {
     String collectionUuid,
     ReviewResult reviewResult,
   );
+  Future<Unit> removeFlashcard(
+      FlashcardCollection collection, String flashcardUuid);
 }
 
 class IsarDataSource extends BaseLocalDataSource {
@@ -111,6 +113,18 @@ class IsarDataSource extends BaseLocalDataSource {
       //update the collection with the new cards list
       await _instance.flashcardCollections
           .put(collection.copyWith(cards: newCardList));
+    });
+    return unit;
+  }
+
+  @override
+  Future<Unit> removeFlashcard(
+      FlashcardCollection collection, String flashcardUuid) async {
+    await _instance.writeTxn(() async {
+      await _instance.flashcardCollections.put(collection.copyWith(
+          cards: collection.cards
+              .where((element) => element.uuid != flashcardUuid)
+              .toList()));
     });
     return unit;
   }

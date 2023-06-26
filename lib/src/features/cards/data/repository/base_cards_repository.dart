@@ -15,4 +15,6 @@ abstract class BaseCardsRepository {
     String collectionUuid,
     ReviewResult reviewResult,
   );
+  EitherUnit removeFlashcard(
+      FlashcardCollection collection, String flashcardUuid);
 }

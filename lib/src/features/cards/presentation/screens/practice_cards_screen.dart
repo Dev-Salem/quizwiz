@@ -13,6 +13,16 @@ class PracticeCardsScreen extends StatelessWidget {
         ),
         body: PageView.builder(
             itemCount: cards.length,
-            itemBuilder: (context, index) => Text(cards[index].question)));
+            itemBuilder: (context, index) => InkWell(
+                  onTap: () => Navigator.of(context).pushReplacementNamed(
+                      '/review_result',
+                      arguments: cards[index]),
+                  child: Center(
+                    child: Text(
+                      cards[index].question,
+                      style: Theme.of(context).textTheme.displayMedium,
+                    ),
+                  ),
+                )));
   }
 }

@@ -54,3 +54,12 @@ class UpdateDueTimeEvent extends CardsEvents {
     required this.reviewResult,
   });
 }
+
+class RemoveFlashcardsEvent extends CardsEvents {
+  final FlashcardCollection collection;
+  final String flashcardUuid;
+  const RemoveFlashcardsEvent({
+    required this.collection,
+    required this.flashcardUuid,
+  });
+}
