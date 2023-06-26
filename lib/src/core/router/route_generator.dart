@@ -4,6 +4,7 @@ import 'package:quizwiz/src/features/cards/data/data.dart';
 import 'package:quizwiz/src/features/cards/presentation/screens/create_flashcards.dart';
 import 'package:quizwiz/src/features/cards/presentation/screens/flashcards_list_screen.dart';
 import 'package:quizwiz/src/features/cards/presentation/screens/home_screen.dart';
+import 'package:quizwiz/src/features/cards/presentation/screens/practice_cards_screen.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -20,6 +21,13 @@ class RouteGenerator {
         var collection = settings.arguments as FlashcardCollection;
         return MaterialPageRoute(
           builder: (context) => FlashcardsListScreen(collection: collection),
+        );
+      case '/practice_cards':
+        var cards = settings.arguments as List<Flashcard>;
+        return MaterialPageRoute(
+          builder: (context) => PracticeCardsScreen(
+            cards: cards,
+          ),
         );
       default:
         return MaterialPageRoute(

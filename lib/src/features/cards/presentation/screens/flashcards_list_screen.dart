@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:quizwiz/src/features/cards/data/data.dart';
+import 'package:quizwiz/src/features/cards/presentation/widgets/flashcards_list_widgets/flashcard_widget.dart';
 
 class FlashcardsListScreen extends StatelessWidget {
   final FlashcardCollection collection;
@@ -8,28 +10,17 @@ class FlashcardsListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(collection.name),
-      ),
-      body: GridView.builder(
-          padding: const EdgeInsets.all(15),
-          itemCount: collection.cards.length,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2, childAspectRatio: 0.7),
-          itemBuilder: (context, index) => Card(
-                child: Column(
-                  children: [
-                    Text(
-                      collection.cards[index].question,
-                      style: Theme.of(context).textTheme.headlineMedium,
-                    ),
-                    Text(
-                      collection.cards[index].answer,
-                      // style: Theme.of(context).textTheme.headlineMedium,
-                    ),
-                  ],
-                ),
-              )),
-    );
+        appBar: AppBar(
+          title: Text(collection.name),
+        ),
+        body: MasonryGridView.builder(
+            padding: const EdgeInsets.all(15),
+            gridDelegate: const SliverSimpleGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+            ),
+            itemCount: collection.cards.length,
+            itemBuilder: (context, index) {
+              return FlashcardWidget(card: collection.cards[index]);
+            }));
   }
 }

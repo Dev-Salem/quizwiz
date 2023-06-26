@@ -87,7 +87,8 @@ class _CreateFlashcardsScreenState extends State<CreateFlashcardsScreen> {
                     FilledButton(
                         onPressed: () {
                           if (_addFlashcard()) {
-                            Navigator.of(context).pushNamed('/');
+                            Navigator.of(context).pushNamed('/flashcards_list',
+                                arguments: widget.collectionUuid);
                           }
                         },
                         child: const Text("Add Card")),

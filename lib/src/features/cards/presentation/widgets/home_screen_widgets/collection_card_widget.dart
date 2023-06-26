@@ -25,7 +25,7 @@ class CollectionCardWidget extends StatelessWidget {
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
-            Text("${collection.cards.length}  cards"),
+            Text("${collection.cards.length} cards"),
             const SizedBox(
               height: 15,
             ),
@@ -35,7 +35,10 @@ class CollectionCardWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   OutlinedButton(
-                      onPressed: () {}, child: const Text('Practice')),
+                      onPressed: () => Navigator.of(context).pushNamed(
+                          '/practice_cards',
+                          arguments: collection.cards),
+                      child: const Text('Practice')),
                   FilledButton(
                       onPressed: () => Navigator.of(context).pushNamed(
                           '/create_flashcards',

@@ -44,6 +44,8 @@ class _CreateCollectionDialogState extends State<CreateCollectionDialog> {
         TextButton(
             onPressed: () {
               context.read<CardsBloc>().add(CreateCollectionsEvent(
+                  //if the user didn't enter a collection name, assign 'untitled'
+                  //to the collection name
                   name: nameController.text == ''
                       ? AppStrings.defaultCollectionName
                       : nameController.text,

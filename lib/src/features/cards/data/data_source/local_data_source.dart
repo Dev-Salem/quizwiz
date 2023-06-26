@@ -23,8 +23,11 @@ class IsarDataSource extends BaseLocalDataSource {
   @override
   Future<Unit> addFlashcard(
       String question, String answer, String collectionUuid) async {
-    final flashcard =
-        Flashcard(question: question, answer: answer, uuid: uuid.v4());
+    final flashcard = Flashcard(
+        question: question,
+        answer: answer,
+        uuid: uuid.v4(),
+        dueTime: DateTime.now().millisecondsSinceEpoch);
     _instance.writeTxn(() async {
       final collection =
           await _instance.flashcardCollections.getByUuid(collectionUuid);
