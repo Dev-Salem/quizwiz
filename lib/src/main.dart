@@ -17,7 +17,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => CardsBloc(CardsRepository(IsarDataSource()))
+      create: (context) => CardsBloc(CardsRepository(
+          IsarFlashcardDataSource(), IsarCollectionDataSource()))
         ..add(GetCollectionsEvent()),
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -63,7 +64,6 @@ Enter the app -> click review cards -> show only cards needed for collection
 
 */
 
-//ToDO: Edit card
 //TODO: Edit collection
 //TODO: Review cards
 //TODO: Generate cards

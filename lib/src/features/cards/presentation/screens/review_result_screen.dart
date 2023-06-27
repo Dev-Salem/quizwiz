@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quizwiz/src/core/core.dart';
+import 'package:quizwiz/src/features/cards/controller/controller.dart';
 import 'package:quizwiz/src/features/cards/data/data.dart';
 import 'package:quizwiz/src/features/cards/presentation/widgets/review_result_widgets/review_bar.dart';
 
@@ -30,12 +30,7 @@ class ReviewResultScreen extends StatelessWidget {
           const Expanded(child: SizedBox()),
           Row(
             children: [
-              ReviewBar(
-                  color: Colors.red,
-                  onTap: () {
-                    print('again');
-                  },
-                  text: "Again"),
+              ReviewBar(color: Colors.red, onTap: () {}, text: "Again"),
               ReviewBar(
                   color: Colors.redAccent,
                   onTap: () {

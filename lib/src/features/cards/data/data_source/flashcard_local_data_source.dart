@@ -7,17 +7,13 @@ import 'package:quizwiz/src/features/cards/data/models/flashcard_collection.dart
 import 'package:dartz/dartz.dart';
 import 'package:uuid/uuid.dart';
 
-abstract class BaseLocalDataSource {
-  Future<List<Flashcard>> getDueReviewCards(
-    FlashcardCollection collection,
-  );
-  Future<List<FlashcardCollection>> getCollections();
-
-  Future<Unit> createCollection(String name, {description = ''});
+abstract class FlashcardLocalDataSource {
   Future<Unit> addFlashcard(
       String question, String answer, String collectionUuid);
 
-  Future<Unit> removeCollection(String uuid);
+  Future<List<Flashcard>> getDueReviewCards(
+    FlashcardCollection collection,
+  );
   Future<Unit> updateDueTime(
     Flashcard card,
     String collectionUuid,
@@ -28,7 +24,7 @@ abstract class BaseLocalDataSource {
   Future<Unit> editFlashcard(EditFlashcardParameters parameters);
 }
 
-class IsarDataSource extends BaseLocalDataSource {
+class IsarFlashcardDataSource extends FlashcardLocalDataSource {
   final _instance = Isar.getInstance()!;
   final uuid = const Uuid();
   @override
@@ -53,28 +49,6 @@ class IsarDataSource extends BaseLocalDataSource {
   }
 
   @override
-  Future<Unit> createCollection(String name, {description = ''}) async {
-    final collection = FlashcardCollection(
-        name: name, description: description, uuid: uuid.v4());
-    _instance.writeTxn(() async {
-      await _instance.flashcardCollections.put(collection).onError(
-          (error, stackTrace) =>
-              throw LocalStorageException(message: error.toString()));
-    });
-    return unit;
-  }
-
-  @override
-  Future<List<FlashcardCollection>> getCollections() async {
-    final collections = await _instance.flashcardCollections
-        .where()
-        .findAll()
-        .onError((error, stackTrace) =>
-            throw LocalStorageException(message: error.toString()));
-    return collections;
-  }
-
-  @override
   Future<List<Flashcard>> getDueReviewCards(
       FlashcardCollection collection) async {
     final cards = collection.cards
@@ -82,16 +56,6 @@ class IsarDataSource extends BaseLocalDataSource {
             .isBefore(DateTime.now()))
         .toList();
     return cards;
-  }
-
-  @override
-  Future<Unit> removeCollection(String uuid) async {
-    _instance.writeTxn(() async {
-      await _instance.flashcardCollections.deleteByUuid(uuid).onError(
-          (error, stackTrace) =>
-              throw LocalStorageException(message: error.toString()));
-    });
-    return unit;
   }
 
   @override
@@ -136,14 +100,14 @@ class IsarDataSource extends BaseLocalDataSource {
     await _instance.writeTxn(() async {
       final findCard = parameters.collection.cards
           .where((element) => element.uuid == parameters.flashcard.uuid);
-      //create the update card
+      //create the updated card
       final newCard = findCard.single
           .copyWith(question: parameters.front, answer: parameters.back);
       //create a new card list without the old card
       List<Flashcard> newList = parameters.collection.cards
           .where((element) => element.uuid != parameters.flashcard.uuid)
           .toList();
-      //add the update card to list
+      //add the updated card to list
       newList.add(newCard);
 
       //update the collection
