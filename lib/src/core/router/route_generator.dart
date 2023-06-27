@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:quizwiz/src/core/widgets/error_widget.dart';
 import 'package:quizwiz/src/features/cards/data/data.dart';
-import 'package:quizwiz/src/features/cards/presentation/screens/create_flashcards.dart';
+import 'package:quizwiz/src/features/cards/data/models/edit_flashcard_parameters.dart';
+import 'package:quizwiz/src/features/cards/presentation/screens/create_flashcards_screen.dart';
+import 'package:quizwiz/src/features/cards/presentation/screens/edit_flashcard_screen.dart';
 import 'package:quizwiz/src/features/cards/presentation/screens/flashcards_list_screen.dart';
 import 'package:quizwiz/src/features/cards/presentation/screens/home_screen.dart';
 import 'package:quizwiz/src/features/cards/presentation/screens/practice_cards_screen.dart';
@@ -36,6 +38,12 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (context) => ReviewResultScreen(card: card),
         );
+      case '/edit_flashcard':
+        var parameters = settings.arguments as EditFlashcardParameters;
+        return MaterialPageRoute(
+            builder: (context) => EditFlashcardScreen(
+                  parameters: parameters,
+                ));
       default:
         return MaterialPageRoute(
           builder: (context) => const CustomErrorWidget(),

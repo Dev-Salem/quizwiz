@@ -14,8 +14,10 @@ class ReviewResultScreen extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          const Expanded(child: SizedBox()),
           Text(
             card.question,
+            textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.displaySmall,
           ),
           const SizedBox(
@@ -23,6 +25,7 @@ class ReviewResultScreen extends StatelessWidget {
           ),
           Text(
             card.answer,
+            style: Theme.of(context).textTheme.headlineMedium,
           ),
           const Expanded(child: SizedBox()),
           Row(

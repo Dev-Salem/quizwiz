@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:quizwiz/src/features/cards/controller/controller.dart';
+import 'package:quizwiz/src/features/cards/data/models/edit_flashcard_parameters.dart';
 
-class CreateFlashcardsScreen extends StatefulWidget {
-  final String collectionUuid;
-  const CreateFlashcardsScreen({super.key, required this.collectionUuid});
+class EditFlashcardScreen extends StatefulWidget {
+  final EditFlashcardParameters parameters;
+  const EditFlashcardScreen({super.key, required this.parameters});
 
   @override
-  State<CreateFlashcardsScreen> createState() => _CreateFlashcardsScreenState();
+  State<EditFlashcardScreen> createState() => _EditFlashcardScreenState();
 }
 
-class _CreateFlashcardsScreenState extends State<CreateFlashcardsScreen> {
+class _EditFlashcardScreenState extends State<EditFlashcardScreen> {
   late final TextEditingController frontController;
   late final TextEditingController backController;
   final key = GlobalKey<FormState>();
   @override
   void initState() {
-    frontController = TextEditingController();
-    backController = TextEditingController();
+    frontController = TextEditingController(text: widget.parameters.front);
+    backController = TextEditingController(text: widget.parameters.back);
     super.initState();
   }
 
@@ -27,12 +28,11 @@ class _CreateFlashcardsScreenState extends State<CreateFlashcardsScreen> {
     super.dispose();
   }
 
-  bool _addFlashcard() {
+  bool _editFlashcard() {
     if (key.currentState!.validate()) {
-      context.read<CardsBloc>().add(AddFlashcardsEvent(
-          collectionUuid: widget.collectionUuid,
-          front: frontController.text,
-          back: backController.text));
+      context.read<CardsBloc>().add(EditFlashcardsEvent(
+          parameters: widget.parameters.copyWith(
+              front: frontController.text, back: backController.text)));
       return true; //if card was added successfully, return true to navigate
     }
     return false;
@@ -42,7 +42,7 @@ class _CreateFlashcardsScreenState extends State<CreateFlashcardsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Create Flashcards"),
+          title: const Text("Edit Flashcard"),
         ),
         body: LayoutBuilder(
             builder: (context, size) => ListView(
@@ -86,25 +86,16 @@ class _CreateFlashcardsScreenState extends State<CreateFlashcardsScreen> {
                     SizedBox(height: size.maxHeight * 0.2),
                     FilledButton(
                         onPressed: () {
-                          if (_addFlashcard()) {
-                            Navigator.of(context).pushNamed(
-                              '/',
-                            );
+                          if (_editFlashcard()) {
+                            Navigator.of(context).pushReplacementNamed(
+                                '/flashcards_list',
+                                arguments: widget.parameters.collection.uuid);
                           }
                         },
-                        child: const Text("Add Card")),
+                        child: const Text("Edit Card")),
                     const SizedBox(
                       height: 20,
                     ),
-                    FilledButton(
-                        onPressed: () {
-                          if (_addFlashcard()) {
-                            Navigator.of(context).pushReplacementNamed(
-                                '/create_flashcards',
-                                arguments: widget.collectionUuid);
-                          }
-                        },
-                        child: const Text("Add Another Card")),
                   ],
                 )));
   }

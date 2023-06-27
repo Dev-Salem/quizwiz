@@ -1,5 +1,6 @@
 import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/features/cards/data/data.dart';
+import 'package:quizwiz/src/features/cards/data/models/edit_flashcard_parameters.dart';
 
 abstract class BaseCardsRepository {
   EitherFlashcards getDueReviewCards(
@@ -17,4 +18,6 @@ abstract class BaseCardsRepository {
   );
   EitherUnit removeFlashcard(
       FlashcardCollection collection, String flashcardUuid);
+
+  EitherUnit editFlashcard(EditFlashcardParameters parameters);
 }

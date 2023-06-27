@@ -20,6 +20,7 @@ class PracticeCardsScreen extends StatelessWidget {
                   child: Center(
                     child: Text(
                       cards[index].question,
+                      textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.displayMedium,
                     ),
                   ),

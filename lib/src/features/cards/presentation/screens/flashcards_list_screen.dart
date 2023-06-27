@@ -4,6 +4,7 @@ import 'package:focused_menu/focused_menu.dart';
 import 'package:focused_menu/modals.dart';
 import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/features/cards/controller/controller.dart';
+import 'package:quizwiz/src/features/cards/data/models/edit_flashcard_parameters.dart';
 import 'package:quizwiz/src/features/cards/presentation/widgets/flashcards_list_widgets/flashcard_widget.dart';
 
 class FlashcardsListScreen extends StatelessWidget {
@@ -30,6 +31,8 @@ class FlashcardsListScreen extends StatelessWidget {
                 itemCount: collection.cards.length,
                 itemBuilder: (context, index) {
                   return FocusedMenuHolder(
+                      menuBoxDecoration:
+                          const BoxDecoration(color: Colors.black),
                       onPressed: () {},
                       menuItems: [
                         FocusedMenuItem(
@@ -42,7 +45,19 @@ class FlashcardsListScreen extends StatelessWidget {
                                 RemoveFlashcardsEvent(
                                     collection: collection,
                                     flashcardUuid:
-                                        collection.cards[index].uuid)))
+                                        collection.cards[index].uuid))),
+                        FocusedMenuItem(
+                            backgroundColor: Theme.of(context).cardColor,
+                            title: const Text("Edit"),
+                            onPressed: () {
+                              Navigator.of(context).pushReplacementNamed(
+                                  '/edit_flashcard',
+                                  arguments: EditFlashcardParameters(
+                                      front: collection.cards[index].question,
+                                      back: collection.cards[index].answer,
+                                      collection: collection,
+                                      flashcard: collection.cards[index]));
+                            })
                       ],
                       child: FlashcardWidget(card: collection.cards[index]));
                 }));

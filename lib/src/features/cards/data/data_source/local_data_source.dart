@@ -2,6 +2,7 @@ import 'package:isar/isar.dart';
 import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/core/errors/exceptions.dart';
 import 'package:quizwiz/src/features/cards/data/models/card_calculation.dart';
+import 'package:quizwiz/src/features/cards/data/models/edit_flashcard_parameters.dart';
 import 'package:quizwiz/src/features/cards/data/models/flashcard_collection.dart';
 import 'package:dartz/dartz.dart';
 import 'package:uuid/uuid.dart';
@@ -24,6 +25,7 @@ abstract class BaseLocalDataSource {
   );
   Future<Unit> removeFlashcard(
       FlashcardCollection collection, String flashcardUuid);
+  Future<Unit> editFlashcard(EditFlashcardParameters parameters);
 }
 
 class IsarDataSource extends BaseLocalDataSource {
@@ -125,6 +127,28 @@ class IsarDataSource extends BaseLocalDataSource {
           cards: collection.cards
               .where((element) => element.uuid != flashcardUuid)
               .toList()));
+    });
+    return unit;
+  }
+
+  @override
+  Future<Unit> editFlashcard(EditFlashcardParameters parameters) async {
+    await _instance.writeTxn(() async {
+      final findCard = parameters.collection.cards
+          .where((element) => element.uuid == parameters.flashcard.uuid);
+      //create the update card
+      final newCard = findCard.single
+          .copyWith(question: parameters.front, answer: parameters.back);
+      //create a new card list without the old card
+      List<Flashcard> newList = parameters.collection.cards
+          .where((element) => element.uuid != parameters.flashcard.uuid)
+          .toList();
+      //add the update card to list
+      newList.add(newCard);
+
+      //update the collection
+      await _instance.flashcardCollections
+          .put(parameters.collection.copyWith(cards: newList));
     });
     return unit;
   }

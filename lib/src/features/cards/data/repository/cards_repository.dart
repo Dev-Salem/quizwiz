@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/features/cards/data/data.dart';
 import 'package:quizwiz/src/features/cards/data/data_source/local_data_source.dart';
+import 'package:quizwiz/src/features/cards/data/models/edit_flashcard_parameters.dart';
 import 'package:quizwiz/src/features/cards/data/repository/base_cards_repository.dart';
 
 class CardsRepository extends BaseCardsRepository {
@@ -82,6 +83,16 @@ class CardsRepository extends BaseCardsRepository {
     try {
       final result =
           await _dataSource.removeFlashcard(collection, flashcardUuid);
+      return Right(result);
+    } on Exception catch (e) {
+      return Left(LocalStorageFailure(message: e.toString()));
+    }
+  }
+
+  @override
+  EitherUnit editFlashcard(EditFlashcardParameters parameters) async {
+    try {
+      final result = await _dataSource.editFlashcard(parameters);
       return Right(result);
     } on Exception catch (e) {
       return Left(LocalStorageFailure(message: e.toString()));

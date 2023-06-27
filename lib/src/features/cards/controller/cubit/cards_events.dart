@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 
 import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/features/cards/data/data.dart';
+import 'package:quizwiz/src/features/cards/data/models/edit_flashcard_parameters.dart';
 
 abstract class CardsEvents extends Equatable {
   const CardsEvents();
@@ -62,4 +63,9 @@ class RemoveFlashcardsEvent extends CardsEvents {
     required this.collection,
     required this.flashcardUuid,
   });
+}
+
+class EditFlashcardsEvent extends CardsEvents {
+  final EditFlashcardParameters parameters;
+  const EditFlashcardsEvent({required this.parameters});
 }

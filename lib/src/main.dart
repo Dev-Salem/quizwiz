@@ -62,3 +62,8 @@ user's flow 2
 Enter the app -> click review cards -> show only cards needed for collection
 
 */
+
+//ToDO: Edit card
+//TODO: Edit collection
+//TODO: Review cards
+//TODO: Generate cards

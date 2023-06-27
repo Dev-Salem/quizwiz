@@ -17,10 +17,11 @@ class CardsBloc extends Bloc<CardsEvents, CollectionState> {
     on<CreateCollectionsEvent>(_createCollections);
     on<AddFlashcardsEvent>(_addFlashcards);
     on<RemoveFlashcardsEvent>(_removeFlashcard);
+    on<UpdateDueTimeEvent>(_updateDueTime);
+    on<EditFlashcardsEvent>(_editFlashcards);
     collectionStream.listen((event) {
       add(GetCollectionsEvent());
     });
-    on<UpdateDueTimeEvent>(_updateDueTime);
   }
 
   _getCollections(
@@ -90,6 +91,18 @@ class CardsBloc extends Bloc<CardsEvents, CollectionState> {
     emit(state.copyWith(requestState: RequestState.loading));
     final result = await _baseCardsRepository.removeFlashcard(
         event.collection, event.flashcardUuid);
+    result.fold(
+        (l) => emit(state.copyWith(
+            errorMessage: l.message, requestState: RequestState.error)),
+        (r) => emit(state.copyWith(
+              requestState: RequestState.success,
+            )));
+  }
+
+  _editFlashcards(
+      EditFlashcardsEvent event, Emitter<CollectionState> emit) async {
+    emit(state.copyWith(requestState: RequestState.loading));
+    final result = await _baseCardsRepository.editFlashcard(event.parameters);
     result.fold(
         (l) => emit(state.copyWith(
             errorMessage: l.message, requestState: RequestState.error)),
