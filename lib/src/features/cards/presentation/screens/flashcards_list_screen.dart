@@ -13,7 +13,7 @@ class FlashcardsListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CardsBloc, CollectionState>(
+    return BlocBuilder<CardsBloc, CardsState>(
       builder: (context, state) {
         final collection = state.collections
             .where((collection) => collection.uuid == collectionUuid)

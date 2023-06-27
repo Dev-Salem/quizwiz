@@ -27,16 +27,19 @@ class RouteGenerator {
               FlashcardsListScreen(collectionUuid: collectionUuid),
         );
       case '/practice_cards':
-        var cards = settings.arguments as List<Flashcard>;
+        var collection = settings.arguments as FlashcardCollection;
         return MaterialPageRoute(
           builder: (context) => PracticeCardsScreen(
-            cards: cards,
+            collection: collection,
           ),
         );
       case '/review_result':
-        var card = settings.arguments as Flashcard;
+        var cardAndCollection =
+            settings.arguments as (Flashcard card, String collectionUuid);
         return MaterialPageRoute(
-          builder: (context) => ReviewResultScreen(card: card),
+          builder: (context) => ReviewResultScreen(
+            cardAndCollection: cardAndCollection,
+          ),
         );
       case '/edit_flashcard':
         var parameters = settings.arguments as EditFlashcardParameters;

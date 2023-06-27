@@ -19,15 +19,15 @@ class HomeScreen extends StatelessWidget {
               builder: (context) => const CreateCollectionDialog()),
           child: const Icon(Icons.add),
         ),
-        body: BlocBuilder<CardsBloc, CollectionState>(
+        body: BlocBuilder<CardsBloc, CardsState>(
           builder: (context, state) {
-            switch (state.requestState) {
+            switch (state.collectionRequestState) {
               case RequestState.loading:
                 return const Center(
                     child: CircularProgressIndicator.adaptive());
               case RequestState.error:
                 return CustomErrorWidget(
-                  errorMessage: state.errorMessage,
+                  errorMessage: state.flashcardErrorMessage,
                 );
               case RequestState.success:
                 return state.collections.isEmpty

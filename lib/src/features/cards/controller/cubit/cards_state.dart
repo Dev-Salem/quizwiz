@@ -1,35 +1,55 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+
 part of 'cards_bloc.dart';
 
 class CardsState extends Equatable {
-  const CardsState();
-
-  @override
-  List<Object> get props => [];
-}
-
-class CollectionState extends CardsState {
-  final RequestState requestState;
-  final String errorMessage;
+  final RequestState collectionRequestState;
+  final String collectionErrorMessage;
   final List<FlashcardCollection> collections;
-  const CollectionState({
-    this.requestState = RequestState.loading,
-    this.errorMessage = '',
+
+  final RequestState flashcardRequestState;
+  final String flashcardErrorMessage;
+  final List<Flashcard> flashcards;
+  const CardsState({
+    this.collectionRequestState = RequestState.loading,
+    this.collectionErrorMessage = '',
     this.collections = const [],
+    this.flashcardRequestState = RequestState.loading,
+    this.flashcardErrorMessage = '',
+    this.flashcards = const [],
   });
 
-  CollectionState copyWith({
-    RequestState? requestState,
-    String? errorMessage,
-    List<FlashcardCollection>? collections,
-  }) {
-    return CollectionState(
-      requestState: requestState ?? this.requestState,
-      errorMessage: errorMessage ?? this.errorMessage,
-      collections: collections ?? this.collections,
-    );
+  @override
+  List<Object> get props {
+    return [
+      collectionRequestState,
+      collectionErrorMessage,
+      collections,
+      flashcardRequestState,
+      flashcardErrorMessage,
+      flashcards,
+    ];
   }
 
-  @override
-  List<Object> get props => [requestState, errorMessage, collections];
+  CardsState copyWith({
+    RequestState? collectionRequestState,
+    String? collectionErrorMessage,
+    List<FlashcardCollection>? collections,
+    RequestState? flashcardRequestState,
+    String? flashcardErrorMessage,
+    List<Flashcard>? flashcards,
+  }) {
+    return CardsState(
+      collectionRequestState:
+          collectionRequestState ?? this.collectionRequestState,
+      collectionErrorMessage:
+          collectionErrorMessage ?? this.collectionErrorMessage,
+      collections: collections ?? this.collections,
+      flashcardRequestState:
+          flashcardRequestState ?? this.flashcardRequestState,
+      flashcardErrorMessage:
+          flashcardErrorMessage ?? this.flashcardErrorMessage,
+      flashcards: flashcards ?? this.flashcards,
+    );
+  }
 }

@@ -43,8 +43,6 @@ class _CreateFlashcardsScreenState extends State<CreateFlashcardsScreen> {
     return false;
   }
 
-  _editCard() {}
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         ..add(GetCollectionsEvent()),
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          themeMode: ThemeMode.dark,
+          themeMode: ThemeMode.light,
           onGenerateRoute: (settings) => RouteGenerator.generateRoute(settings),
           theme: AppTheme.lightTheme(),
           darkTheme: AppTheme.darkTheme(),

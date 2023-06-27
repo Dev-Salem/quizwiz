@@ -35,9 +35,8 @@ class CollectionCardWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   OutlinedButton(
-                      onPressed: () => Navigator.of(context).pushNamed(
-                          '/practice_cards',
-                          arguments: collection.cards),
+                      onPressed: () => Navigator.of(context)
+                          .pushNamed('/practice_cards', arguments: collection),
                       child: const Text('Practice')),
                   FilledButton(
                       onPressed: () => Navigator.of(context).pushNamed(
