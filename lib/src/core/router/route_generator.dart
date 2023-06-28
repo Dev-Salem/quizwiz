@@ -34,8 +34,10 @@ class RouteGenerator {
           ),
         );
       case '/review_result':
-        var cardAndCollection =
-            settings.arguments as (Flashcard card, String collectionUuid);
+        var cardAndCollection = settings.arguments as (
+          Flashcard card,
+          FlashcardCollection collection
+        );
         return MaterialPageRoute(
           builder: (context) => ReviewResultScreen(
             cardAndCollection: cardAndCollection,

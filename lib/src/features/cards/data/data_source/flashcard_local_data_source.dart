@@ -1,4 +1,5 @@
 import 'package:isar/isar.dart';
+import 'package:jiffy/jiffy.dart' as jiffy;
 import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/core/errors/exceptions.dart';
 import 'package:quizwiz/src/features/cards/data/models/card_calculation.dart';
@@ -27,6 +28,7 @@ abstract class FlashcardLocalDataSource {
 class IsarFlashcardDataSource extends FlashcardLocalDataSource {
   final _instance = Isar.getInstance()!;
   final uuid = const Uuid();
+
   @override
   Future<Unit> addFlashcard(
       String question, String answer, String collectionUuid) async {
@@ -51,10 +53,10 @@ class IsarFlashcardDataSource extends FlashcardLocalDataSource {
   @override
   Future<List<Flashcard>> getDueReviewCards(
       FlashcardCollection collection) async {
-    final cards = collection.cards
-        .where((card) => DateTime.fromMillisecondsSinceEpoch(card.dueTime)
-            .isBefore(DateTime.now()))
-        .toList();
+    final cards = collection.cards.where((card) {
+      return jiffy.Jiffy.parseFromMillisecondsSinceEpoch(card.dueTime).yMMMEd ==
+          jiffy.Jiffy.now().yMMMEd;
+    }).toList();
     return cards;
   }
 

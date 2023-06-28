@@ -5,14 +5,19 @@ import 'package:quizwiz/src/features/cards/data/data.dart';
 import 'package:quizwiz/src/features/cards/presentation/widgets/review_result_widgets/review_bar.dart';
 
 class ReviewResultScreen extends StatelessWidget {
-  final (Flashcard card, String collectionUuid) cardAndCollection;
+  final (Flashcard card, FlashcardCollection collection) cardAndCollection;
   const ReviewResultScreen({super.key, required this.cardAndCollection});
 
   void _addReview(BuildContext buildContext, ReviewResult result) {
-    buildContext.read<CardsBloc>().add(UpdateDueTimeEvent(
-        card: cardAndCollection.$1,
-        collectionUuid: cardAndCollection.$2,
-        reviewResult: result));
+    buildContext.read<CardsBloc>()
+      ..add(UpdateDueTimeEvent(
+          card: cardAndCollection.$1,
+          collectionUuid: cardAndCollection.$2.uuid,
+          reviewResult: result))
+      ..add(GetDueReviewsEvent(collection: cardAndCollection.$2));
+
+    Navigator.of(buildContext).pushReplacementNamed('/practice_cards',
+        arguments: cardAndCollection.$2);
   }
 
   @override

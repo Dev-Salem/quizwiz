@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quizwiz/src/features/cards/controller/controller.dart';
 import 'package:quizwiz/src/features/cards/data/models/flashcard_collection.dart';
 
 class CollectionCardWidget extends StatelessWidget {
@@ -35,8 +36,14 @@ class CollectionCardWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   OutlinedButton(
-                      onPressed: () => Navigator.of(context)
-                          .pushNamed('/practice_cards', arguments: collection),
+                      onPressed: () {
+                        context
+                            .read<CardsBloc>()
+                            .add(GetDueReviewsEvent(collection: collection));
+                        Navigator.of(context).pushReplacementNamed(
+                            '/practice_cards',
+                            arguments: collection);
+                      },
                       child: const Text('Practice')),
                   FilledButton(
                       onPressed: () => Navigator.of(context).pushNamed(

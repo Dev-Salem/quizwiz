@@ -69,3 +69,8 @@ class EditFlashcardsEvent extends CardsEvents {
   final EditFlashcardParameters parameters;
   const EditFlashcardsEvent({required this.parameters});
 }
+
+class GetDueReviewsEvent extends CardsEvents {
+  final FlashcardCollection collection;
+  const GetDueReviewsEvent({required this.collection});
+}

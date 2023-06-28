@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:quizwiz/src/features/cards/controller/controller.dart';
-import 'package:quizwiz/src/features/cards/data/data.dart';
 
 class CreateFlashcardsScreen extends StatefulWidget {
   final String collectionUuid;
-  //if cardInfo is empty then add new card, otherwise edit card
-  final (String front, String back)? cardInfo;
-  final Flashcard? flashcard;
-  const CreateFlashcardsScreen(
-      {super.key, required this.collectionUuid, this.cardInfo, this.flashcard});
+  const CreateFlashcardsScreen({
+    super.key,
+    required this.collectionUuid,
+  });
 
   @override
   State<CreateFlashcardsScreen> createState() => _CreateFlashcardsScreenState();
@@ -20,8 +18,8 @@ class _CreateFlashcardsScreenState extends State<CreateFlashcardsScreen> {
   final key = GlobalKey<FormState>();
   @override
   void initState() {
-    frontController = TextEditingController(text: widget.cardInfo?.$1);
-    backController = TextEditingController(text: widget.cardInfo?.$2);
+    frontController = TextEditingController();
+    backController = TextEditingController();
     super.initState();
   }
 
@@ -87,6 +85,15 @@ class _CreateFlashcardsScreenState extends State<CreateFlashcardsScreen> {
                           ),
                         ],
                       ),
+                    ),
+                    SizedBox(
+                      width: 50,
+                      child: TextButton.icon(
+                          onPressed: () {},
+                          icon: const Icon(Icons.rocket),
+                          label: const Text(
+                            "Generate Cards With AI",
+                          )),
                     ),
                     SizedBox(height: size.maxHeight * 0.2),
                     FilledButton(

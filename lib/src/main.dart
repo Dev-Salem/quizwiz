@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         ..add(GetCollectionsEvent()),
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          themeMode: ThemeMode.light,
+          themeMode: ThemeMode.dark,
           onGenerateRoute: (settings) => RouteGenerator.generateRoute(settings),
           theme: AppTheme.lightTheme(),
           darkTheme: AppTheme.darkTheme(),
@@ -65,5 +65,4 @@ Enter the app -> click review cards -> show only cards needed for collection
 */
 
 //TODO: Edit collection
-//TODO: Review cards
 //TODO: Generate cards
