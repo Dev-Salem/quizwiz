@@ -1,6 +1,6 @@
 class AppStrings {
   static const notFoundAsset = "assets/93134-not-found.json";
-  static const String baseUrl = 'https://api.pawan.krd/v1/chat/completions';
+  static const String baseUrl = 'https://api.pawan.krd/v1/chat/completion';
   static const String errorMessage = 'Something went wrong';
   static const String homeScreen = "Home Screen";
   static const String delete = "Delete";

@@ -40,8 +40,9 @@ class IsarFlashcardDataSource extends FlashcardLocalDataSource {
     _instance.writeTxn(() async {
       final collection =
           await _instance.flashcardCollections.getByUuid(collectionUuid);
-      List<Flashcard> cards = [];
-      cards.addAll(collection!.cards);
+      List<Flashcard> cards = [
+        ...collection!.cards,
+      ];
       cards.add(flashcard);
       await _instance.flashcardCollections
           .put(collection.copyWith(cards: cards));

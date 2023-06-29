@@ -4,8 +4,8 @@ import 'package:quizwiz/src/core/utils/strings.dart';
 
 class DioClient {
   static Future<Map<String, dynamic>> fetchChatCompletion(
-      Map<String, String> messages,
-      {int maxTokens = 100}) async {
+      List<Map<String, String>> messages,
+      {int maxTokens = 200}) async {
     final dio = Dio();
     dio.options.headers = {
       'Authorization': 'Bearer $apiKey',
@@ -18,10 +18,7 @@ class DioClient {
       "messages": messages
     };
 
-    final response = await dio.post(
-      AppStrings.baseUrl,
-      data: requestBody,
-    );
+    final response = await dio.post(AppStrings.baseUrl);
 
     return response.data;
   }

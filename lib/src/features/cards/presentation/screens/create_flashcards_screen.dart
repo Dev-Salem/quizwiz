@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quizwiz/src/features/cards/controller/controller.dart';
+import 'package:quizwiz/src/features/cards/data/data_source/remote_data_source.dart';
+import 'package:quizwiz/src/features/cards/presentation/widgets/create_flashcards_widgets/forms.dart';
 
 class CreateFlashcardsScreen extends StatefulWidget {
   final String collectionUuid;
@@ -54,47 +56,24 @@ class _CreateFlashcardsScreenState extends State<CreateFlashcardsScreen> {
                     SizedBox(
                       height: size.maxHeight * 0.2,
                     ),
-                    Form(
-                      key: key,
-                      child: Column(
-                        children: [
-                          TextFormField(
-                            controller: frontController,
-                            maxLines: 2,
-                            minLines: 1,
-                            validator: (value) => value!.isEmpty
-                                ? "Invalid Input: Empty Field"
-                                : null,
-                            decoration: const InputDecoration(
-                              label: Text("Term (Front)"),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 30,
-                          ),
-                          TextFormField(
-                            maxLines: 4,
-                            minLines: 1,
-                            controller: backController,
-                            validator: (value) => value!.isEmpty
-                                ? "Invalid Input: Empty Field"
-                                : null,
-                            decoration: const InputDecoration(
-                              label: Text("Definition (Back)"),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
                     SizedBox(
                       width: 50,
                       child: TextButton.icon(
-                          onPressed: () {},
+                          onPressed: () async {
+                            await DioLocalDataSource().generateFlashcards(
+                                """Michael Feathers, author of Working
+Effectively with Legacy Code
+I could list all of the qualities that I notice in clean code, but there is one overarching quality that leads to all of them. Clean code always looks like it was written by someone who cares. There is nothing obvious that you can do to make it better. All of those things were thought about by the code’s author, and if you try to imagine improvements, you’re led back to where you are, sitting in appreciation of the code someone left for you—code left by some- one who cares deeply about the craft. """);
+                          },
                           icon: const Icon(Icons.rocket),
                           label: const Text(
                             "Generate Cards With AI",
                           )),
                     ),
+                    CustomForms(
+                        formKey: key,
+                        frontController: frontController,
+                        backController: backController),
                     SizedBox(height: size.maxHeight * 0.2),
                     FilledButton(
                         onPressed: () {
