@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/features/cards/controller/controller.dart';
-import 'package:quizwiz/src/features/cards/data/data_source/remote_data_source.dart';
 import 'package:quizwiz/src/features/cards/presentation/widgets/create_flashcards_widgets/forms.dart';
 
 class CreateFlashcardsScreen extends StatefulWidget {
@@ -20,9 +20,9 @@ class _CreateFlashcardsScreenState extends State<CreateFlashcardsScreen> {
   final key = GlobalKey<FormState>();
   @override
   void initState() {
+    super.initState();
     frontController = TextEditingController();
     backController = TextEditingController();
-    super.initState();
   }
 
   @override
@@ -47,7 +47,7 @@ class _CreateFlashcardsScreenState extends State<CreateFlashcardsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Create Flashcards"),
+          title: const Text(AppStrings.createFlashcards),
         ),
         body: LayoutBuilder(
             builder: (context, size) => ListView(
@@ -56,24 +56,14 @@ class _CreateFlashcardsScreenState extends State<CreateFlashcardsScreen> {
                     SizedBox(
                       height: size.maxHeight * 0.2,
                     ),
-                    SizedBox(
-                      width: 50,
-                      child: TextButton.icon(
-                          onPressed: () async {
-                            await DioLocalDataSource().generateFlashcards(
-                                """Michael Feathers, author of Working
-Effectively with Legacy Code
-I could list all of the qualities that I notice in clean code, but there is one overarching quality that leads to all of them. Clean code always looks like it was written by someone who cares. There is nothing obvious that you can do to make it better. All of those things were thought about by the code’s author, and if you try to imagine improvements, you’re led back to where you are, sitting in appreciation of the code someone left for you—code left by some- one who cares deeply about the craft. """);
-                          },
-                          icon: const Icon(Icons.rocket),
-                          label: const Text(
-                            "Generate Cards With AI",
-                          )),
-                    ),
                     CustomForms(
                         formKey: key,
                         frontController: frontController,
                         backController: backController),
+                    TextButton.icon(
+                        onPressed: () async {},
+                        icon: const Icon(Icons.rocket),
+                        label: const Text(AppStrings.generateWithAI)),
                     SizedBox(height: size.maxHeight * 0.2),
                     FilledButton(
                         onPressed: () {
@@ -83,7 +73,7 @@ I could list all of the qualities that I notice in clean code, but there is one 
                             );
                           }
                         },
-                        child: const Text("Add Card")),
+                        child: const Text(AppStrings.addCard)),
                     const SizedBox(
                       height: 20,
                     ),
@@ -95,7 +85,7 @@ I could list all of the qualities that I notice in clean code, but there is one 
                                 arguments: widget.collectionUuid);
                           }
                         },
-                        child: const Text("Add Another Card")),
+                        child: const Text(AppStrings.addAnotherCard)),
                   ],
                 )));
   }

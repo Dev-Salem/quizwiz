@@ -99,4 +99,19 @@ class CardsRepository extends BaseCardsRepository {
       return Left(LocalStorageFailure(message: e.toString()));
     }
   }
+
+  @override
+  EitherUnit editCollection(
+      ({
+        FlashcardCollection collection,
+        String description,
+        String name
+      }) collection) async {
+    try {
+      final result = await _collectionDataSource.editCollection(collection);
+      return Right(result);
+    } on Exception catch (e) {
+      return Left(LocalStorageFailure(message: e.toString()));
+    }
+  }
 }

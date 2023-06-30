@@ -7,6 +7,12 @@ abstract class CollectionLocalDataSource {
   Future<List<FlashcardCollection>> getCollections();
   Future<Unit> createCollection(String name, {description = ''});
   Future<Unit> removeCollection(String uuid);
+  Future<Unit> editCollection(
+      ({
+        FlashcardCollection collection,
+        String name,
+        String description
+      }) collection);
 }
 
 class IsarCollectionDataSource extends CollectionLocalDataSource {
@@ -42,5 +48,21 @@ class IsarCollectionDataSource extends CollectionLocalDataSource {
         .onError((error, stackTrace) =>
             throw LocalStorageException(message: error.toString()));
     return collections;
+  }
+
+  @override
+  Future<Unit> editCollection(
+      ({
+        FlashcardCollection collection,
+        String description,
+        String name
+      }) collection) async {
+    await _instance
+        .writeTxnSync(() async => await _instance.flashcardCollections.put(
+            collection.collection.copyWith(
+                name: collection.name, description: collection.description)))
+        .onError((error, stackTrace) =>
+            throw LocalStorageException(message: error.toString()));
+    return unit;
   }
 }

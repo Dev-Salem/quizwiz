@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quizwiz/src/core/core.dart';
-import 'package:quizwiz/src/features/cards/controller/cubit/cards_bloc.dart';
-import 'package:quizwiz/src/features/cards/controller/cubit/cards_events.dart';
+import 'package:quizwiz/src/features/cards/controller/controller.dart';
+import 'package:quizwiz/src/features/cards/presentation/presentation.dart';
 
 class CreateCollectionDialog extends StatefulWidget {
   const CreateCollectionDialog({super.key});
@@ -16,68 +15,35 @@ class _CreateCollectionDialogState extends State<CreateCollectionDialog> {
   late final TextEditingController descriptionController;
   @override
   void initState() {
+    super.initState();
     nameController = TextEditingController();
     descriptionController = TextEditingController();
-    super.initState();
   }
 
   @override
   void dispose() {
+    super.dispose();
     nameController.dispose();
     descriptionController.dispose();
-    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      contentPadding: const EdgeInsets.all(20),
-      title: const Text(AppStrings.createCollection),
-      actionsAlignment: MainAxisAlignment.spaceBetween,
-      actions: [
-        TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: const Text(
-              AppStrings.cancel,
-              style: TextStyle(color: Colors.red),
-            )),
-        TextButton(
-            onPressed: () {
-              context.read<CardsBloc>().add(CreateCollectionsEvent(
-                  //if the user didn't enter a collection name, assign 'untitled'
-                  //to the collection name
-                  name: nameController.text == ''
-                      ? AppStrings.defaultCollectionName
-                      : nameController.text,
-                  description: descriptionController.text));
-              Navigator.of(context).pop();
-            },
-            child: const Text(AppStrings.create)),
-      ],
-      content: SizedBox(
-        height: 200,
-        child: Column(
-          children: [
-            TextFormField(
-              controller: nameController,
-              maxLength: 30,
-              decoration: const InputDecoration(
-                label: Text(AppStrings.nameTextFieldLabel),
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            TextFormField(
-              controller: descriptionController,
-              maxLength: 70,
-              decoration: const InputDecoration(
-                label: Text(AppStrings.descriptionTextFieldLabel),
-              ),
-            ),
-          ],
-        ),
-      ),
+    return CreateOrEditCollectionDialog(
+      nameController: nameController,
+      descriptionController: descriptionController,
+      button: TextButton(
+          onPressed: () {
+            context.read<CardsBloc>().add(CreateCollectionsEvent(
+                //if the user didn't enter a collection name, assign 'untitled'
+                //to the collection name
+                name: nameController.text == ''
+                    ? AppStrings.defaultCollectionName
+                    : nameController.text,
+                description: descriptionController.text));
+            Navigator.of(context).pop();
+          },
+          child: const Text(AppStrings.create)),
     );
   }
 }

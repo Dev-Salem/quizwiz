@@ -35,11 +35,7 @@ class CardCalculation {
         card.dueTime = now + _toMilliseconds(card.interval);
         break;
     }
-    return card.copyWith(
-        dueTime: card.dueTime,
-        factor: card.factor,
-        repetitions: card.repetitions,
-        interval: card.interval);
+    return card;
   }
 
   double _calculateInterval(int repetitions, double factor) {

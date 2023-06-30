@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:isar/isar.dart';
 import 'package:quizwiz/src/core/core.dart';
-import 'package:quizwiz/src/features/cards/controller/cubit/cards_events.dart';
+import 'package:quizwiz/src/features/cards/controller/bloc/cards_events.dart';
 import 'package:quizwiz/src/features/cards/data/models/flashcard_collection.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quizwiz/src/features/cards/data/repository/cards_repository.dart';

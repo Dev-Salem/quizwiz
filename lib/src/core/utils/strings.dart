@@ -10,4 +10,9 @@ class AppStrings {
   static const String create = "Create";
   static const String nameTextFieldLabel = "Name";
   static const String descriptionTextFieldLabel = "Description (optional)";
+  static const String generateWithAI = "Generate Cards With AI";
+  static const String createFlashcards = "Create Flashcards";
+  static const String addCard = "Add Card";
+  static const String addAnotherCard = "Add Another Card";
+  static const String editFlashcard = "Edit Flashcard";
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/features/cards/controller/controller.dart';
 import 'package:quizwiz/src/features/cards/data/models/edit_flashcard_parameters.dart';
+import 'package:quizwiz/src/features/cards/presentation/widgets/create_flashcards_widgets/forms.dart';
 
 class EditFlashcardScreen extends StatefulWidget {
   final EditFlashcardParameters parameters;
@@ -16,9 +18,9 @@ class _EditFlashcardScreenState extends State<EditFlashcardScreen> {
   final key = GlobalKey<FormState>();
   @override
   void initState() {
+    super.initState();
     frontController = TextEditingController(text: widget.parameters.front);
     backController = TextEditingController(text: widget.parameters.back);
-    super.initState();
   }
 
   @override
@@ -42,7 +44,7 @@ class _EditFlashcardScreenState extends State<EditFlashcardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Edit Flashcard"),
+          title: const Text(AppStrings.editFlashcard),
         ),
         body: LayoutBuilder(
             builder: (context, size) => ListView(
@@ -51,38 +53,10 @@ class _EditFlashcardScreenState extends State<EditFlashcardScreen> {
                     SizedBox(
                       height: size.maxHeight * 0.2,
                     ),
-                    Form(
-                      key: key,
-                      child: Column(
-                        children: [
-                          TextFormField(
-                            controller: frontController,
-                            maxLines: 2,
-                            minLines: 1,
-                            validator: (value) => value!.isEmpty
-                                ? "Invalid Input: Empty Field"
-                                : null,
-                            decoration: const InputDecoration(
-                              label: Text("Term (Front)"),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 30,
-                          ),
-                          TextFormField(
-                            maxLines: 4,
-                            minLines: 1,
-                            controller: backController,
-                            validator: (value) => value!.isEmpty
-                                ? "Invalid Input: Empty Field"
-                                : null,
-                            decoration: const InputDecoration(
-                              label: Text("Definition (Back)"),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    CustomForms(
+                        frontController: frontController,
+                        backController: backController,
+                        formKey: key),
                     SizedBox(height: size.maxHeight * 0.2),
                     FilledButton(
                         onPressed: () {
@@ -92,7 +66,7 @@ class _EditFlashcardScreenState extends State<EditFlashcardScreen> {
                                 arguments: widget.parameters.collection.uuid);
                           }
                         },
-                        child: const Text("Edit Card")),
+                        child: const Text(AppStrings.editFlashcard)),
                     const SizedBox(
                       height: 20,
                     ),

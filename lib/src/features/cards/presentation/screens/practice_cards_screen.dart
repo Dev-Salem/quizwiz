@@ -19,9 +19,11 @@ class PracticeCardsScreen extends StatelessWidget {
           body: BlocBuilder<CardsBloc, CardsState>(
             builder: (context, state) {
               return state.flashcards.isEmpty
-                  ? TextButton(
-                      onPressed: () => Navigator.of(context).pushNamed('/'),
-                      child: const Text("Noting's Here, Go to Home"))
+                  ? Center(
+                      child: TextButton(
+                          onPressed: () => Navigator.of(context).pushNamed('/'),
+                          child: const Text("Noting's Here, Go to Home")),
+                    )
                   : PageView.builder(
                       itemCount: state.flashcards.length,
                       itemBuilder: (context, index) => InkWell(

@@ -32,7 +32,13 @@ class CollectionsListScreen extends StatelessWidget {
                   onPressed: () {
                     context.read<CardsBloc>().add(
                         RemoveCollectionEvent(uuid: collections[index].uuid));
-                  })
+                  }),
+              FocusedMenuItem(
+                  backgroundColor: Theme.of(context).cardColor,
+                  title: const Text(
+                    "Edit",
+                  ),
+                  onPressed: () {}),
             ],
             child: CollectionCardWidget(
               collection: collections[index],

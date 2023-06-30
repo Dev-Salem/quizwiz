@@ -20,4 +20,10 @@ abstract class BaseCardsRepository {
       FlashcardCollection collection, String flashcardUuid);
 
   EitherUnit editFlashcard(EditFlashcardParameters parameters);
+  EitherUnit editCollection(
+      ({
+        FlashcardCollection collection,
+        String name,
+        String description
+      }) collection);
 }
