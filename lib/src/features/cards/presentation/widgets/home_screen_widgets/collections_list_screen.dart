@@ -6,6 +6,7 @@ import 'package:quizwiz/src/core/utils/strings.dart';
 import 'package:quizwiz/src/features/cards/controller/controller.dart';
 import 'package:quizwiz/src/features/cards/data/data.dart';
 import 'package:quizwiz/src/features/cards/presentation/presentation.dart';
+import 'package:quizwiz/src/features/cards/presentation/widgets/home_screen_widgets/edit_collection_dialog.dart';
 
 class CollectionsListScreen extends StatelessWidget {
   final List<FlashcardCollection> collections;
@@ -38,7 +39,10 @@ class CollectionsListScreen extends StatelessWidget {
                   title: const Text(
                     "Edit",
                   ),
-                  onPressed: () {}),
+                  onPressed: () => showDialog(
+                      context: context,
+                      builder: (context) => EditCollectionDialog(
+                          collection: collections[index]))),
             ],
             child: CollectionCardWidget(
               collection: collections[index],

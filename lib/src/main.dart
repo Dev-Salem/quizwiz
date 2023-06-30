@@ -63,7 +63,6 @@ user's flow 2
 Enter the app -> click review cards -> show only cards needed for collection
 
 */
-
-//TODO: Edit collection
+ 
 //TODO: Generate cards
 //TODO: multiple choice quiz

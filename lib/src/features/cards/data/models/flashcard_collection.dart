@@ -33,6 +33,11 @@ class FlashcardCollection {
       uuid: uuid ?? this.uuid,
     );
   }
+
+  @override
+  String toString() {
+    return 'FlashcardCollection(name: $name, description: $description, cards: $cards, id: $id, uuid: $uuid)';
+  }
 }
 
 @embedded
@@ -91,5 +96,10 @@ class Flashcard {
       question: map['question'] as String,
       answer: map['answer'] as String,
     );
+  }
+
+  @override
+  String toString() {
+    return 'Flashcard(question: $question, answer: $answer, dueTime: $dueTime, interval: $interval, factor: $factor, repetitions: $repetitions, uuid: $uuid)';
   }
 }

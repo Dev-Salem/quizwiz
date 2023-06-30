@@ -74,3 +74,14 @@ class GetDueReviewsEvent extends CardsEvents {
   final FlashcardCollection collection;
   const GetDueReviewsEvent({required this.collection});
 }
+
+class EditCollectionEvent extends CardsEvents {
+  final String name;
+  final String description;
+  final FlashcardCollection collection;
+  const EditCollectionEvent({
+    required this.name,
+    required this.description,
+    required this.collection,
+  });
+}

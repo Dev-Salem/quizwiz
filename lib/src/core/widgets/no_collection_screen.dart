@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:quizwiz/src/core/utils/strings.dart';
 
-class NoCollectionScreen extends StatelessWidget {
-  const NoCollectionScreen({super.key});
+class NoResultScreen extends StatelessWidget {
+  final String description;
+  const NoResultScreen({super.key, required this.description});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class NoCollectionScreen extends StatelessWidget {
                 height: 250,
               ),
               Text(
-                "Nothing's Here, Start Making Collections!",
+                description,
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.headlineSmall,
               ),

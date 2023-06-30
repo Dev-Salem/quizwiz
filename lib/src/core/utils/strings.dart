@@ -15,4 +15,6 @@ class AppStrings {
   static const String addCard = "Add Card";
   static const String addAnotherCard = "Add Another Card";
   static const String editFlashcard = "Edit Flashcard";
+  static const String noCollection =
+      "Nothing's Here, Start Making Collections!";
 }

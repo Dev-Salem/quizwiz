@@ -57,12 +57,13 @@ class IsarCollectionDataSource extends CollectionLocalDataSource {
         String description,
         String name
       }) collection) async {
-    await _instance
-        .writeTxnSync(() async => await _instance.flashcardCollections.put(
-            collection.collection.copyWith(
-                name: collection.name, description: collection.description)))
-        .onError((error, stackTrace) =>
-            throw LocalStorageException(message: error.toString()));
+    await _instance.writeTxn(() async {
+      final newCollection = collection.collection
+          .copyWith(name: collection.name, description: collection.description);
+      await _instance.flashcardCollections.put(newCollection);
+    }).onError((error, stackTrace) {
+      throw LocalStorageException(message: error.toString());
+    });
     return unit;
   }
 }

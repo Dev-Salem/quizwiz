@@ -32,7 +32,7 @@ class HomeScreen extends StatelessWidget {
                 );
               case RequestState.success:
                 return state.collections.isEmpty
-                    ? const NoCollectionScreen()
+                    ? const NoResultScreen(description: AppStrings.noCollection)
                     : CollectionsListScreen(collections: state.collections);
               default:
                 return const CustomErrorWidget();
