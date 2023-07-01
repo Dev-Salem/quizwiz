@@ -48,7 +48,7 @@ class IsarCollectionDataSource extends CollectionLocalDataSource {
         .findAll()
         .onError((error, stackTrace) =>
             throw LocalStorageException(message: error.toString()));
-    return collections;
+    return collections.reversed.toList();
   }
 
   @override
@@ -77,6 +77,7 @@ class IsarCollectionDataSource extends CollectionLocalDataSource {
     if (collection == null) {
       throw const LocalStorageException(message: "Collection does not exist");
     }
-    return collection;
+    //sort by data of create/update
+    return collection.copyWith(cards: collection.cards.reversed.toList());
   }
 }
