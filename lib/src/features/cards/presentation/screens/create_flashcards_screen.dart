@@ -81,7 +81,7 @@ class _CreateFlashcardsScreenState extends State<CreateFlashcardsScreen> {
                         onPressed: () {
                           if (_addFlashcard()) {
                             Navigator.of(context).pushReplacementNamed(
-                                '/create_flashcards',
+                                RouterConstance.goToCreateFlashcards,
                                 arguments: widget.collectionUuid);
                           }
                         },

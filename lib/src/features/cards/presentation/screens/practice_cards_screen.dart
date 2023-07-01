@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/features/cards/controller/controller.dart';
 import 'package:quizwiz/src/features/cards/data/data.dart';
 
@@ -27,11 +28,12 @@ class PracticeCardsScreen extends StatelessWidget {
                   : PageView.builder(
                       itemCount: state.flashcards.length,
                       itemBuilder: (context, index) => InkWell(
-                            onTap: () => Navigator.of(context)
-                                .pushNamed('/review_result', arguments: (
-                              state.flashcards[index],
-                              collection
-                            )),
+                            onTap: () => Navigator.of(context).pushNamed(
+                                RouterConstance.goToReviewResult,
+                                arguments: (
+                                  state.flashcards[index],
+                                  collection
+                                )),
                             child: Center(
                               child: Text(
                                 state.flashcards[index].question,

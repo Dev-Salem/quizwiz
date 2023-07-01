@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quizwiz/src/core/router/router_constance.dart';
 import 'package:quizwiz/src/core/widgets/error_widget.dart';
 import 'package:quizwiz/src/features/cards/data/data.dart';
 import 'package:quizwiz/src/features/cards/data/models/edit_flashcard_parameters.dart';
@@ -14,26 +15,26 @@ class RouteGenerator {
     switch (settings.name) {
       case '/':
         return MaterialPageRoute(builder: (context) => const HomeScreen());
-      case '/create_flashcards':
+      case RouterConstance.goToCreateFlashcards:
         var uuid = settings.arguments as String;
         return MaterialPageRoute(
             builder: (context) => CreateFlashcardsScreen(
                   collectionUuid: uuid,
                 ));
-      case '/flashcards_list':
+      case RouterConstance.goToFlashcardsList:
         var collectionUuid = settings.arguments as String;
         return MaterialPageRoute(
           builder: (context) =>
               FlashcardsListScreen(collectionUuid: collectionUuid),
         );
-      case '/practice_cards':
+      case RouterConstance.goToPracticeCards:
         var collection = settings.arguments as FlashcardCollection;
         return MaterialPageRoute(
           builder: (context) => PracticeCardsScreen(
             collection: collection,
           ),
         );
-      case '/review_result':
+      case RouterConstance.goToReviewResult:
         var cardAndCollection = settings.arguments as (
           Flashcard card,
           FlashcardCollection collection
@@ -43,7 +44,7 @@ class RouteGenerator {
             cardAndCollection: cardAndCollection,
           ),
         );
-      case '/edit_flashcard':
+      case RouterConstance.goToEditFlashcard:
         var parameters = settings.arguments as EditFlashcardParameters;
         return MaterialPageRoute(
             builder: (context) => EditFlashcardScreen(

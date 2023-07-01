@@ -51,7 +51,7 @@ class FlashcardsListScreen extends StatelessWidget {
                             title: const Text("Edit"),
                             onPressed: () {
                               Navigator.of(context).pushReplacementNamed(
-                                  '/edit_flashcard',
+                                  RouterConstance.goToEditFlashcard,
                                   arguments: EditFlashcardParameters(
                                       front: collection.cards[index].question,
                                       back: collection.cards[index].answer,

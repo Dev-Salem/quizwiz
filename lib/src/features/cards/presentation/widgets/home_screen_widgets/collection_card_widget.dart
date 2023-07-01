@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/features/cards/controller/controller.dart';
 import 'package:quizwiz/src/features/cards/data/models/flashcard_collection.dart';
 
@@ -41,13 +42,13 @@ class CollectionCardWidget extends StatelessWidget {
                             .read<CardsBloc>()
                             .add(GetDueReviewsEvent(collection: collection));
                         Navigator.of(context).pushReplacementNamed(
-                            '/practice_cards',
+                            RouterConstance.goToPracticeCards,
                             arguments: collection);
                       },
                       child: const Text('Practice')),
                   FilledButton(
                       onPressed: () => Navigator.of(context).pushNamed(
-                          '/create_flashcards',
+                          RouterConstance.goToCreateFlashcards,
                           arguments: collection.uuid),
                       child: const Text("Add Cards"))
                 ],

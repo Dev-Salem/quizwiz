@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:focused_menu/modals.dart';
 import 'package:focused_menu/focused_menu.dart';
+import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/core/utils/strings.dart';
 import 'package:quizwiz/src/features/cards/controller/controller.dart';
 import 'package:quizwiz/src/features/cards/data/data.dart';
@@ -21,7 +22,8 @@ class CollectionsListScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 10 // 10,
               ),
           child: FocusedMenuHolder(
-            onPressed: () => Navigator.of(context).pushNamed('/flashcards_list',
+            onPressed: () => Navigator.of(context).pushNamed(
+                RouterConstance.goToFlashcardsList,
                 arguments: collections[index].uuid),
             menuItems: [
               FocusedMenuItem(
