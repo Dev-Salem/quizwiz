@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:quizwiz/src/core/errors/exceptions.dart';
 import 'package:quizwiz/src/core/utils/private_key.dart';
 import 'package:quizwiz/src/core/utils/strings.dart';
 
@@ -7,20 +8,18 @@ class DioClient {
       List<Map<String, String>> messages,
       {int maxTokens = 200}) async {
     final dio = Dio();
+    dio.options.baseUrl = AppStrings.baseUrl;
     dio.options.headers = {
-      'Authorization': 'Bearer $apiKey',
-      'Content-Type': 'application/json',
+      'content-type': 'application/json',
+      'X-RapidAPI-Key': officialKey,
+      'X-RapidAPI-Host': 'chatgpt-api8.p.rapidapi.com'
     };
-
-    final requestBody = {
-      "model": "gpt-3.5-turbo",
-      "max_tokens": maxTokens,
-      "messages": messages
-    };
-
-    final response = await dio.post(AppStrings.baseUrl);
-
-    return response.data;
+    try {
+      final response = await dio.post('/', data: messages);
+      return response.data;
+    } on Exception catch (e) {
+      throw NetworkingException(e.toString());
+    }
   }
 }
 

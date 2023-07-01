@@ -1,11 +1,11 @@
 import 'package:isar/isar.dart';
-import 'package:jiffy/jiffy.dart' as jiffy;
 import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/core/errors/exceptions.dart';
 import 'package:quizwiz/src/features/cards/data/models/card_calculation.dart';
 import 'package:quizwiz/src/features/cards/data/models/edit_flashcard_parameters.dart';
 import 'package:quizwiz/src/features/cards/data/models/flashcard_collection.dart';
 import 'package:dartz/dartz.dart';
+import 'package:quizwiz/src/features/cards/data/models/multipe_choice_quiz.dart';
 import 'package:uuid/uuid.dart';
 
 abstract class FlashcardLocalDataSource {
@@ -23,6 +23,8 @@ abstract class FlashcardLocalDataSource {
   Future<Unit> removeFlashcard(
       FlashcardCollection collection, String flashcardUuid);
   Future<Unit> editFlashcard(EditFlashcardParameters parameters);
+  Future<List<MultipleChoiceQuiz>> getMultipleChoiceOptions(
+      ({Flashcard flashcard, FlashcardCollection collection}) parameters);
 }
 
 class IsarFlashcardDataSource extends FlashcardLocalDataSource {
@@ -55,8 +57,8 @@ class IsarFlashcardDataSource extends FlashcardLocalDataSource {
   Future<List<Flashcard>> getDueReviewCards(
       FlashcardCollection collection) async {
     final cards = collection.cards.where((card) {
-      return jiffy.Jiffy.parseFromMillisecondsSinceEpoch(card.dueTime).yMMMEd ==
-          jiffy.Jiffy.now().yMMMEd;
+      return DateTime.fromMillisecondsSinceEpoch(card.dueTime)
+          .isBefore(DateTime.now());
     }).toList();
     return cards;
   }
@@ -118,5 +120,19 @@ class IsarFlashcardDataSource extends FlashcardLocalDataSource {
           .put(parameters.collection.copyWith(cards: newList));
     });
     return unit;
+  }
+
+  @override
+  Future<List<MultipleChoiceQuiz>> getMultipleChoiceOptions(
+      ({
+        FlashcardCollection collection,
+        Flashcard flashcard
+      }) parameters) async {
+    List<MultipleChoiceQuiz> result = [];
+    parameters.collection.cards.forEach((element) {
+      result.add(MultipleChoiceQuiz.fromCollection(
+          card: element, collection: parameters.collection));
+    });
+    return result;
   }
 }

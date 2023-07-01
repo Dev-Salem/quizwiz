@@ -6,3 +6,8 @@ class LocalStorageException implements Exception {
     required this.message,
   });
 }
+
+class NetworkingException implements Exception {
+  final String message;
+  const NetworkingException(this.message);
+}
