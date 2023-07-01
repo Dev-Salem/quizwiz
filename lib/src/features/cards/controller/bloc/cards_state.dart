@@ -3,17 +3,28 @@
 part of 'cards_bloc.dart';
 
 class CardsState extends Equatable {
-  final RequestState collectionRequestState;
-  final String collectionErrorMessage;
+  //state of all the collections
+  final RequestState collectionsRequestState;
+  final String collectionsErrorMessage;
   final List<FlashcardCollection> collections;
 
+  //state of a single collection
+  final RequestState collectionRequestState;
+  final String collectionErrorMessage;
+  final FlashcardCollection? collection;
+
+  //state of flashcards of a specific collection
   final RequestState flashcardRequestState;
   final String flashcardErrorMessage;
   final List<Flashcard> flashcards;
+
   const CardsState({
+    this.collectionsRequestState = RequestState.loading,
+    this.collectionsErrorMessage = '',
+    this.collections = const [],
     this.collectionRequestState = RequestState.loading,
     this.collectionErrorMessage = '',
-    this.collections = const [],
+    this.collection,
     this.flashcardRequestState = RequestState.loading,
     this.flashcardErrorMessage = '',
     this.flashcards = const [],
@@ -22,9 +33,11 @@ class CardsState extends Equatable {
   @override
   List<Object> get props {
     return [
+      collectionsRequestState,
+      collectionsErrorMessage,
+      collections,
       collectionRequestState,
       collectionErrorMessage,
-      collections,
       flashcardRequestState,
       flashcardErrorMessage,
       flashcards,
@@ -32,19 +45,27 @@ class CardsState extends Equatable {
   }
 
   CardsState copyWith({
+    RequestState? collectionsRequestState,
+    String? collectionsErrorMessage,
+    List<FlashcardCollection>? collections,
     RequestState? collectionRequestState,
     String? collectionErrorMessage,
-    List<FlashcardCollection>? collections,
+    FlashcardCollection? collection,
     RequestState? flashcardRequestState,
     String? flashcardErrorMessage,
     List<Flashcard>? flashcards,
   }) {
     return CardsState(
+      collectionsRequestState:
+          collectionsRequestState ?? this.collectionsRequestState,
+      collectionsErrorMessage:
+          collectionsErrorMessage ?? this.collectionsErrorMessage,
+      collections: collections ?? this.collections,
       collectionRequestState:
           collectionRequestState ?? this.collectionRequestState,
       collectionErrorMessage:
           collectionErrorMessage ?? this.collectionErrorMessage,
-      collections: collections ?? this.collections,
+      collection: collection ?? this.collection,
       flashcardRequestState:
           flashcardRequestState ?? this.flashcardRequestState,
       flashcardErrorMessage:

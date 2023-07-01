@@ -18,9 +18,6 @@ class DioLocalDataSource extends BaseLocalDataSource {
         },
         {"role": "user", "content": "Summarize this: $material"}
       ]);
-      print(result);
-    } catch (e) {
-      print("He");
-    }
+    } catch (e) {}
   }
 }

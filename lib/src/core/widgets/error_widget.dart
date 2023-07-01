@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/features/cards/controller/controller.dart';
@@ -21,7 +20,7 @@ class CustomErrorWidget extends StatelessWidget {
                   context.read<CardsBloc>().add(GetCollectionsEvent());
                   Navigator.of(context).pushReplacementNamed('/');
                 },
-                child: const Text("Try Again"))
+                child: Text(errorMessage))
           ],
         ),
       ),

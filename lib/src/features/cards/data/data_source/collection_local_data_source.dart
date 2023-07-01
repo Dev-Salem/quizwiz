@@ -13,6 +13,7 @@ abstract class CollectionLocalDataSource {
         String name,
         String description
       }) collection);
+  Future<FlashcardCollection> getCollection(String collectionUuid);
 }
 
 class IsarCollectionDataSource extends CollectionLocalDataSource {
@@ -65,5 +66,17 @@ class IsarCollectionDataSource extends CollectionLocalDataSource {
       throw LocalStorageException(message: error.toString());
     });
     return unit;
+  }
+
+  @override
+  Future<FlashcardCollection> getCollection(String collectionUuid) async {
+    final collection = await _instance.flashcardCollections
+        .getByUuid(collectionUuid)
+        .onError((error, stackTrace) =>
+            throw LocalStorageException(message: error.toString()));
+    if (collection == null) {
+      throw const LocalStorageException(message: "Collection does not exist");
+    }
+    return collection;
   }
 }

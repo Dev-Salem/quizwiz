@@ -4,4 +4,5 @@ import 'package:quizwiz/src/features/cards/data/models/flashcard_collection.dart
 
 typedef EitherFlashcards = Future<Either<Failure, List<Flashcard>>>;
 typedef EitherCollections = Future<Either<Failure, List<FlashcardCollection>>>;
+typedef EitherCollection = Future<Either<Failure, FlashcardCollection>>;
 typedef EitherUnit = Future<Either<Failure, Unit>>;

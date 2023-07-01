@@ -114,4 +114,14 @@ class CardsRepository extends BaseCardsRepository {
       return Left(LocalStorageFailure(message: e.toString()));
     }
   }
+
+  @override
+  EitherCollection getCollection(String collectionUuid) async {
+    try {
+      final result = await _collectionDataSource.getCollection(collectionUuid);
+      return Right(result);
+    } on Exception catch (e) {
+      return Left(LocalStorageFailure(message: e.toString()));
+    }
+  }
 }

@@ -22,7 +22,7 @@ class HomeScreen extends StatelessWidget {
         ),
         body: BlocBuilder<CardsBloc, CardsState>(
           builder: (context, state) {
-            switch (state.collectionRequestState) {
+            switch (state.collectionsRequestState) {
               case RequestState.loading:
                 return const Center(
                     child: CircularProgressIndicator.adaptive());

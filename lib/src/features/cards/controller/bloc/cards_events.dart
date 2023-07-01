@@ -85,3 +85,8 @@ class EditCollectionEvent extends CardsEvents {
     required this.collection,
   });
 }
+
+class GetCollectionEvent extends CardsEvents {
+  final String collectionUuid;
+  const GetCollectionEvent({required this.collectionUuid});
+}

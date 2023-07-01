@@ -26,4 +26,5 @@ abstract class BaseCardsRepository {
         String name,
         String description
       }) collection);
+  EitherCollection getCollection(String collectionUuid);
 }

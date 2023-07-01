@@ -21,72 +21,73 @@ class CardsBloc extends Bloc<CardsEvents, CardsState> {
     on<EditFlashcardsEvent>(_editFlashcards);
     on<GetDueReviewsEvent>(_getDueReviewsEvent);
     on<EditCollectionEvent>(_editCollection);
+    on<GetCollectionEvent>(_getCollection);
     collectionStream.listen((event) {
       add(GetCollectionsEvent());
     });
   }
 
   _getCollections(GetCollectionsEvent event, Emitter<CardsState> emit) async {
-    emit(state.copyWith(collectionRequestState: RequestState.loading));
+    emit(state.copyWith(collectionsRequestState: RequestState.loading));
     final result = await _baseCardsRepository.getCollections();
     result.fold(
         (l) => emit(state.copyWith(
-            collectionErrorMessage: l.message,
-            collectionRequestState: RequestState.error)),
+            collectionsErrorMessage: l.message,
+            collectionsRequestState: RequestState.error)),
         (r) => emit(state.copyWith(
-            collectionRequestState: RequestState.success, collections: r)));
+            collectionsRequestState: RequestState.success, collections: r)));
   }
 
   _removeCollection(
       RemoveCollectionEvent event, Emitter<CardsState> emit) async {
-    emit(state.copyWith(collectionRequestState: RequestState.loading));
+    emit(state.copyWith(collectionsRequestState: RequestState.loading));
     final result = await _baseCardsRepository.removeCollection(event.uuid);
     result.fold(
         (l) => emit(state.copyWith(
-            collectionErrorMessage: l.message,
-            collectionRequestState: RequestState.error)),
+            collectionsErrorMessage: l.message,
+            collectionsRequestState: RequestState.error)),
         (r) => emit(state.copyWith(
-              collectionRequestState: RequestState.success,
+              collectionsRequestState: RequestState.success,
             )));
   }
 
   _createCollections(
       CreateCollectionsEvent event, Emitter<CardsState> emit) async {
-    emit(state.copyWith(collectionRequestState: RequestState.loading));
+    emit(state.copyWith(collectionsRequestState: RequestState.loading));
     final result = await _baseCardsRepository.createCollection(event.name,
         description: event.description);
     result.fold(
         (l) => emit(state.copyWith(
-            collectionErrorMessage: l.message,
-            collectionRequestState: RequestState.error)),
+            collectionsErrorMessage: l.message,
+            collectionsRequestState: RequestState.error)),
         (r) => emit(state.copyWith(
-              collectionRequestState: RequestState.success,
+              collectionsRequestState: RequestState.success,
             )));
   }
 
   _addFlashcards(AddFlashcardsEvent event, Emitter<CardsState> emit) async {
-    emit(state.copyWith(collectionRequestState: RequestState.loading));
+    emit(state.copyWith(collectionsRequestState: RequestState.loading));
     final result = await _baseCardsRepository.addFlashcard(
         event.front, event.back, event.collectionUuid);
     result.fold(
         (l) => emit(state.copyWith(
-            collectionErrorMessage: l.message,
-            collectionRequestState: RequestState.error)),
+            collectionsErrorMessage: l.message,
+            collectionsRequestState: RequestState.error)),
         (r) => emit(state.copyWith(
-              collectionRequestState: RequestState.success,
+              collectionsRequestState: RequestState.success,
             )));
   }
 
   _updateDueTime(UpdateDueTimeEvent event, Emitter<CardsState> emit) async {
-    emit(state.copyWith(collectionRequestState: RequestState.loading));
+    emit(state.copyWith(collectionsRequestState: RequestState.loading));
     final result = await _baseCardsRepository.updateDueTime(
         event.card, event.collectionUuid, event.reviewResult);
     result.fold(
         (l) => emit(state.copyWith(
-            collectionErrorMessage: l.message,
-            collectionRequestState: RequestState.error)),
+            collectionsErrorMessage: l.message,
+            collectionsRequestState: RequestState.error)),
         (r) => emit(state.copyWith(
-              collectionRequestState: RequestState.success,
+              collectionsRequestState: RequestState.success,
             )));
   }
 
@@ -98,27 +99,30 @@ class CardsBloc extends Bloc<CardsEvents, CardsState> {
     result.fold(
         (l) => emit(state.copyWith(
             collectionErrorMessage: l.message,
-            collectionRequestState: RequestState.error)),
-        (r) => emit(state.copyWith(
-              collectionRequestState: RequestState.success,
-            )));
+            collectionRequestState: RequestState.error)), (r) {
+      emit(state.copyWith(
+        collectionRequestState: RequestState.success,
+      ));
+    });
+    add(GetCollectionEvent(collectionUuid: event.collection.uuid));
   }
 
   _editFlashcards(EditFlashcardsEvent event, Emitter<CardsState> emit) async {
-    emit(state.copyWith(collectionRequestState: RequestState.loading));
+    emit(state.copyWith(collectionsRequestState: RequestState.loading));
     final result = await _baseCardsRepository.editFlashcard(event.parameters);
     result.fold(
         (l) => emit(state.copyWith(
-            collectionErrorMessage: l.message,
-            collectionRequestState: RequestState.error)),
+            collectionsErrorMessage: l.message,
+            collectionsRequestState: RequestState.error)),
         (r) => emit(state.copyWith(
-              collectionRequestState: RequestState.success,
+              collectionsRequestState: RequestState.success,
             )));
+    add(GetCollectionEvent(collectionUuid: event.parameters.collection.uuid));
   }
 
   _getDueReviewsEvent(
       GetDueReviewsEvent event, Emitter<CardsState> emit) async {
-    emit(state.copyWith(collectionRequestState: RequestState.loading));
+    emit(state.copyWith(collectionsRequestState: RequestState.loading));
     final result =
         await _baseCardsRepository.getDueReviewCards(event.collection);
     result.fold(
@@ -126,13 +130,13 @@ class CardsBloc extends Bloc<CardsEvents, CardsState> {
             flashcardErrorMessage: l.message,
             flashcardRequestState: RequestState.error)),
         (r) => emit(state.copyWith(
-            collectionRequestState: RequestState.success,
+            collectionsRequestState: RequestState.success,
             flashcards: r,
             flashcardRequestState: RequestState.success)));
   }
 
   _editCollection(EditCollectionEvent event, Emitter<CardsState> emit) async {
-    emit(state.copyWith(collectionRequestState: RequestState.loading));
+    emit(state.copyWith(collectionsRequestState: RequestState.loading));
     final result = await _baseCardsRepository.editCollection((
       collection: event.collection,
       name: event.name,
@@ -140,13 +144,27 @@ class CardsBloc extends Bloc<CardsEvents, CardsState> {
     ));
     result.fold((l) {
       emit(state.copyWith(
-          collectionErrorMessage: l.message,
-          collectionRequestState: RequestState.error));
+          collectionsErrorMessage: l.message,
+          collectionsRequestState: RequestState.error));
     }, (r) {
       emit(state.copyWith(
-        collectionRequestState: RequestState.success,
+        collectionsRequestState: RequestState.success,
       ));
-      add(GetCollectionsEvent());
     });
+  }
+
+  _getCollection(GetCollectionEvent event, Emitter<CardsState> emit) async {
+    emit(state.copyWith(collectionRequestState: RequestState.loading));
+    final result =
+        await _baseCardsRepository.getCollection(event.collectionUuid);
+    result.fold(
+        (l) => emit(state.copyWith(
+            collectionErrorMessage: l.message,
+            collectionRequestState: RequestState.error)),
+        (r) => emit(state.copyWith(
+              collectionRequestState: RequestState.success,
+              collectionsRequestState: RequestState.success,
+              collection: r,
+            )));
   }
 }
