@@ -28,7 +28,6 @@ class CardsBloc extends Bloc<CardsEvents, CardsState> {
   }
 
   _getCollections(GetCollectionsEvent event, Emitter<CardsState> emit) async {
-    print("GetCollections was called");
     emit(state.copyWith(collectionsRequestState: RequestState.loading));
     final result = await _baseCardsRepository.getCollections();
     result.fold(

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:quizwiz/src/core/router/route_generator.dart';
-import 'package:quizwiz/src/core/theme/app_theme.dart';
+import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/features/cards/controller/controller.dart';
-import 'package:quizwiz/src/features/cards/presentation/screens/home_screen.dart';
+import 'package:quizwiz/src/features/cards/presentation/presentation.dart';
 import 'package:path_provider/path_provider.dart';
 import 'features/cards/data/data.dart';
 
