@@ -25,7 +25,7 @@ class NoFlashcardsToReview extends StatelessWidget {
           const Text(AppStrings.noFlashcardsToReview),
           const Expanded(child: SizedBox()),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25),
+            padding: const EdgeInsets.symmetric(horizontal: 30),
             child: Row(
               children: [
                 OutlinedButton(

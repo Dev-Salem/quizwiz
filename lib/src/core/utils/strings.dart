@@ -2,6 +2,7 @@ class AppStrings {
   static const notFoundAsset = "assets/93134-not-found.json";
   static const String baseUrl = 'https://chatgpt-api8.p.rapidapi.com';
   static const String errorMessage = 'Something went wrong';
+  static const String review = 'Review';
   static const String homeScreen = "Home Screen";
   static const String delete = "Delete";
   static const String createCollection = "Create Collection";

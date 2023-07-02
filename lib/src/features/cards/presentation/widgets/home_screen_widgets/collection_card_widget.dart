@@ -45,12 +45,12 @@ class CollectionCardWidget extends StatelessWidget {
                             RouterConstance.goToPracticeCards,
                             arguments: collection);
                       },
-                      child: const Text('Practice')),
+                      child: const Text(AppStrings.review)),
                   FilledButton(
                       onPressed: () => Navigator.of(context).pushNamed(
                           RouterConstance.goToCreateFlashcards,
                           arguments: collection.uuid),
-                      child: const Text("Add Cards"))
+                      child: const Text(AppStrings.addCard))
                 ],
               ),
             )

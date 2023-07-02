@@ -78,6 +78,7 @@ class _MultipleChoiceQuizScreenState extends State<MultipleChoiceQuizScreen> {
                           alignment: Alignment.center,
                           child: Text(
                             quiz[index].question,
+                            textAlign: TextAlign.center,
                             style: Theme.of(context).textTheme.displaySmall,
                           )),
                       ...List.generate(quiz[index].options.length, (i) {
