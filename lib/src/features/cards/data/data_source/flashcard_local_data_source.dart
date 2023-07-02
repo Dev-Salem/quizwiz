@@ -126,10 +126,10 @@ class IsarFlashcardDataSource extends FlashcardLocalDataSource {
   Future<List<MultipleChoiceQuiz>> getMultipleChoiceOptions(
       FlashcardCollection collection) async {
     List<MultipleChoiceQuiz> result = [];
-    collection.cards.forEach((element) {
+    for (var element in collection.cards) {
       result.add(MultipleChoiceQuiz.fromCollection(
           card: element, collection: collection));
-    });
+    }
     return result;
   }
 }
