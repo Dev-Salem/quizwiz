@@ -18,6 +18,10 @@ class CardsState extends Equatable {
   final String flashcardErrorMessage;
   final List<Flashcard> flashcards;
 
+  final RequestState quizRequestState;
+  final String quizErrorMessage;
+  final List<MultipleChoiceQuiz> multipleChoices;
+
   const CardsState({
     this.collectionsRequestState = RequestState.loading,
     this.collectionsErrorMessage = '',
@@ -28,6 +32,9 @@ class CardsState extends Equatable {
     this.flashcardRequestState = RequestState.loading,
     this.flashcardErrorMessage = '',
     this.flashcards = const [],
+    this.quizRequestState = RequestState.loading,
+    this.quizErrorMessage = '',
+    this.multipleChoices = const [],
   });
 
   @override
@@ -41,6 +48,9 @@ class CardsState extends Equatable {
       flashcardRequestState,
       flashcardErrorMessage,
       flashcards,
+      quizRequestState,
+      quizErrorMessage,
+      multipleChoices,
     ];
   }
 
@@ -54,6 +64,9 @@ class CardsState extends Equatable {
     RequestState? flashcardRequestState,
     String? flashcardErrorMessage,
     List<Flashcard>? flashcards,
+    RequestState? quizRequestState,
+    String? quizErrorMessage,
+    List<MultipleChoiceQuiz>? multipleChoices,
   }) {
     return CardsState(
       collectionsRequestState:
@@ -71,6 +84,9 @@ class CardsState extends Equatable {
       flashcardErrorMessage:
           flashcardErrorMessage ?? this.flashcardErrorMessage,
       flashcards: flashcards ?? this.flashcards,
+      quizRequestState: quizRequestState ?? this.quizRequestState,
+      quizErrorMessage: quizErrorMessage ?? this.quizErrorMessage,
+      multipleChoices: multipleChoices ?? this.multipleChoices,
     );
   }
 }

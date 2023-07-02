@@ -17,4 +17,8 @@ class AppStrings {
   static const String editFlashcard = "Edit Flashcard";
   static const String noCollection =
       "Nothing's Here, Start Making Collections!";
+  static const String noFlashcardsToReview = "No Flashcards To Review Today";
+  static const String goBack = "Go Back";
+  static const String practice = "Practice";
+  static const String noCards = "No Cards Here, Try Adding New Cards";
 }

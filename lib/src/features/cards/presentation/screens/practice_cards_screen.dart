@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/features/cards/controller/controller.dart';
 import 'package:quizwiz/src/features/cards/data/data.dart';
+import 'package:quizwiz/src/features/cards/presentation/widgets/practice_cards_widgets/no_flashcards_to_review.dart';
 
 class PracticeCardsScreen extends StatelessWidget {
   final FlashcardCollection collection;
@@ -20,10 +21,8 @@ class PracticeCardsScreen extends StatelessWidget {
           body: BlocBuilder<CardsBloc, CardsState>(
             builder: (context, state) {
               return state.flashcards.isEmpty
-                  ? Center(
-                      child: TextButton(
-                          onPressed: () => Navigator.of(context).pushNamed('/'),
-                          child: const Text("Noting's Here, Go to Home")),
+                  ? NoFlashcardsToReview(
+                      collection: collection,
                     )
                   : PageView.builder(
                       itemCount: state.flashcards.length,

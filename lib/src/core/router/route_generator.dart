@@ -6,7 +6,9 @@ import 'package:quizwiz/src/features/cards/data/models/edit_flashcard_parameters
 import 'package:quizwiz/src/features/cards/presentation/screens/create_flashcards_screen.dart';
 import 'package:quizwiz/src/features/cards/presentation/screens/edit_flashcard_screen.dart';
 import 'package:quizwiz/src/features/cards/presentation/screens/flashcards_list_screen.dart';
+import 'package:quizwiz/src/features/cards/presentation/screens/generate_cards_screen.dart';
 import 'package:quizwiz/src/features/cards/presentation/screens/home_screen.dart';
+import 'package:quizwiz/src/features/cards/presentation/screens/multiple_choic_quiz_screen.dart';
 import 'package:quizwiz/src/features/cards/presentation/screens/practice_cards_screen.dart';
 import 'package:quizwiz/src/features/cards/presentation/screens/review_result_screen.dart';
 
@@ -50,6 +52,12 @@ class RouteGenerator {
             builder: (context) => EditFlashcardScreen(
                   parameters: parameters,
                 ));
+      case RouterConstance.goToGenerateFlashcards:
+        return MaterialPageRoute(
+            builder: (context) => const GenerateCardsScreen());
+      case RouterConstance.goToQuiz:
+        return MaterialPageRoute(
+            builder: (context) => const MultipleChoiceQuizScreen());
       default:
         return MaterialPageRoute(
           builder: (context) => const CustomErrorWidget(),

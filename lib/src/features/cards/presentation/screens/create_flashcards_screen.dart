@@ -61,7 +61,10 @@ class _CreateFlashcardsScreenState extends State<CreateFlashcardsScreen> {
                         frontController: frontController,
                         backController: backController),
                     TextButton.icon(
-                        onPressed: () async {},
+                        onPressed: () {
+                          Navigator.of(context).pushReplacementNamed(
+                              RouterConstance.goToGenerateFlashcards);
+                        },
                         icon: const Icon(Icons.rocket),
                         label: const Text(AppStrings.generateWithAI)),
                     SizedBox(height: size.maxHeight * 0.2),

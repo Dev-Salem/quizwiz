@@ -37,7 +37,7 @@ class FlashcardsListScreen extends StatelessWidget {
                   title: Text(collection.name),
                 ),
                 body: collection.cards.isEmpty
-                    ? const NoResultScreen(description: "No cards here")
+                    ? const NoResultScreen(description: AppStrings.noCards)
                     : MasonryGridView.builder(
                         padding: const EdgeInsets.all(15),
                         gridDelegate:

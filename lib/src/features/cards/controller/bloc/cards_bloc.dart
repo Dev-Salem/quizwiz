@@ -1,10 +1,8 @@
 import 'package:equatable/equatable.dart';
-import 'package:isar/isar.dart';
 import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/features/cards/controller/bloc/cards_events.dart';
-import 'package:quizwiz/src/features/cards/data/models/flashcard_collection.dart';
+import 'package:quizwiz/src/features/cards/data/data.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quizwiz/src/features/cards/data/repository/cards_repository.dart';
 part 'cards_state.dart';
 
 class CardsBloc extends Bloc<CardsEvents, CardsState> {
@@ -22,6 +20,7 @@ class CardsBloc extends Bloc<CardsEvents, CardsState> {
     on<GetDueReviewsEvent>(_getDueReviewsEvent);
     on<EditCollectionEvent>(_editCollection);
     on<GetCollectionEvent>(_getCollection);
+    on<GetMultipleQuizOptionsEvent>(_getMultipleQuizOptionsEvent);
     collectionStream.listen((event) {
       add(GetCollectionsEvent());
     });
@@ -133,7 +132,8 @@ class CardsBloc extends Bloc<CardsEvents, CardsState> {
         (r) => emit(state.copyWith(
             collectionsRequestState: RequestState.success,
             flashcards: r,
-            flashcardRequestState: RequestState.success)));
+            flashcardRequestState: RequestState.success,
+            collectionRequestState: RequestState.success)));
   }
 
   _editCollection(EditCollectionEvent event, Emitter<CardsState> emit) async {
@@ -167,5 +167,19 @@ class CardsBloc extends Bloc<CardsEvents, CardsState> {
               collectionsRequestState: RequestState.success,
               collection: r,
             )));
+  }
+
+  _getMultipleQuizOptionsEvent(
+      GetMultipleQuizOptionsEvent event, Emitter<CardsState> emit) async {
+    emit(state.copyWith(quizRequestState: RequestState.loading));
+    final result =
+        await _baseCardsRepository.getMultipleChoiceOptions(event.collection);
+    result.fold(
+        (l) => emit(state.copyWith(
+            quizRequestState: RequestState.error, quizErrorMessage: l.message)),
+        (r) => emit(state.copyWith(
+            quizRequestState: RequestState.success,
+            collectionRequestState: RequestState.success,
+            multipleChoices: r)));
   }
 }

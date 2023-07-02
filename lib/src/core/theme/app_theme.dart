@@ -1,4 +1,5 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flutter/material.dart';
 
 class AppTheme {
   // Made for FlexColorScheme version 7.0.5. Make sure you
@@ -19,7 +20,7 @@ class AppTheme {
         swapLegacyOnMaterial3: true,
         // To use the playground font, add GoogleFonts package and uncomment
         // fontFamily: GoogleFonts.notoSans().fontFamily,
-      );
+      ).copyWith(appBarTheme: const AppBarTheme(centerTitle: true));
   static darkTheme() => FlexThemeData.dark(
         scheme: FlexScheme.materialBaseline,
         surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
@@ -33,7 +34,7 @@ class AppTheme {
         swapLegacyOnMaterial3: true,
         // To use the Playground font, add GoogleFonts package and uncomment
         // fontFamily: GoogleFonts.notoSans().fontFamily,
-      );
+      ).copyWith(appBarTheme: const AppBarTheme(centerTitle: true));
 // If you do not have a themeMode switch, uncomment this line
 // to let the device system mode control the theme mode:
 // themeMode: ThemeMode.system,

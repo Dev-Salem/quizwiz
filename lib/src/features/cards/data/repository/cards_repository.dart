@@ -124,4 +124,16 @@ class CardsRepository extends BaseCardsRepository {
       return Left(LocalStorageFailure(message: e.toString()));
     }
   }
+
+  @override
+  EitherMultiple getMultipleChoiceOptions(
+      FlashcardCollection collection) async {
+    try {
+      final result =
+          await _flashcardDataSource.getMultipleChoiceOptions(collection);
+      return Right(result);
+    } on Exception catch (e) {
+      return Left(LocalStorageFailure(message: e.toString()));
+    }
+  }
 }

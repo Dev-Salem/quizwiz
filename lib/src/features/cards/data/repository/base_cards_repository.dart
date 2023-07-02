@@ -27,4 +27,5 @@ abstract class BaseCardsRepository {
         String description
       }) collection);
   EitherCollection getCollection(String collectionUuid);
+  EitherMultiple getMultipleChoiceOptions(FlashcardCollection collection);
 }

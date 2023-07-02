@@ -5,7 +5,7 @@ import 'package:quizwiz/src/features/cards/data/models/card_calculation.dart';
 import 'package:quizwiz/src/features/cards/data/models/edit_flashcard_parameters.dart';
 import 'package:quizwiz/src/features/cards/data/models/flashcard_collection.dart';
 import 'package:dartz/dartz.dart';
-import 'package:quizwiz/src/features/cards/data/models/multipe_choice_quiz.dart';
+import 'package:quizwiz/src/features/cards/data/models/multiple_choice_quiz.dart';
 import 'package:uuid/uuid.dart';
 
 abstract class FlashcardLocalDataSource {
@@ -24,7 +24,7 @@ abstract class FlashcardLocalDataSource {
       FlashcardCollection collection, String flashcardUuid);
   Future<Unit> editFlashcard(EditFlashcardParameters parameters);
   Future<List<MultipleChoiceQuiz>> getMultipleChoiceOptions(
-      ({Flashcard flashcard, FlashcardCollection collection}) parameters);
+      FlashcardCollection collection);
 }
 
 class IsarFlashcardDataSource extends FlashcardLocalDataSource {
@@ -124,14 +124,11 @@ class IsarFlashcardDataSource extends FlashcardLocalDataSource {
 
   @override
   Future<List<MultipleChoiceQuiz>> getMultipleChoiceOptions(
-      ({
-        FlashcardCollection collection,
-        Flashcard flashcard
-      }) parameters) async {
+      FlashcardCollection collection) async {
     List<MultipleChoiceQuiz> result = [];
-    parameters.collection.cards.forEach((element) {
+    collection.cards.forEach((element) {
       result.add(MultipleChoiceQuiz.fromCollection(
-          card: element, collection: parameters.collection));
+          card: element, collection: collection));
     });
     return result;
   }
