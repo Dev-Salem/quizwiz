@@ -1,7 +1,10 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:quizwiz/src/core/core.dart';
+import 'package:quizwiz/src/features/cards/data/models/flashcard_api_model.dart'
+    as model;
 
 class GenerateCardsScreen extends StatefulWidget {
   const GenerateCardsScreen({super.key});
@@ -35,21 +38,10 @@ class _GenerateCardsScreenState extends State<GenerateCardsScreen> {
           ),
           ElevatedButton.icon(
               onPressed: () async {
-                final result = await DioClient.fetchChatCompletion([
-                  {
-                    "role": "user",
-                    "content": """
-pretend to be an expert in summarizing studying material.
-create a valid JSON array of objects for ${_controller.text} following this format [no prose]:
-
-[
-{"clean code": "code that meets the standards"},
-{"science": "the pursuit and application of knowledge"}
-]
- """
-                  }
-                ]);
-                log(result.toString());
+                final result =
+                    await DioClient.fetchChatCompletion(_controller.text);
+                final flashcards = model.FlashcardsModel.fromJson(result);
+                print(flashcards);
               },
               icon: const Icon(Icons.rocket),
               label: const Text("Generate"))

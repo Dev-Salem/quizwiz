@@ -93,8 +93,8 @@ class Flashcard {
 
   factory Flashcard.fromMap(Map<String, dynamic> map) {
     return Flashcard(
-      question: map['question'] as String,
-      answer: map['answer'] as String,
+      question: map['term'] as String,
+      answer: map['definition'] as String,
     );
   }
 
