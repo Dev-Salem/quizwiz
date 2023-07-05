@@ -1,11 +1,5 @@
-import 'dart:convert';
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:quizwiz/src/core/core.dart';
-import 'package:quizwiz/src/features/cards/data/data.dart';
-import 'package:quizwiz/src/features/cards/data/models/flashcard_api_model.dart'
-    as model;
 
 class GenerateCardsScreen extends StatefulWidget {
   final String collectionUuid;
@@ -17,6 +11,7 @@ class GenerateCardsScreen extends StatefulWidget {
 
 class _GenerateCardsScreenState extends State<GenerateCardsScreen> {
   late final TextEditingController _controller;
+  final formKey = GlobalKey<FormState>();
   @override
   void initState() {
     super.initState();
@@ -38,23 +33,25 @@ class _GenerateCardsScreenState extends State<GenerateCardsScreen> {
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: TextFormField(
-              controller: _controller,
-              minLines: 1,
-              maxLines: 10,
-              decoration:
-                  const InputDecoration(label: Text(AppStrings.pasteMaterial)),
+            child: Form(
+              key: formKey,
+              child: TextFormField(
+                controller: _controller,
+                minLines: 1,
+                maxLines: 10,
+                validator: (value) => value!.isEmpty ? "Empty Value" : null,
+                decoration: const InputDecoration(
+                    label: Text(AppStrings.pasteMaterial)),
+              ),
             ),
           ),
           ElevatedButton.icon(
               onPressed: () async {
-                // final result =
-                //     await DioClient.fetchChatCompletion(_controller.text);
-                // final flashcards = model.FlashcardsModel.fromJson(result);
-                // print(flashcards);
-                Navigator.of(context).pushReplacementNamed(
-                    RouterConstance.goToGeneratedFlashcards,
-                    arguments: widget.collectionUuid);
+                if (formKey.currentState!.validate() == true) {
+                  Navigator.of(context).pushReplacementNamed(
+                      RouterConstance.goToGeneratedFlashcards,
+                      arguments: widget.collectionUuid);
+                }
               },
               icon: const Icon(Icons.rocket),
               label: const Text(AppStrings.generate))

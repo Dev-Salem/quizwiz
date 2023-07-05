@@ -34,9 +34,13 @@ class _MultipleChoiceQuizScreenState extends State<MultipleChoiceQuizScreen> {
   }
 
   void onTap(int index, List<MultipleChoiceQuiz> quiz) {
+    //change the color to green
     _changeAnswerColor();
+    //after [500 milliseconds] change the color back
     Future.delayed(
         const Duration(milliseconds: 500), () => _changeAnswerColor());
+    //if this's the last question, navigate to the home page, else slide to the
+    //next question
     if (index == quiz.length - 1) {
       Future.delayed(const Duration(milliseconds: 400),
           () => Navigator.of(context).pushReplacementNamed('/'));

@@ -4,6 +4,7 @@ import 'package:focused_menu/focused_menu.dart';
 import 'package:focused_menu/modals.dart';
 import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/core/widgets/error_widget.dart';
+import 'package:quizwiz/src/core/widgets/loading_widget.dart';
 import 'package:quizwiz/src/core/widgets/no_collection_screen.dart';
 import 'package:quizwiz/src/features/cards/controller/controller.dart';
 import 'package:quizwiz/src/features/cards/data/models/edit_flashcard_parameters.dart';
@@ -21,11 +22,7 @@ class FlashcardsListScreen extends StatelessWidget {
       builder: (context, state) {
         switch (state.collectionRequestState) {
           case RequestState.loading:
-            return const Scaffold(
-              body: Center(
-                child: CircularProgressIndicator.adaptive(),
-              ),
-            );
+            return const LoadingWidget();
           case RequestState.error:
             return CustomErrorWidget(
               errorMessage: state.flashcardErrorMessage,
