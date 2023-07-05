@@ -45,8 +45,9 @@ class NoFlashcardsToReview extends StatelessWidget {
                         context.read<CardsBloc>().add(
                             GetMultipleQuizOptionsEvent(
                                 collection: collection));
-                        Navigator.of(context)
-                            .pushNamed(RouterConstance.goToQuiz);
+                        Navigator.of(context).pushNamed(
+                            RouterConstance.goToQuiz,
+                            arguments: collection.uuid);
                       }
                     },
                     icon: const Icon(Icons.quiz),

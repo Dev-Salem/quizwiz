@@ -2,9 +2,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/features/cards/data/data.dart';
-import 'package:quizwiz/src/features/cards/data/data_source/remote_data_source.dart';
-import 'package:quizwiz/src/features/cards/data/models/edit_flashcard_parameters.dart';
-import 'package:quizwiz/src/features/cards/data/repository/base_cards_repository.dart';
 
 class CardsRepository extends BaseCardsRepository {
   final IsarFlashcardDataSource _flashcardDataSource;

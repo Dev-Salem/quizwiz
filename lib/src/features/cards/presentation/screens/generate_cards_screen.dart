@@ -8,8 +8,8 @@ import 'package:quizwiz/src/features/cards/data/models/flashcard_api_model.dart'
     as model;
 
 class GenerateCardsScreen extends StatefulWidget {
-  final FlashcardCollection collection;
-  const GenerateCardsScreen({super.key, required this.collection});
+  final String collectionUuid;
+  const GenerateCardsScreen({super.key, required this.collectionUuid});
 
   @override
   State<GenerateCardsScreen> createState() => _GenerateCardsScreenState();

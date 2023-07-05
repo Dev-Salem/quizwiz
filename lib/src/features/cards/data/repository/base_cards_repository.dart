@@ -1,6 +1,5 @@
 import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/features/cards/data/data.dart';
-import 'package:quizwiz/src/features/cards/data/models/edit_flashcard_parameters.dart';
 
 abstract class BaseCardsRepository {
   const BaseCardsRepository();
