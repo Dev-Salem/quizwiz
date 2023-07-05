@@ -1,38 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:quizwiz/src/app_entry.dart';
 import 'package:quizwiz/src/core/core.dart';
-import 'package:quizwiz/src/features/cards/controller/controller.dart';
-import 'package:quizwiz/src/features/cards/presentation/presentation.dart';
 import 'package:path_provider/path_provider.dart';
 import 'features/cards/data/data.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await _openIsarBox();
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => CardsBloc(CardsRepository(
-          IsarFlashcardDataSource(), IsarCollectionDataSource()))
-        ..add(GetCollectionsEvent()),
-      child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          themeMode: ThemeMode.dark,
-          onGenerateRoute: (settings) => RouteGenerator.generateRoute(settings),
-          theme: AppTheme.lightTheme(),
-          darkTheme: AppTheme.darkTheme(),
-          home: const HomeScreen()),
-    );
-  }
+  await _initialize();
+  runApp(const QuizWizApp());
 }
 
 Future<void> _openIsarBox() async {
   final dir = await getApplicationDocumentsDirectory();
   await Isar.open([FlashcardCollectionSchema], directory: dir.path);
+}
+
+Future<void> _initialize() async {
+  ServiceLocator().init();
+  WidgetsFlutterBinding.ensureInitialized();
+  await _openIsarBox();
 }
 
 /*Quizwiz is  an app that allows users to upload pdf files or paste 

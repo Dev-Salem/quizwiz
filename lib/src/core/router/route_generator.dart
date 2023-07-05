@@ -7,6 +7,7 @@ import 'package:quizwiz/src/features/cards/presentation/screens/create_flashcard
 import 'package:quizwiz/src/features/cards/presentation/screens/edit_flashcard_screen.dart';
 import 'package:quizwiz/src/features/cards/presentation/screens/flashcards_list_screen.dart';
 import 'package:quizwiz/src/features/cards/presentation/screens/generate_cards_screen.dart';
+import 'package:quizwiz/src/features/cards/presentation/screens/generated_flashcards_screen.dart';
 import 'package:quizwiz/src/features/cards/presentation/screens/home_screen.dart';
 import 'package:quizwiz/src/features/cards/presentation/screens/multiple_choic_quiz_screen.dart';
 import 'package:quizwiz/src/features/cards/presentation/screens/practice_cards_screen.dart';
@@ -53,11 +54,19 @@ class RouteGenerator {
                   parameters: parameters,
                 ));
       case RouterConstance.goToGenerateFlashcards:
+        var collection = settings.arguments as FlashcardCollection;
         return MaterialPageRoute(
-            builder: (context) => const GenerateCardsScreen());
+            builder: (context) => GenerateCardsScreen(
+                  collection: collection,
+                ));
       case RouterConstance.goToQuiz:
         return MaterialPageRoute(
             builder: (context) => const MultipleChoiceQuizScreen());
+      case RouterConstance.goToGeneratedFlashcards:
+        var collection = settings.arguments as FlashcardCollection;
+        return MaterialPageRoute(
+            builder: (context) =>
+                GeneratedFlashcardsScreen(collection: collection));
       default:
         return MaterialPageRoute(
           builder: (context) => const CustomErrorWidget(),

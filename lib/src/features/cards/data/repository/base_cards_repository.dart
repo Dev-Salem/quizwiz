@@ -3,6 +3,7 @@ import 'package:quizwiz/src/features/cards/data/data.dart';
 import 'package:quizwiz/src/features/cards/data/models/edit_flashcard_parameters.dart';
 
 abstract class BaseCardsRepository {
+  const BaseCardsRepository();
   EitherFlashcards getDueReviewCards(
     FlashcardCollection collection,
   );
@@ -28,4 +29,5 @@ abstract class BaseCardsRepository {
       }) collection);
   EitherCollection getCollection(String collectionUuid);
   EitherMultiple getMultipleChoiceOptions(FlashcardCollection collection);
+  EitherFlashcards generateFlashcards(String material);
 }

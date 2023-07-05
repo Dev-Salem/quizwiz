@@ -96,3 +96,10 @@ class GetMultipleQuizOptionsEvent extends CardsEvents {
 
   const GetMultipleQuizOptionsEvent({required this.collection});
 }
+
+class GenerateFlashcardsEvent extends CardsEvents {
+  final String material;
+  const GenerateFlashcardsEvent({
+    required this.material,
+  });
+}

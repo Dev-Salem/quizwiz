@@ -13,3 +13,7 @@ class Failure extends Equatable {
 class LocalStorageFailure extends Failure {
   const LocalStorageFailure({required super.message});
 }
+
+class RemoteDataSourceFailure extends Failure {
+  const RemoteDataSourceFailure({required super.message});
+}

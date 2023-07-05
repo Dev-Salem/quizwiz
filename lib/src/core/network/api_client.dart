@@ -37,8 +37,15 @@ following this format [no prose], make sure the json starts and ends with quotat
         }
       ]);
       return response.data;
+    } on DioException catch (e) {
+      throw NetworkingException(e.message.toString());
     } on Exception catch (e) {
-      throw NetworkingException(e.toString());
+      if (e.toString().isNotEmpty) {
+        throw NetworkingException(e.toString());
+      } else {
+        throw const UnexpectedNetworkException(
+            "Unexpected Exception: Make sure you have internet connection");
+      }
     }
   }
 }

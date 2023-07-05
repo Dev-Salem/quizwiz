@@ -2,14 +2,21 @@
 import 'package:dartz/dartz.dart';
 import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/features/cards/data/data.dart';
+import 'package:quizwiz/src/features/cards/data/data_source/remote_data_source.dart';
 import 'package:quizwiz/src/features/cards/data/models/edit_flashcard_parameters.dart';
 import 'package:quizwiz/src/features/cards/data/repository/base_cards_repository.dart';
 
 class CardsRepository extends BaseCardsRepository {
   final IsarFlashcardDataSource _flashcardDataSource;
   final IsarCollectionDataSource _collectionDataSource;
-
-  CardsRepository(this._flashcardDataSource, this._collectionDataSource);
+  final DioRemoteDataSource _remoteDataSource;
+  const CardsRepository(
+      {required IsarFlashcardDataSource flashcards,
+      required IsarCollectionDataSource collection,
+      required DioRemoteDataSource dio})
+      : _flashcardDataSource = flashcards,
+        _collectionDataSource = collection,
+        _remoteDataSource = dio;
 
   @override
   EitherUnit addFlashcard(
@@ -134,6 +141,16 @@ class CardsRepository extends BaseCardsRepository {
       return Right(result);
     } on Exception catch (e) {
       return Left(LocalStorageFailure(message: e.toString()));
+    }
+  }
+
+  @override
+  EitherFlashcards generateFlashcards(String material) async {
+    try {
+      final result = await _remoteDataSource.generateFlashcards(material);
+      return Right(result);
+    } on Exception catch (e) {
+      return Left(RemoteDataSourceFailure(message: e.toString()));
     }
   }
 }

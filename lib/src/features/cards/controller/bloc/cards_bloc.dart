@@ -9,7 +9,9 @@ class CardsBloc extends Bloc<CardsEvents, CardsState> {
   final CardsRepository _baseCardsRepository;
   final collectionStream = Isar.getInstance()!.flashcardCollections.watchLazy();
 
-  CardsBloc(this._baseCardsRepository) : super(const CardsState()) {
+  CardsBloc({required CardsRepository repository})
+      : _baseCardsRepository = repository,
+        super(const CardsState()) {
     on<GetCollectionsEvent>(_getCollections);
     on<RemoveCollectionEvent>(_removeCollection);
     on<CreateCollectionsEvent>(_createCollections);
@@ -21,6 +23,7 @@ class CardsBloc extends Bloc<CardsEvents, CardsState> {
     on<EditCollectionEvent>(_editCollection);
     on<GetCollectionEvent>(_getCollection);
     on<GetMultipleQuizOptionsEvent>(_getMultipleQuizOptionsEvent);
+    on<GenerateFlashcardsEvent>(_generateFlashcards);
     collectionStream.listen((event) {
       add(GetCollectionsEvent());
     });
@@ -181,5 +184,20 @@ class CardsBloc extends Bloc<CardsEvents, CardsState> {
             quizRequestState: RequestState.success,
             collectionRequestState: RequestState.success,
             multipleChoices: r)));
+  }
+
+  _generateFlashcards(
+      GenerateFlashcardsEvent event, Emitter<CardsState> emit) async {
+    emit(state.copyWith(flashcardRequestState: RequestState.loading));
+    final result =
+        await _baseCardsRepository.generateFlashcards(event.material);
+    result.fold(
+        (l) => emit(state.copyWith(
+            flashcardRequestState: RequestState.error,
+            flashcardErrorMessage: l.message)),
+        (r) => emit(state.copyWith(
+            flashcardRequestState: RequestState.success,
+            collectionRequestState: RequestState.success,
+            flashcards: r)));
   }
 }

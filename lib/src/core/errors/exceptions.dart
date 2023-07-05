@@ -11,3 +11,13 @@ class NetworkingException implements Exception {
   final String message;
   const NetworkingException(this.message);
 }
+
+class JsonDeserializationException implements Exception {
+  final String message;
+  const JsonDeserializationException(this.message);
+}
+
+class UnexpectedNetworkException {
+  final String message;
+  const UnexpectedNetworkException(this.message);
+}
