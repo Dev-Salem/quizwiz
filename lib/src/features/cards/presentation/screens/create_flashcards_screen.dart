@@ -63,7 +63,8 @@ class _CreateFlashcardsScreenState extends State<CreateFlashcardsScreen> {
                     TextButton.icon(
                         onPressed: () {
                           Navigator.of(context).pushReplacementNamed(
-                              RouterConstance.goToGenerateFlashcards);
+                              RouterConstance.goToGenerateFlashcards,
+                              arguments: widget.collectionUuid);
                         },
                         icon: const Icon(Icons.rocket),
                         label: const Text(AppStrings.generateWithAI)),

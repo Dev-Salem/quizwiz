@@ -34,9 +34,17 @@ class _GenerateCardsScreenState extends State<GenerateCardsScreen> {
     return Scaffold(
       appBar: AppBar(),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          TextFormField(
-            controller: _controller,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: TextFormField(
+              controller: _controller,
+              minLines: 1,
+              maxLines: 10,
+              decoration:
+                  const InputDecoration(label: Text(AppStrings.pasteMaterial)),
+            ),
           ),
           ElevatedButton.icon(
               onPressed: () async {
@@ -45,10 +53,11 @@ class _GenerateCardsScreenState extends State<GenerateCardsScreen> {
                 // final flashcards = model.FlashcardsModel.fromJson(result);
                 // print(flashcards);
                 Navigator.of(context).pushReplacementNamed(
-                    RouterConstance.goToGeneratedFlashcards);
+                    RouterConstance.goToGeneratedFlashcards,
+                    arguments: widget.collectionUuid);
               },
               icon: const Icon(Icons.rocket),
-              label: const Text("Generate"))
+              label: const Text(AppStrings.generate))
         ],
       ),
     );

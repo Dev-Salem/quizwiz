@@ -22,4 +22,9 @@ class AppStrings {
   static const String goBack = "Go Back";
   static const String practice = "Practice";
   static const String noCards = "No Cards Here, Try Adding New Cards";
+  static const String done = "Done";
+  static const generatedFlashcard = "Generated Flashcard";
+  static const String addAll = "Add All";
+  static const String pasteMaterial = "Paste Your Material Here";
+  static const String generate = "Generate";
 }

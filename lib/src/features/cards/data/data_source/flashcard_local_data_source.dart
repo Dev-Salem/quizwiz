@@ -58,7 +58,8 @@ class IsarFlashcardDataSource extends FlashcardLocalDataSource {
       FlashcardCollection collection) async {
     final cards = collection.cards.where((card) {
       return DateTime.fromMillisecondsSinceEpoch(card.dueTime)
-          .isBefore(DateTime.now());
+              .compareTo(DateTime.now()) <=
+          0;
     }).toList();
     return cards;
   }
