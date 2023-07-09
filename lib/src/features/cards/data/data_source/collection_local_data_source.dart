@@ -14,6 +14,8 @@ abstract class CollectionLocalDataSource {
         String description
       }) collection);
   Future<FlashcardCollection> getCollection(String collectionUuid);
+  Future<Unit> combineCollections(FlashcardCollection mainCollection,
+      FlashcardCollection secondaryCollection);
 }
 
 class IsarCollectionDataSource extends CollectionLocalDataSource {
@@ -79,5 +81,19 @@ class IsarCollectionDataSource extends CollectionLocalDataSource {
     }
     //sort by data of create/update
     return collection.copyWith(cards: collection.cards.reversed.toList());
+  }
+
+  @override
+  Future<Unit> combineCollections(FlashcardCollection mainCollection,
+      FlashcardCollection secondaryCollection) async {
+    List<Flashcard> newCardList = [
+      ...mainCollection.cards,
+      ...secondaryCollection.cards
+    ];
+    await _instance.writeTxn(() async {
+      await _instance.flashcardCollections
+          .put(mainCollection.copyWith(cards: newCardList));
+    });
+    return unit;
   }
 }

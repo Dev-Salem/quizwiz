@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:dartz/dartz.dart';
 import 'package:quizwiz/src/core/core.dart';
-import 'package:quizwiz/src/core/errors/exceptions.dart';
 import 'package:quizwiz/src/features/cards/data/data.dart';
 
 class CardsRepository extends BaseCardsRepository {
@@ -158,6 +157,18 @@ class CardsRepository extends BaseCardsRepository {
     try {
       final result = await _flashcardDataSource.saveAllGeneratedFlashcard(
           collectionUuid, flashcards);
+      return Right(result);
+    } on Exception catch (e) {
+      return Left(LocalStorageFailure(message: e.toString()));
+    }
+  }
+
+  @override
+  EitherUnit combineCollections(FlashcardCollection mainCollection,
+      FlashcardCollection secondaryCollection) async {
+    try {
+      final result = await _collectionDataSource.combineCollections(
+          mainCollection, secondaryCollection);
       return Right(result);
     } on Exception catch (e) {
       return Left(LocalStorageFailure(message: e.toString()));

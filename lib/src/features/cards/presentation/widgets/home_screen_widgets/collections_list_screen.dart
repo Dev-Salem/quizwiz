@@ -6,6 +6,7 @@ import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/features/cards/controller/controller.dart';
 import 'package:quizwiz/src/features/cards/data/data.dart';
 import 'package:quizwiz/src/features/cards/presentation/presentation.dart';
+import 'package:quizwiz/src/features/cards/presentation/widgets/home_screen_widgets/combine_collection_dialog.dart';
 import 'package:quizwiz/src/features/cards/presentation/widgets/home_screen_widgets/edit_collection_dialog.dart';
 
 class CollectionsListScreen extends StatelessWidget {
@@ -17,7 +18,7 @@ class CollectionsListScreen extends StatelessWidget {
     return ListView.builder(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
       itemCount: collections.length,
-      itemBuilder: (context, index) => Padding(
+      itemBuilder: (listViewContext, index) => Padding(
           padding: const EdgeInsets.symmetric(vertical: 10 // 10,
               ),
           child: FocusedMenuHolder(
@@ -48,6 +49,24 @@ class CollectionsListScreen extends StatelessWidget {
                       context: context,
                       builder: (context) => EditCollectionDialog(
                           collection: collections[index]))),
+              FocusedMenuItem(
+                  backgroundColor: Theme.of(context).cardColor,
+                  title: const Text(
+                    "Combine Collection",
+                  ),
+                  onPressed: () => showDialog(
+                      context: context,
+                      useRootNavigator: false,
+                      builder: (_) {
+                        return CombineCollectionDialog(
+                          //the selected collection
+                          mainCollection: collections[index],
+                          //the available collections to combine with
+                          availableCollection: collections
+                              .where((element) => element != collections[index])
+                              .toList(),
+                        );
+                      })),
             ],
             child: CollectionCardWidget(
               collection: collections[index],

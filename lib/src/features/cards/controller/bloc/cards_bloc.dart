@@ -25,6 +25,7 @@ class CardsBloc extends Bloc<CardsEvents, CardsState> {
     on<GetMultipleQuizOptionsEvent>(_getMultipleQuizOptionsEvent);
     on<GenerateFlashcardsEvent>(_generateFlashcards);
     on<SaveAllGenerateFlashcardsEvent>(_saveAllGenerateFlashcards);
+    on<CombineCollectionsEvent>(_combineCollections);
     collectionStream.listen((event) {
       add(GetCollectionsEvent());
     });
@@ -220,5 +221,19 @@ class CardsBloc extends Bloc<CardsEvents, CardsState> {
           collectionsErrorMessage: e.toString(),
           collectionsRequestState: RequestState.error));
     }
+  }
+
+  _combineCollections(
+      CombineCollectionsEvent event, Emitter<CardsState> emit) async {
+    emit(state.copyWith(collectionsRequestState: RequestState.loading));
+    final result = await _baseCardsRepository.combineCollections(
+        event.mainCollection, event.secondaryCollection);
+    result.fold(
+        (l) => emit(state.copyWith(
+            collectionsErrorMessage: l.message,
+            collectionsRequestState: RequestState.error)),
+        (r) => emit(state.copyWith(
+              collectionsRequestState: RequestState.success,
+            )));
   }
 }

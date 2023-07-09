@@ -31,4 +31,6 @@ abstract class BaseCardsRepository {
   EitherFlashcards generateFlashcards(String material);
   EitherUnit saveAllGeneratedFlashcard(
       String collectionUuid, List<Flashcard> flashcards);
+  EitherUnit combineCollections(FlashcardCollection mainCollection,
+      FlashcardCollection secondaryCollection);
 }

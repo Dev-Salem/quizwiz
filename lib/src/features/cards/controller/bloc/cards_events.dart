@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
+
 import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/features/cards/data/data.dart';
 
@@ -108,4 +109,13 @@ class SaveAllGenerateFlashcardsEvent extends CardsEvents {
 
   const SaveAllGenerateFlashcardsEvent(
       {required this.flashcards, required this.collectionUuid});
+}
+
+class CombineCollectionsEvent extends CardsEvents {
+  final FlashcardCollection mainCollection;
+  final FlashcardCollection secondaryCollection;
+  const CombineCollectionsEvent({
+    required this.mainCollection,
+    required this.secondaryCollection,
+  });
 }

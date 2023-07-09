@@ -48,4 +48,3 @@ Enter the app -> click review cards -> show only cards needed for collection
 
 */
  
-//TODO: Generate cards
