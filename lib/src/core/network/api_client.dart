@@ -1,51 +1,43 @@
+import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:quizwiz/src/core/errors/exceptions.dart';
-import 'package:quizwiz/src/core/utils/private_key.dart';
+import 'package:quizwiz/src/core/network/network_constants.dart';
+import 'package:quizwiz/src/core/network/private_key.dart';
 import 'package:quizwiz/src/core/utils/strings.dart';
 
 class DioClient {
-  static Future<Map<String, dynamic>> fetchChatCompletion(String messages,
+  static Future<List<dynamic>> fetchChatCompletion(String material,
       {int maxTokens = 200}) async {
     final dio = Dio();
+    dio.options.validateStatus = (int? status) {
+      return status != null && status > 0;
+    };
     dio.options.baseUrl = AppStrings.baseUrl;
     dio.options.headers = {
-      'content-type': 'application/json',
+      'content-type': NetworkConstants.contentType,
       'X-RapidAPI-Key': officialKey,
-      'X-RapidAPI-Host': 'chatgpt-api8.p.rapidapi.com'
+      'X-RapidAPI-Host': NetworkConstants.headerHost
     };
+
     try {
       final response = await dio.post('/', data: [
         {
           "role": "user",
-          "content": """
-pretend to be an expert in summarizing studying material.
-create a valid JSON array of objects for $messages 
-following this format [no prose], make sure the json starts and ends with quotations:
-
-[
-  {
-  "term": "clean code",
-  "definition": "code that meets the standards"
-  },
-  {
-  "term": "science",
-  "definitions": "the pursuit and application of knowledge"
-  }
-
-]
- """
+          "content": NetworkConstants.generateFlashcardsPrompt(material)
         }
       ]);
-      return response.data;
-    } on DioException catch (e) {
-      throw NetworkingException(e.message.toString());
+      return jsonDecode(response.data['text']);
     } on Exception catch (e) {
-      if (e.toString().isNotEmpty) {
+      if (e is DioException) {
+        throw NetworkingException(e.message!);
+      } else if (e.toString().isNotEmpty) {
         throw NetworkingException(e.toString());
       } else {
         throw const UnexpectedNetworkException(
-            "Unexpected Exception: Make sure you have internet connection");
+            "Unexpected Networking Exception: Try To Connect To The Internet");
       }
+    } finally {
+      dio.close();
     }
   }
 }

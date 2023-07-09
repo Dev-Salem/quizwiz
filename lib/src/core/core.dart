@@ -7,3 +7,4 @@ export 'package:quizwiz/src/core/theme/app_theme.dart';
 export 'package:quizwiz/src/core/utils/enums.dart';
 export 'package:quizwiz/src/core/utils/strings.dart';
 export 'package:quizwiz/src/core/utils/typdef.dart';
+export 'package:quizwiz/src/core/widgets/custom_snackbar.dart';

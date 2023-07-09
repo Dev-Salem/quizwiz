@@ -25,6 +25,8 @@ abstract class FlashcardLocalDataSource {
   Future<Unit> editFlashcard(EditFlashcardParameters parameters);
   Future<List<MultipleChoiceQuiz>> getMultipleChoiceOptions(
       FlashcardCollection collection);
+  Future<Unit> saveAllGeneratedFlashcard(
+      String collectionUuid, List<Flashcard> flashcards);
 }
 
 class IsarFlashcardDataSource extends FlashcardLocalDataSource {
@@ -132,5 +134,20 @@ class IsarFlashcardDataSource extends FlashcardLocalDataSource {
           card: element, collection: collection));
     }
     return result;
+  }
+
+  @override
+  Future<Unit> saveAllGeneratedFlashcard(
+      String collectionUuid, List<Flashcard> flashcards) async {
+    _instance.writeTxn(() async {
+      final collection =
+          await _instance.flashcardCollections.getByUuid(collectionUuid);
+      List<Flashcard> newCardsList = [...collection!.cards];
+      newCardsList.addAll(flashcards);
+      await _instance.flashcardCollections
+          .put(collection.copyWith(cards: newCardsList));
+    }).onError((error, stackTrace) =>
+        throw LocalStorageException(message: error.toString()));
+    return unit;
   }
 }

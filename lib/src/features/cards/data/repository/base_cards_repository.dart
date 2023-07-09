@@ -29,4 +29,6 @@ abstract class BaseCardsRepository {
   EitherCollection getCollection(String collectionUuid);
   EitherMultiple getMultipleChoiceOptions(FlashcardCollection collection);
   EitherFlashcards generateFlashcards(String material);
+  EitherUnit saveAllGeneratedFlashcard(
+      String collectionUuid, List<Flashcard> flashcards);
 }

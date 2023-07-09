@@ -1,9 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
-
 import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/features/cards/data/data.dart';
-import 'package:quizwiz/src/features/cards/data/models/edit_flashcard_parameters.dart';
 
 abstract class CardsEvents extends Equatable {
   const CardsEvents();
@@ -102,4 +100,12 @@ class GenerateFlashcardsEvent extends CardsEvents {
   const GenerateFlashcardsEvent({
     required this.material,
   });
+}
+
+class SaveAllGenerateFlashcardsEvent extends CardsEvents {
+  final List<Flashcard> flashcards;
+  final String collectionUuid;
+
+  const SaveAllGenerateFlashcardsEvent(
+      {required this.flashcards, required this.collectionUuid});
 }

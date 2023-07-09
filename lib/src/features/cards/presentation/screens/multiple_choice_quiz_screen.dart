@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/core/widgets/error_widget.dart';
+import 'package:quizwiz/src/core/widgets/loading_widget.dart';
 import 'package:quizwiz/src/features/cards/controller/controller.dart';
 import 'package:quizwiz/src/features/cards/data/data.dart';
 
@@ -63,7 +64,7 @@ class _MultipleChoiceQuizScreenState extends State<MultipleChoiceQuizScreen> {
         builder: (context, state) {
           switch (state.quizRequestState) {
             case RequestState.loading:
-              return const Center(child: CircularProgressIndicator.adaptive());
+              return const LoadingWidget();
             case RequestState.error:
               return CustomErrorWidget(
                 errorMessage: state.quizErrorMessage,
@@ -98,7 +99,10 @@ class _MultipleChoiceQuizScreenState extends State<MultipleChoiceQuizScreen> {
                                     showCorrectAnswer
                                 ? Colors.green
                                 : Theme.of(context).cardColor,
-                            child: Text(option),
+                            child: Text(
+                              option,
+                              textAlign: TextAlign.center,
+                            ),
                           ),
                         );
                       })

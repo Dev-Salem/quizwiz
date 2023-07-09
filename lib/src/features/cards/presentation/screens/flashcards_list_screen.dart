@@ -8,6 +8,7 @@ import 'package:quizwiz/src/core/widgets/loading_widget.dart';
 import 'package:quizwiz/src/core/widgets/no_collection_screen.dart';
 import 'package:quizwiz/src/features/cards/controller/controller.dart';
 import 'package:quizwiz/src/features/cards/data/models/edit_flashcard_parameters.dart';
+import 'package:quizwiz/src/features/cards/data/models/flashcard_collection.dart';
 import 'package:quizwiz/src/features/cards/presentation/widgets/flashcards_list_widgets/flashcard_widget.dart';
 
 class FlashcardsListScreen extends StatelessWidget {
@@ -28,7 +29,8 @@ class FlashcardsListScreen extends StatelessWidget {
               errorMessage: state.flashcardErrorMessage,
             );
           case RequestState.success:
-            final collection = state.collection!;
+            final collection =
+                state.collection ?? FlashcardCollection(name: "", uuid: "");
             return Scaffold(
                 appBar: AppBar(
                   title: Text(collection.name),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quizwiz/src/core/core.dart';
+import 'package:quizwiz/src/features/cards/controller/controller.dart';
 
 class GenerateCardsScreen extends StatefulWidget {
   final String collectionUuid;
@@ -48,6 +49,9 @@ class _GenerateCardsScreenState extends State<GenerateCardsScreen> {
           ElevatedButton.icon(
               onPressed: () async {
                 if (formKey.currentState!.validate() == true) {
+                  context
+                      .read<CardsBloc>()
+                      .add(GenerateFlashcardsEvent(material: _controller.text));
                   Navigator.of(context).pushReplacementNamed(
                       RouterConstance.goToGeneratedFlashcards,
                       arguments: widget.collectionUuid);
