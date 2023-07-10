@@ -13,7 +13,7 @@ class QuizWizApp extends StatelessWidget {
       create: (context) => sl<CardsBloc>()..add(GetCollectionsEvent()),
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          themeMode: ThemeMode.dark,
+          themeMode: AppTheme().theme,
           onGenerateRoute: (settings) => RouteGenerator.generateRoute(settings),
           theme: AppTheme.lightTheme(),
           darkTheme: AppTheme.darkTheme(),

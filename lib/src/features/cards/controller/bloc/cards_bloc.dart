@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:equatable/equatable.dart';
 import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/features/cards/controller/bloc/cards_events.dart';
@@ -7,10 +9,11 @@ part 'cards_state.dart';
 
 class CardsBloc extends Bloc<CardsEvents, CardsState> {
   final CardsRepository _baseCardsRepository;
-  final collectionStream = Isar.getInstance()!.flashcardCollections.watchLazy();
+  final Isar _isar;
 
-  CardsBloc({required CardsRepository repository})
+  CardsBloc({required CardsRepository repository, required Isar isar})
       : _baseCardsRepository = repository,
+        _isar = isar,
         super(const CardsState()) {
     on<GetCollectionsEvent>(_getCollections);
     on<RemoveCollectionEvent>(_removeCollection);
@@ -26,9 +29,15 @@ class CardsBloc extends Bloc<CardsEvents, CardsState> {
     on<GenerateFlashcardsEvent>(_generateFlashcards);
     on<SaveAllGenerateFlashcardsEvent>(_saveAllGenerateFlashcards);
     on<CombineCollectionsEvent>(_combineCollections);
-    collectionStream.listen((event) {
+    _isar.flashcardCollections.watchLazy().listen((event) {
       add(GetCollectionsEvent());
     });
+  }
+  @override
+  Future<void> close() async {
+    log("close bloc");
+    await _isar.close();
+    return super.close();
   }
 
   _getCollections(GetCollectionsEvent event, Emitter<CardsState> emit) async {
