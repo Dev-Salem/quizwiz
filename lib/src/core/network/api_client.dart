@@ -3,7 +3,6 @@ import 'package:dio/dio.dart';
 import 'package:quizwiz/src/core/errors/exceptions.dart';
 import 'package:quizwiz/src/core/network/network_constants.dart';
 import 'package:quizwiz/src/core/network/private_key.dart';
-import 'package:quizwiz/src/core/utils/strings.dart';
 
 class DioClient {
   static Future<List<dynamic>> fetchChatCompletion(String material,
@@ -12,7 +11,7 @@ class DioClient {
     dio.options.validateStatus = (int? status) {
       return status != null && status > 0;
     };
-    dio.options.baseUrl = AppStrings.baseUrl;
+    dio.options.baseUrl = NetworkConstants.baseUrl;
     dio.options.headers = {
       'content-type': NetworkConstants.contentType,
       'X-RapidAPI-Key': officialKey,

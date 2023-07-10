@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/features/cards/presentation/presentation.dart';
 
@@ -10,7 +9,7 @@ class QuizWizApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => sl<CardsBloc>()..add(GetCollectionsEvent()),
+      create: (context) => sl<CardsBloc>()..add(const GetCollectionsEvent()),
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
           themeMode: AppTheme().theme,

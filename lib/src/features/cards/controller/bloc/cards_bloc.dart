@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:equatable/equatable.dart';
 import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/features/cards/controller/bloc/cards_events.dart';
@@ -30,12 +28,11 @@ class CardsBloc extends Bloc<CardsEvents, CardsState> {
     on<SaveAllGenerateFlashcardsEvent>(_saveAllGenerateFlashcards);
     on<CombineCollectionsEvent>(_combineCollections);
     _isar.flashcardCollections.watchLazy().listen((event) {
-      add(GetCollectionsEvent());
+      add(const GetCollectionsEvent());
     });
   }
   @override
   Future<void> close() async {
-    log("close bloc");
     await _isar.close();
     return super.close();
   }
@@ -76,7 +73,7 @@ class CardsBloc extends Bloc<CardsEvents, CardsState> {
         (r) => emit(state.copyWith(
               collectionsRequestState: RequestState.success,
             )));
-    add(GetCollectionsEvent());
+    add(const GetCollectionsEvent());
   }
 
   _addFlashcards(AddFlashcardsEvent event, Emitter<CardsState> emit) async {

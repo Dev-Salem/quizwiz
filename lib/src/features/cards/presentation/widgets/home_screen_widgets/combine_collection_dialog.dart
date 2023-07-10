@@ -14,7 +14,7 @@ class CombineCollectionDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SimpleDialog(
-      title: const Text("Combine With"),
+      title: const Text(AppStrings.combineWith),
       contentPadding: const EdgeInsets.all(30),
       children: List.generate(availableCollection.length, (index) {
         return InkWell(
@@ -22,7 +22,7 @@ class CombineCollectionDialog extends StatelessWidget {
             context.read<CardsBloc>().add(CombineCollectionsEvent(
                 mainCollection: mainCollection,
                 secondaryCollection: availableCollection[index]));
-            customSnackBar("Collections Combined Successfully", context);
+            customSnackBar(AppStrings.combineCollectionMessage, context);
             Navigator.of(context).pop();
           },
           child: Row(

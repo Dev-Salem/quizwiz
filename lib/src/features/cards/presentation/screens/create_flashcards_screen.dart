@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/features/cards/controller/controller.dart';
-import 'package:quizwiz/src/features/cards/presentation/widgets/create_flashcards_widgets/forms.dart';
+import 'package:quizwiz/src/features/cards/presentation/presentation.dart';
 
 class CreateFlashcardsScreen extends StatefulWidget {
   final String collectionUuid;

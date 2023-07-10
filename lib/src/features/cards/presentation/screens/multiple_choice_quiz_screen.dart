@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:quizwiz/src/core/core.dart';
-import 'package:quizwiz/src/core/widgets/error_widget.dart';
-import 'package:quizwiz/src/core/widgets/loading_widget.dart';
 import 'package:quizwiz/src/features/cards/controller/controller.dart';
 import 'package:quizwiz/src/features/cards/data/data.dart';
 
@@ -16,6 +14,7 @@ class MultipleChoiceQuizScreen extends StatefulWidget {
 class _MultipleChoiceQuizScreenState extends State<MultipleChoiceQuizScreen> {
   bool showCorrectAnswer = false;
   late final PageController _controller;
+  final int _slideDuration = 400; //time in milliseconds
   @override
   void initState() {
     super.initState();
@@ -37,19 +36,19 @@ class _MultipleChoiceQuizScreenState extends State<MultipleChoiceQuizScreen> {
   void onTap(int index, List<MultipleChoiceQuiz> quiz) {
     //change the color to green
     _changeAnswerColor();
-    //after [500 milliseconds] change the color back
-    Future.delayed(
-        const Duration(milliseconds: 500), () => _changeAnswerColor());
+    //after [_slideDuration + 100ms] change the color back
+    Future.delayed(Duration(milliseconds: _slideDuration + 100),
+        () => _changeAnswerColor());
     //if this's the last question, navigate to the home page, else slide to the
     //next question
     if (index == quiz.length - 1) {
-      Future.delayed(const Duration(milliseconds: 400),
+      Future.delayed(Duration(milliseconds: _slideDuration),
           () => Navigator.of(context).pushReplacementNamed('/'));
     } else {
       Future.delayed(
-          const Duration(milliseconds: 900),
+          Duration(milliseconds: _slideDuration + 500),
           () => _controller.nextPage(
-              duration: const Duration(milliseconds: 400),
+              duration: Duration(milliseconds: _slideDuration),
               curve: Curves.easeInOut));
     }
   }
@@ -58,7 +57,7 @@ class _MultipleChoiceQuizScreenState extends State<MultipleChoiceQuizScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Multiple Choice Quiz"),
+        title: const Text(AppStrings.multipleChoice),
       ),
       body: BlocBuilder<CardsBloc, CardsState>(
         builder: (context, state) {

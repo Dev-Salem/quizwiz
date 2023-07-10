@@ -1,6 +1,5 @@
 class AppStrings {
   static const notFoundAsset = "assets/93134-not-found.json";
-  static const String baseUrl = 'https://chatgpt-api8.p.rapidapi.com';
   static const String errorMessage = 'Something went wrong';
   static const String review = 'Review';
   static const String homeScreen = "Home Screen";
@@ -27,4 +26,10 @@ class AppStrings {
   static const String addAll = "Add All";
   static const String pasteMaterial = "Paste Your Material Here";
   static const String generate = "Generate";
+  static const String combineWith = "Combine With";
+  static const combineCollectionMessage = "Collections Combined Successfully";
+  static const String edit = "Edit";
+  static const String combineCollection = "Combine Collection";
+  static const reviewFlashcard = "Review Flashcard";
+  static const multipleChoice = "Multiple Choice Quiz";
 }

@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/features/cards/controller/controller.dart';
-import 'package:quizwiz/src/features/cards/data/models/edit_flashcard_parameters.dart';
-import 'package:quizwiz/src/features/cards/presentation/widgets/create_flashcards_widgets/forms.dart';
+import 'package:quizwiz/src/features/cards/data/data.dart';
+import 'package:quizwiz/src/features/cards/presentation/presentation.dart';
 
 class EditFlashcardScreen extends StatefulWidget {
   final EditFlashcardParameters parameters;

@@ -18,7 +18,6 @@ abstract class BaseCardsRepository {
   );
   EitherUnit removeFlashcard(
       FlashcardCollection collection, String flashcardUuid);
-
   EitherUnit editFlashcard(EditFlashcardParameters parameters);
   EitherUnit editCollection(
       ({

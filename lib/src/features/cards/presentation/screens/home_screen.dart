@@ -1,10 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:quizwiz/src/core/core.dart';
-import 'package:quizwiz/src/core/widgets/error_widget.dart';
-import 'package:quizwiz/src/core/widgets/loading_widget.dart';
 import 'package:quizwiz/src/features/cards/controller/controller.dart';
 import 'package:quizwiz/src/features/cards/presentation/presentation.dart';
-import 'package:quizwiz/src/features/cards/presentation/widgets/home_screen_widgets/create_collection_dialog.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -15,7 +11,6 @@ class HomeScreen extends StatelessWidget {
       child: Scaffold(
           appBar: AppBar(
             title: const Text(AppStrings.homeScreen),
-            centerTitle: true,
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () => showDialog(
@@ -37,8 +32,6 @@ class HomeScreen extends StatelessWidget {
                       ? const NoResultScreen(
                           description: AppStrings.noCollection)
                       : CollectionsListScreen(collections: state.collections);
-                default:
-                  return const CustomErrorWidget();
               }
             },
           )),

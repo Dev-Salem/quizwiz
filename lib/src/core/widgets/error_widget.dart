@@ -17,7 +17,7 @@ class CustomErrorWidget extends StatelessWidget {
             Text("Error:$errorMessage"),
             TextButton(
                 onPressed: () {
-                  context.read<CardsBloc>().add(GetCollectionsEvent());
+                  context.read<CardsBloc>().add(const GetCollectionsEvent());
                   Navigator.of(context).pushReplacementNamed('/');
                 },
                 child: const Text(AppStrings.goBack))

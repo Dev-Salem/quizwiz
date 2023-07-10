@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:quizwiz/src/core/core.dart';
 
 class CreateOrEditCollectionDialog extends StatelessWidget {
+  /// A template for using [AlertDialog] to create or edit a collection
   final TextEditingController nameController;
   final TextEditingController descriptionController;
   final TextButton button;

@@ -33,11 +33,6 @@ class FlashcardCollection {
       uuid: uuid ?? this.uuid,
     );
   }
-
-  @override
-  String toString() {
-    return 'FlashcardCollection(name: $name, description: $description, cards: $cards, id: $id, uuid: $uuid)';
-  }
 }
 
 @embedded
@@ -79,27 +74,10 @@ class Flashcard {
     );
   }
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'question': question,
-      'answer': answer,
-      'dueTime': dueTime,
-      'interval': interval,
-      'factor': factor,
-      'repetitions': repetitions,
-      'uuid': uuid,
-    };
-  }
-
   factory Flashcard.fromMap(Map<String, dynamic> map) {
     return Flashcard(
       question: map['term'] as String,
       answer: map['definition'] as String,
     );
-  }
-
-  @override
-  String toString() {
-    return 'Flashcard(question: $question, answer: $answer, dueTime: $dueTime, interval: $interval, factor: $factor, repetitions: $repetitions, uuid: $uuid)';
   }
 }

@@ -1,5 +1,4 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:flutter/material.dart';
 import 'package:focused_menu/modals.dart';
 import 'package:focused_menu/focused_menu.dart';
 import 'package:quizwiz/src/core/core.dart';
@@ -43,7 +42,7 @@ class CollectionsListScreen extends StatelessWidget {
               FocusedMenuItem(
                   backgroundColor: Theme.of(context).cardColor,
                   title: const Text(
-                    "Edit",
+                    AppStrings.edit,
                   ),
                   onPressed: () => showDialog(
                       context: context,
@@ -52,7 +51,7 @@ class CollectionsListScreen extends StatelessWidget {
               FocusedMenuItem(
                   backgroundColor: Theme.of(context).cardColor,
                   title: const Text(
-                    "Combine Collection",
+                    AppStrings.combineCollection,
                   ),
                   onPressed: () => showDialog(
                       context: context,

@@ -16,7 +16,7 @@ class PracticeCardsScreen extends StatelessWidget {
       },
       child: Scaffold(
           appBar: AppBar(
-            title: const Text("Review Flashcards"),
+            title: const Text(AppStrings.reviewFlashcard),
           ),
           body: BlocBuilder<CardsBloc, CardsState>(
             builder: (context, state) {

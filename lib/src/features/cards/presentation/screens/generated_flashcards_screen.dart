@@ -1,9 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:quizwiz/src/core/core.dart';
-import 'package:quizwiz/src/core/widgets/error_widget.dart';
-import 'package:quizwiz/src/core/widgets/loading_widget.dart';
 import 'package:quizwiz/src/features/cards/controller/controller.dart';
-import 'package:quizwiz/src/features/cards/presentation/widgets/generated_flashcards/generated_flashcard_widget.dart';
+import 'package:quizwiz/src/features/cards/presentation/presentation.dart';
 
 class GeneratedFlashcardsScreen extends StatelessWidget {
   final String collectionUuid;

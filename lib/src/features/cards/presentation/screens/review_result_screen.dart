@@ -47,19 +47,19 @@ class ReviewResultScreen extends StatelessWidget {
               ReviewBar(
                   color: Colors.red,
                   onTap: () => _addReview(context, ReviewResult.again),
-                  text: "Again"),
+                  text: ReviewResult.again.toString()),
               ReviewBar(
                   color: Colors.redAccent,
                   onTap: () => _addReview(context, ReviewResult.hard),
-                  text: "Hard"),
+                  text: ReviewResult.hard.toString()),
               ReviewBar(
                   color: Colors.green,
                   onTap: () => _addReview(context, ReviewResult.good),
-                  text: "Good"),
+                  text: ReviewResult.good.toString()),
               ReviewBar(
                   color: Colors.blue,
                   onTap: () => _addReview(context, ReviewResult.easy),
-                  text: "Easy"),
+                  text: ReviewResult.easy.toString()),
             ],
           ),
           const SizedBox(

@@ -11,8 +11,7 @@ abstract class CardsEvents extends Equatable {
 }
 
 class GetCollectionsEvent extends CardsEvents {
-  @override
-  List<Object?> get props => [];
+  const GetCollectionsEvent();
 }
 
 class RemoveCollectionEvent extends CardsEvents {
@@ -20,8 +19,6 @@ class RemoveCollectionEvent extends CardsEvents {
   const RemoveCollectionEvent({
     required this.uuid,
   });
-  @override
-  List<Object?> get props => [uuid];
 }
 
 class CreateCollectionsEvent extends CardsEvents {

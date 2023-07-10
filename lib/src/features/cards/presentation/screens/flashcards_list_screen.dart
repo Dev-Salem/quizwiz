@@ -1,15 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:focused_menu/focused_menu.dart';
 import 'package:focused_menu/modals.dart';
 import 'package:quizwiz/src/core/core.dart';
-import 'package:quizwiz/src/core/widgets/error_widget.dart';
-import 'package:quizwiz/src/core/widgets/loading_widget.dart';
-import 'package:quizwiz/src/core/widgets/no_collection_screen.dart';
 import 'package:quizwiz/src/features/cards/controller/controller.dart';
-import 'package:quizwiz/src/features/cards/data/models/edit_flashcard_parameters.dart';
-import 'package:quizwiz/src/features/cards/data/models/flashcard_collection.dart';
-import 'package:quizwiz/src/features/cards/presentation/widgets/flashcards_list_widgets/flashcard_widget.dart';
+import 'package:quizwiz/src/features/cards/data/data.dart';
+import 'package:quizwiz/src/features/cards/presentation/presentation.dart';
 
 class FlashcardsListScreen extends StatelessWidget {
   final String collectionUuid;
