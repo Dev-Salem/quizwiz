@@ -120,16 +120,6 @@ class CardsRepository extends BaseCardsRepository {
   }
 
   @override
-  EitherCollection getCollection(String collectionUuid) async {
-    try {
-      final result = await _collectionDataSource.getCollection(collectionUuid);
-      return Right(result);
-    } on Exception catch (e) {
-      return Left(LocalStorageFailure(message: e.toString()));
-    }
-  }
-
-  @override
   EitherMultiple getMultipleChoiceOptions(
       FlashcardCollection collection) async {
     try {

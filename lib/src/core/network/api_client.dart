@@ -33,7 +33,7 @@ class DioClient {
         throw NetworkingException(e.toString());
       } else {
         throw const UnexpectedNetworkException(
-            "Unexpected Networking Exception: Try To Connect To The Internet");
+            "Unexpected Network Exception: Try To Connect To The Internet");
       }
     } finally {
       dio.close();

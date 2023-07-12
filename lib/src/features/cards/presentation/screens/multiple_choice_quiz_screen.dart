@@ -33,26 +33,6 @@ class _MultipleChoiceQuizScreenState extends State<MultipleChoiceQuizScreen> {
     });
   }
 
-  void onTap(int index, List<MultipleChoiceQuiz> quiz) {
-    //change the color to green
-    _changeAnswerColor();
-    //after [_slideDuration + 100ms] change the color back
-    Future.delayed(Duration(milliseconds: _slideDuration + 100),
-        () => _changeAnswerColor());
-    //if this's the last question, navigate to the home page, else slide to the
-    //next question
-    if (index == quiz.length - 1) {
-      Future.delayed(Duration(milliseconds: _slideDuration),
-          () => Navigator.of(context).pushReplacementNamed('/'));
-    } else {
-      Future.delayed(
-          Duration(milliseconds: _slideDuration + 500),
-          () => _controller.nextPage(
-              duration: Duration(milliseconds: _slideDuration),
-              curve: Curves.easeInOut));
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -113,5 +93,25 @@ class _MultipleChoiceQuizScreenState extends State<MultipleChoiceQuizScreen> {
         },
       ),
     );
+  }
+
+  void onTap(int index, List<MultipleChoiceQuiz> quiz) {
+    //change the color to green
+    _changeAnswerColor();
+    //after [_slideDuration + 100ms] change the color back
+    Future.delayed(Duration(milliseconds: _slideDuration + 100),
+        () => _changeAnswerColor());
+    //if this's the last question, navigate to the home page, else slide to the
+    //next question
+    if (index == quiz.length - 1) {
+      Future.delayed(Duration(milliseconds: _slideDuration),
+          () => Navigator.of(context).pushReplacementNamed('/'));
+    } else {
+      Future.delayed(
+          Duration(milliseconds: _slideDuration + 500),
+          () => _controller.nextPage(
+              duration: Duration(milliseconds: _slideDuration),
+              curve: Curves.easeInOut));
+    }
   }
 }
