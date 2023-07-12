@@ -32,26 +32,28 @@ class CreateOrEditCollectionDialog extends StatelessWidget {
       ],
       content: SizedBox(
         height: 200,
-        child: Column(
-          children: [
-            TextFormField(
-              controller: nameController,
-              maxLength: 30,
-              decoration: const InputDecoration(
-                label: Text(AppStrings.nameTextFieldLabel),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              TextFormField(
+                controller: nameController,
+                maxLength: 30,
+                decoration: const InputDecoration(
+                  label: Text(AppStrings.nameTextFieldLabel),
+                ),
               ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            TextFormField(
-              controller: descriptionController,
-              maxLength: 70,
-              decoration: const InputDecoration(
-                label: Text(AppStrings.descriptionTextFieldLabel),
+              const SizedBox(
+                height: 20,
               ),
-            ),
-          ],
+              TextFormField(
+                controller: descriptionController,
+                maxLength: 70,
+                decoration: const InputDecoration(
+                  label: Text(AppStrings.descriptionTextFieldLabel),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

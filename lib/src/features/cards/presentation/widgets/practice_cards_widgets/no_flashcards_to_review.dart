@@ -1,8 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:quizwiz/src/core/core.dart';
-import 'package:quizwiz/src/features/cards/controller/controller.dart';
 import 'package:quizwiz/src/features/cards/data/data.dart';
+import 'package:quizwiz/src/features/cards/presentation/widgets/practice_cards_widgets/choose_quiz_dialog.dart';
 
 class NoFlashcardsToReview extends StatelessWidget {
   final FlashcardCollection collection;
@@ -35,19 +35,11 @@ class NoFlashcardsToReview extends StatelessWidget {
                     child: const Text(AppStrings.goBack)),
                 const Expanded(child: SizedBox()),
                 FilledButton.icon(
-                    onPressed: () {
-                      if (collection.cards.length < 4) {
-                        customSnackBar("Add At Least 4 Flashcards", context);
-                        Navigator.of(context).pushReplacementNamed('/');
-                      } else {
-                        context.read<CardsBloc>().add(
-                            GetMultipleQuizOptionsEvent(
-                                collection: collection));
-                        Navigator.of(context).pushNamed(
-                          RouterConstance.goToQuiz,
-                        );
-                      }
-                    },
+                    onPressed: () => showDialog(
+                        context: context,
+                        builder: (context) => ChooseQuizDialog(
+                              collection: collection,
+                            )),
                     icon: const Icon(Icons.quiz),
                     label: const Text(AppStrings.practice)),
               ],

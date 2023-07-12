@@ -7,4 +7,5 @@ class RouterConstance {
   static const goToGenerateFlashcards = '/generate_flashcards';
   static const goToQuiz = '/multiple_choice_quiz';
   static const goToGeneratedFlashcards = '/generated_flashcards';
+  static const goToWritingQuiz = '/writing_quiz';
 }

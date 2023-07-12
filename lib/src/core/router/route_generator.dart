@@ -2,6 +2,7 @@ import 'package:quizwiz/src/core/router/router_constance.dart';
 import 'package:quizwiz/src/core/widgets/error_widget.dart';
 import 'package:quizwiz/src/features/cards/data/data.dart';
 import 'package:quizwiz/src/features/cards/presentation/presentation.dart';
+import 'package:quizwiz/src/features/cards/presentation/screens/writing_quiz_screen.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -57,6 +58,11 @@ class RouteGenerator {
         return MaterialPageRoute(
             builder: (context) =>
                 GeneratedFlashcardsScreen(collectionUuid: collectionUuid));
+      case RouterConstance.goToWritingQuiz:
+        var flashcards = settings.arguments as List<Flashcard>;
+        return MaterialPageRoute(
+          builder: (context) => WritingQuizScreen(flashcards: flashcards),
+        );
       default:
         return MaterialPageRoute(
           builder: (context) => const CustomErrorWidget(),

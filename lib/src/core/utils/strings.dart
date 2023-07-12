@@ -27,9 +27,12 @@ class AppStrings {
   static const String pasteMaterial = "Paste Your Material Here";
   static const String generate = "Generate";
   static const String combineWith = "Combine With";
-  static const combineCollectionMessage = "Collections Combined Successfully";
+  static const String combineCollectionMessage =
+      "Collections Combined Successfully";
   static const String edit = "Edit";
   static const String combineCollection = "Combine Collection";
-  static const reviewFlashcard = "Review Flashcard";
-  static const multipleChoice = "Multiple Choice Quiz";
+  static const String reviewFlashcard = "Review Flashcard";
+  static const String multipleChoice = "Multiple Choice";
+  static const String writingQuiz = "Writing Quiz";
+  static const String quizType = "Quiz Type";
 }
