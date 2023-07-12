@@ -14,9 +14,9 @@ class FlashcardsListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CardsBloc, CardsState>(
       buildWhen: (previous, current) =>
-          current.collection!.cards != previous.collection!.cards,
+          current.collections != previous.collections,
       builder: (context, state) {
-        switch (state.collectionRequestState) {
+        switch (state.collectionsRequestState) {
           case RequestState.loading:
             return const LoadingWidget();
           case RequestState.error:
@@ -24,8 +24,11 @@ class FlashcardsListScreen extends StatelessWidget {
               errorMessage: state.flashcardErrorMessage,
             );
           case RequestState.success:
-            final collection =
-                state.collection ?? FlashcardCollection(name: "", uuid: "");
+            final collection = state.collections
+                .where(
+                  (element) => element.uuid == collectionUuid,
+                )
+                .single;
             return Scaffold(
                 appBar: AppBar(
                   title: Text(collection.name),

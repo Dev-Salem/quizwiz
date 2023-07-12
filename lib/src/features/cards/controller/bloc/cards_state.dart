@@ -8,11 +8,6 @@ class CardsState extends Equatable {
   final String collectionsErrorMessage;
   final List<FlashcardCollection> collections;
 
-  //state of a single collection
-  final RequestState collectionRequestState;
-  final String collectionErrorMessage;
-  final FlashcardCollection? collection;
-
   //state of flashcards of a specific collection
   final RequestState flashcardRequestState;
   final String flashcardErrorMessage;
@@ -27,9 +22,6 @@ class CardsState extends Equatable {
     this.collectionsRequestState = RequestState.loading,
     this.collectionsErrorMessage = '',
     this.collections = const [],
-    this.collectionRequestState = RequestState.loading,
-    this.collectionErrorMessage = '',
-    this.collection,
     this.flashcardRequestState = RequestState.loading,
     this.flashcardErrorMessage = '',
     this.flashcards = const [],
@@ -44,8 +36,6 @@ class CardsState extends Equatable {
       collectionsRequestState,
       collectionsErrorMessage,
       collections,
-      collectionRequestState,
-      collectionErrorMessage,
       flashcardRequestState,
       flashcardErrorMessage,
       flashcards,
@@ -59,9 +49,6 @@ class CardsState extends Equatable {
     RequestState? collectionsRequestState,
     String? collectionsErrorMessage,
     List<FlashcardCollection>? collections,
-    RequestState? collectionRequestState,
-    String? collectionErrorMessage,
-    FlashcardCollection? collection,
     RequestState? flashcardRequestState,
     String? flashcardErrorMessage,
     List<Flashcard>? flashcards,
@@ -75,11 +62,6 @@ class CardsState extends Equatable {
       collectionsErrorMessage:
           collectionsErrorMessage ?? this.collectionsErrorMessage,
       collections: collections ?? this.collections,
-      collectionRequestState:
-          collectionRequestState ?? this.collectionRequestState,
-      collectionErrorMessage:
-          collectionErrorMessage ?? this.collectionErrorMessage,
-      collection: collection ?? this.collection,
       flashcardRequestState:
           flashcardRequestState ?? this.flashcardRequestState,
       flashcardErrorMessage:

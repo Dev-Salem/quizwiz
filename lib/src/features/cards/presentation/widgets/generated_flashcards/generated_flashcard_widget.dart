@@ -18,9 +18,6 @@ class GeneratedFlashcardWidget extends StatelessWidget {
           TextButton(
               key: key,
               onPressed: () {
-                context
-                    .read<CardsBloc>()
-                    .add(GetCollectionEvent(collectionUuid: collectionUuid));
                 Navigator.of(context).pushReplacementNamed(
                     RouterConstance.goToFlashcardsList,
                     arguments: collectionUuid);

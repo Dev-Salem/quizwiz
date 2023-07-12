@@ -22,8 +22,6 @@ class CollectionsListScreen extends StatelessWidget {
               ),
           child: FocusedMenuHolder(
             onPressed: () {
-              context.read<CardsBloc>().add(
-                  GetCollectionEvent(collectionUuid: collections[index].uuid));
               Navigator.of(context).pushNamed(
                   RouterConstance.goToFlashcardsList,
                   arguments: collections[index].uuid);

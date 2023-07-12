@@ -82,11 +82,6 @@ class EditCollectionEvent extends CardsEvents {
   });
 }
 
-class GetCollectionEvent extends CardsEvents {
-  final String collectionUuid;
-  const GetCollectionEvent({required this.collectionUuid});
-}
-
 class GetMultipleQuizOptionsEvent extends CardsEvents {
   final FlashcardCollection collection;
 

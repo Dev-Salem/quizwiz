@@ -8,19 +8,6 @@ class ReviewResultScreen extends StatelessWidget {
   final (Flashcard card, FlashcardCollection collection) cardAndCollection;
   const ReviewResultScreen({super.key, required this.cardAndCollection});
 
-  void _addReview(BuildContext buildContext, ReviewResult result) {
-    buildContext.read<CardsBloc>()
-      ..add(UpdateDueTimeEvent(
-          card: cardAndCollection.$1,
-          collectionUuid: cardAndCollection.$2.uuid,
-          reviewResult: result))
-      ..add(GetDueReviewsEvent(collection: cardAndCollection.$2));
-
-    Navigator.of(buildContext).pushReplacementNamed(
-        RouterConstance.goToPracticeCards,
-        arguments: cardAndCollection.$2);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,19 +34,19 @@ class ReviewResultScreen extends StatelessWidget {
               ReviewBar(
                   color: Colors.red,
                   onTap: () => _addReview(context, ReviewResult.again),
-                  text: ReviewResult.again.toString()),
+                  text: "Again"),
               ReviewBar(
                   color: Colors.redAccent,
                   onTap: () => _addReview(context, ReviewResult.hard),
-                  text: ReviewResult.hard.toString()),
+                  text: "Hard"),
               ReviewBar(
                   color: Colors.green,
                   onTap: () => _addReview(context, ReviewResult.good),
-                  text: ReviewResult.good.toString()),
+                  text: "Good"),
               ReviewBar(
                   color: Colors.blue,
                   onTap: () => _addReview(context, ReviewResult.easy),
-                  text: ReviewResult.easy.toString()),
+                  text: "Easy"),
             ],
           ),
           const SizedBox(
@@ -68,5 +55,18 @@ class ReviewResultScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void _addReview(BuildContext buildContext, ReviewResult result) {
+    buildContext.read<CardsBloc>()
+      ..add(UpdateDueTimeEvent(
+          card: cardAndCollection.$1,
+          collectionUuid: cardAndCollection.$2.uuid,
+          reviewResult: result))
+      ..add(GetDueReviewsEvent(collection: cardAndCollection.$2));
+
+    Navigator.of(buildContext).pushReplacementNamed(
+        RouterConstance.goToPracticeCards,
+        arguments: cardAndCollection.$2);
   }
 }
