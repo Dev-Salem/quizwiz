@@ -3,17 +3,15 @@ import 'package:dartz/dartz.dart';
 import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/features/cards/data/data.dart';
 
-class CardsRepository extends BaseCardsRepository {
-  final IsarFlashcardDataSource _flashcardDataSource;
-  final IsarCollectionDataSource _collectionDataSource;
-  final DioRemoteDataSource _remoteDataSource;
-  const CardsRepository(
-      {required IsarFlashcardDataSource flashcards,
-      required IsarCollectionDataSource collection,
-      required DioRemoteDataSource dio})
-      : _flashcardDataSource = flashcards,
-        _collectionDataSource = collection,
-        _remoteDataSource = dio;
+class CardsRepository implements BaseCardsRepository {
+  final FlashcardLocalDataSource _flashcardDataSource;
+  final CollectionLocalDataSource _collectionDataSource;
+  final BaseRemoteDataSource _remoteDataSource;
+  CardsRepository(
+    this._flashcardDataSource,
+    this._collectionDataSource,
+    this._remoteDataSource,
+  );
 
   @override
   EitherUnit addFlashcard(

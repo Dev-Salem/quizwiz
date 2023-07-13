@@ -3,10 +3,11 @@ import 'package:quizwiz/src/core/errors/exceptions.dart';
 import 'package:quizwiz/src/features/cards/data/data.dart';
 
 abstract class BaseRemoteDataSource {
+  factory BaseRemoteDataSource() => DioRemoteDataSource();
   Future<List<Flashcard>> generateFlashcards(String material);
 }
 
-class DioRemoteDataSource extends BaseRemoteDataSource {
+class DioRemoteDataSource implements BaseRemoteDataSource {
   @override
   Future<List<Flashcard>> generateFlashcards(String material) async {
     try {
@@ -16,7 +17,7 @@ class DioRemoteDataSource extends BaseRemoteDataSource {
       rethrow;
     } on Exception {
       throw const JsonDeserializationException(
-          "Could not deserialize flashcards");
+          "Unvalued API output, Try again");
     }
   }
 }

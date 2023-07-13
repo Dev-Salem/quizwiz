@@ -4,6 +4,7 @@ import 'package:quizwiz/src/features/cards/data/data.dart';
 import 'package:uuid/uuid.dart';
 
 abstract class CollectionLocalDataSource {
+  factory CollectionLocalDataSource() => IsarCollectionDataSource();
   Future<List<FlashcardCollection>> getCollections();
   Future<Unit> createCollection(String name, {description = ''});
   Future<Unit> removeCollection(String uuid);
@@ -17,7 +18,7 @@ abstract class CollectionLocalDataSource {
       FlashcardCollection secondaryCollection);
 }
 
-class IsarCollectionDataSource extends CollectionLocalDataSource {
+class IsarCollectionDataSource implements CollectionLocalDataSource {
   final _instance = Isar.getInstance()!;
   final uuid = const Uuid();
   @override

@@ -7,15 +7,13 @@ final sl = GetIt.instance;
 class ServiceLocator {
   void init() {
     //data sources
-    sl.registerLazySingleton(() => IsarCollectionDataSource());
-    sl.registerLazySingleton(() => IsarFlashcardDataSource());
-    sl.registerLazySingleton(() => DioRemoteDataSource());
+    sl.registerLazySingleton(() => CollectionLocalDataSource());
+    sl.registerLazySingleton(() => FlashcardLocalDataSource());
+    sl.registerLazySingleton(() => BaseRemoteDataSource());
     sl.registerLazySingleton<Isar>(() => Isar.getInstance()!);
     //repository
-    sl.registerLazySingleton(
-        () => CardsRepository(flashcards: sl(), collection: sl(), dio: sl()));
+    sl.registerLazySingleton(() => BaseCardsRepository(sl(), sl(), sl()));
     //bloc
-    sl.registerFactory<CardsBloc>(
-        () => CardsBloc(isar: sl(), repository: sl()));
+    sl.registerFactory<CardsBloc>(() => CardsBloc(sl(), sl()));
   }
 }

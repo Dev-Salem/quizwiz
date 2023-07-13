@@ -6,13 +6,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 part 'cards_state.dart';
 
 class CardsBloc extends Bloc<CardsEvents, CardsState> {
-  final CardsRepository _baseCardsRepository;
+  final BaseCardsRepository _baseCardsRepository;
   final Isar _isar;
 
-  CardsBloc({required CardsRepository repository, required Isar isar})
-      : _baseCardsRepository = repository,
-        _isar = isar,
-        super(const CardsState()) {
+  CardsBloc(this._isar, this._baseCardsRepository) : super(const CardsState()) {
     on<GetCollectionsEvent>(_getCollections);
     on<RemoveCollectionEvent>(_removeCollection);
     on<CreateCollectionsEvent>(_createCollections);

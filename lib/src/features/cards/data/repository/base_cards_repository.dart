@@ -2,7 +2,13 @@ import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/features/cards/data/data.dart';
 
 abstract class BaseCardsRepository {
-  const BaseCardsRepository();
+  factory BaseCardsRepository(
+          FlashcardLocalDataSource flashcardLocalDataSource,
+          CollectionLocalDataSource collectionLocalDataSource,
+          BaseRemoteDataSource baseRemoteDataSource) =>
+      CardsRepository(flashcardLocalDataSource, collectionLocalDataSource,
+          baseRemoteDataSource);
+
   EitherFlashcards getDueReviewCards(
     FlashcardCollection collection,
   );

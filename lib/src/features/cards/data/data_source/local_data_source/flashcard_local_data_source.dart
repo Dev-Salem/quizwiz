@@ -9,6 +9,7 @@ import 'package:quizwiz/src/features/cards/data/models/multiple_choice_quiz.dart
 import 'package:uuid/uuid.dart';
 
 abstract class FlashcardLocalDataSource {
+  factory FlashcardLocalDataSource() => IsarFlashcardDataSource();
   Future<Unit> addFlashcard(
       String question, String answer, String collectionUuid);
 
@@ -29,7 +30,7 @@ abstract class FlashcardLocalDataSource {
       String collectionUuid, List<Flashcard> flashcards);
 }
 
-class IsarFlashcardDataSource extends FlashcardLocalDataSource {
+class IsarFlashcardDataSource implements FlashcardLocalDataSource {
   final _instance = Isar.getInstance()!;
   final uuid = const Uuid();
 
