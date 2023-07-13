@@ -1,10 +1,9 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:focused_menu/focused_menu.dart';
-import 'package:focused_menu/modals.dart';
 import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/features/cards/controller/controller.dart';
-import 'package:quizwiz/src/features/cards/data/data.dart';
 import 'package:quizwiz/src/features/cards/presentation/presentation.dart';
+import 'package:quizwiz/src/features/cards/presentation/widgets/flashcards_list_widgets/custom_focused_menu_holder.dart';
 
 class FlashcardsListScreen extends StatelessWidget {
   final String collectionUuid;
@@ -43,45 +42,9 @@ class FlashcardsListScreen extends StatelessWidget {
                         ),
                         itemCount: collection.cards.length,
                         itemBuilder: (context, index) {
-                          return FocusedMenuHolder(
-                              menuBoxDecoration:
-                                  const BoxDecoration(color: Colors.black),
-                              onPressed: () {},
-                              menuItems: [
-                                FocusedMenuItem(
-                                    backgroundColor:
-                                        Theme.of(context).cardColor,
-                                    title: const Text(
-                                      AppStrings.delete,
-                                      style: TextStyle(color: Colors.red),
-                                    ),
-                                    onPressed: () {
-                                      context.read<CardsBloc>().add(
-                                          RemoveFlashcardsEvent(
-                                              collection: collection,
-                                              flashcardUuid: collection
-                                                  .cards[index].uuid));
-                                    }),
-                                FocusedMenuItem(
-                                    backgroundColor:
-                                        Theme.of(context).cardColor,
-                                    title: const Text("Edit"),
-                                    onPressed: () {
-                                      Navigator.of(context)
-                                          .pushReplacementNamed(
-                                              RouterConstance.goToEditFlashcard,
-                                              arguments:
-                                                  EditFlashcardParameters(
-                                                      front: collection
-                                                          .cards[index]
-                                                          .question,
-                                                      back: collection
-                                                          .cards[index].answer,
-                                                      collection: collection,
-                                                      flashcard: collection
-                                                          .cards[index]));
-                                    })
-                              ],
+                          return CustomFocusedMenuHolder(
+                              collection: collection,
+                              index: index,
                               child: FlashcardWidget(
                                   card: collection.cards[index]));
                         }));

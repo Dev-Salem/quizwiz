@@ -191,21 +191,15 @@ class CardsBloc extends Bloc<CardsEvents, CardsState> {
   _saveAllGenerateFlashcards(
       SaveAllGenerateFlashcardsEvent event, Emitter<CardsState> emit) async {
     emit(state.copyWith(collectionsRequestState: RequestState.loading));
-    try {
-      final result = await _baseCardsRepository.saveAllGeneratedFlashcard(
-          event.collectionUuid, event.flashcards);
-      result.fold(
-          (l) => emit(state.copyWith(
-              collectionsErrorMessage: l.message,
-              collectionsRequestState: RequestState.error)),
-          (r) => emit(state.copyWith(
-                collectionsRequestState: RequestState.success,
-              )));
-    } catch (e) {
-      emit(state.copyWith(
-          collectionsErrorMessage: e.toString(),
-          collectionsRequestState: RequestState.error));
-    }
+    final result = await _baseCardsRepository.saveAllGeneratedFlashcard(
+        event.collectionUuid, event.flashcards);
+    result.fold(
+        (l) => emit(state.copyWith(
+            collectionsErrorMessage: l.message,
+            collectionsRequestState: RequestState.error)),
+        (r) => emit(state.copyWith(
+              collectionsRequestState: RequestState.success,
+            )));
   }
 
   _combineCollections(
