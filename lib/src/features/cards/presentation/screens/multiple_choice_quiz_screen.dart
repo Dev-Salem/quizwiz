@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/features/cards/controller/controller.dart';
 import 'package:quizwiz/src/features/cards/data/data.dart';
+import 'package:quizwiz/src/features/cards/presentation/widgets/multiple_choice_quiz_widgets/multiple_choice_body.dart';
 
 class MultipleChoiceQuizScreen extends StatefulWidget {
   const MultipleChoiceQuizScreen({super.key});
@@ -50,52 +51,18 @@ class _MultipleChoiceQuizScreenState extends State<MultipleChoiceQuizScreen> {
               );
             case RequestState.success:
               final quiz = state.multipleChoices;
-              return PageView.builder(
-                controller: _controller,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: quiz.length,
-                itemBuilder: (context, index) => LayoutBuilder(
-                  builder: (context, constraints) => Column(
-                    children: [
-                      Container(
-                          height: constraints.maxHeight / 3,
-                          alignment: Alignment.center,
-                          child: Text(
-                            quiz[index].question,
-                            textAlign: TextAlign.center,
-                            style: Theme.of(context).textTheme.displaySmall,
-                          )),
-                      ...List.generate(quiz[index].options.length, (i) {
-                        final option = quiz[index].options[i];
-                        return InkWell(
-                          onTap: () => onTap(index, quiz),
-                          child: Container(
-                            width: constraints.maxWidth,
-                            padding: const EdgeInsets.symmetric(vertical: 20),
-                            margin: const EdgeInsets.symmetric(vertical: 5),
-                            alignment: Alignment.center,
-                            color: option == quiz[index].rightAnswer &&
-                                    showCorrectAnswer
-                                ? Colors.green
-                                : Theme.of(context).cardColor,
-                            child: Text(
-                              option,
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        );
-                      })
-                    ],
-                  ),
-                ),
-              );
+              return MultipleChoiceQuizBody(
+                  quiz: quiz,
+                  controller: _controller,
+                  showCorrectAnswer: showCorrectAnswer,
+                  onTap: _onTap);
           }
         },
       ),
     );
   }
 
-  void onTap(int index, List<MultipleChoiceQuiz> quiz) {
+  void _onTap(int index, List<MultipleChoiceQuiz> quiz) {
     //change the color to green
     _changeAnswerColor();
     //after [_slideDuration + 100ms] change the color back

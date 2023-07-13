@@ -101,6 +101,8 @@ class _WritingQuizScreenState extends State<WritingQuizScreen> {
   }
 
   void _onPressed(int index) {
+    ///Navigate to home screen if the user reached the las question,
+    /// other go to the next question
     if (_pageController.page == widget.flashcards.length - 1) {
       Navigator.of(context).pushReplacementNamed('/');
     } else {
