@@ -16,8 +16,7 @@ class DioRemoteDataSource implements BaseRemoteDataSource {
     } on NetworkingException {
       rethrow;
     } on Exception {
-      throw const JsonDeserializationException(
-          "Unvalued API output, Try again");
+      throw const JsonDeserializationException("Invalid API output, Try again");
     }
   }
 }

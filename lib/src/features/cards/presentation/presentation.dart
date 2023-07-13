@@ -16,3 +16,7 @@ export 'package:quizwiz/src/features/cards/presentation/widgets/generated_flashc
 export 'package:flutter/material.dart';
 export 'package:quizwiz/src/features/cards/presentation/widgets/flashcards_list_widgets/flashcard_widget.dart';
 export 'package:quizwiz/src/features/cards/presentation/widgets/create_flashcards_widgets/forms.dart';
+export 'package:quizwiz/src/features/cards/presentation/widgets/flashcards_list_widgets/custom_focused_menu_holder.dart';
+export 'package:quizwiz/src/features/cards/presentation/widgets/multiple_choice_quiz_widgets/multiple_choice_body.dart';
+export 'package:quizwiz/src/features/cards/presentation/widgets/practice_cards_widgets/no_flashcards_to_review.dart';
+export 'package:quizwiz/src/features/cards/presentation/widgets/review_result_widgets/review_bar.dart';

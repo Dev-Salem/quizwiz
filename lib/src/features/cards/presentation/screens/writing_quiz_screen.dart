@@ -60,7 +60,7 @@ class _WritingQuizScreenState extends State<WritingQuizScreen> {
                               .textTheme
                               .displaySmall!
                               .copyWith(
-                                  backgroundColor: _answerColor(
+                                  backgroundColor: _changeAnswerColor(
                                       answer, _textController.text)),
                         )
                       : const SizedBox(),
@@ -113,7 +113,7 @@ class _WritingQuizScreenState extends State<WritingQuizScreen> {
     }
   }
 
-  Color _answerColor(String answer, String userInput) {
+  Color _changeAnswerColor(String answer, String userInput) {
     if (answer.trim().toLowerCase() == userInput.trim().toLowerCase()) {
       return Colors.green;
     } else {

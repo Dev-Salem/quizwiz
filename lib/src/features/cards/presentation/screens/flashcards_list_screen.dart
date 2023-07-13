@@ -3,7 +3,6 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/features/cards/controller/controller.dart';
 import 'package:quizwiz/src/features/cards/presentation/presentation.dart';
-import 'package:quizwiz/src/features/cards/presentation/widgets/flashcards_list_widgets/custom_focused_menu_holder.dart';
 
 class FlashcardsListScreen extends StatelessWidget {
   final String collectionUuid;

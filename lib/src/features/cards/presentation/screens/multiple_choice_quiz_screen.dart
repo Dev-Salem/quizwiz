@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/features/cards/controller/controller.dart';
 import 'package:quizwiz/src/features/cards/data/data.dart';
-import 'package:quizwiz/src/features/cards/presentation/widgets/multiple_choice_quiz_widgets/multiple_choice_body.dart';
+import 'package:quizwiz/src/features/cards/presentation/presentation.dart';
 
 class MultipleChoiceQuizScreen extends StatefulWidget {
   const MultipleChoiceQuizScreen({super.key});

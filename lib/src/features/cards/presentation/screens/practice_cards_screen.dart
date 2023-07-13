@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/features/cards/controller/controller.dart';
 import 'package:quizwiz/src/features/cards/data/data.dart';
-import 'package:quizwiz/src/features/cards/presentation/widgets/practice_cards_widgets/no_flashcards_to_review.dart';
+import 'package:quizwiz/src/features/cards/presentation/presentation.dart';
 
 class PracticeCardsScreen extends StatelessWidget {
   final FlashcardCollection collection;

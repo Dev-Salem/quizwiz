@@ -135,7 +135,7 @@ class CardsRepository implements BaseCardsRepository {
       final result = await _remoteDataSource.generateFlashcards(material);
       return Right(result);
     } catch (e) {
-      return Left(RemoteDataSourceFailure(message: e.toString()));
+      return Left(NetworkFailure(message: e.toString()));
     }
   }
 

@@ -42,7 +42,7 @@ class IsarFlashcardDataSource implements FlashcardLocalDataSource {
         answer: answer,
         uuid: uuid.v4(),
         dueTime: DateTime.now().millisecondsSinceEpoch);
-    _instance.writeTxn(() async {
+    await _instance.writeTxn(() async {
       final collection =
           await _instance.flashcardCollections.getByUuid(collectionUuid);
       List<Flashcard> cards = [

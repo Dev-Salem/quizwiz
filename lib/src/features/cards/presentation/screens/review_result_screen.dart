@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/features/cards/controller/controller.dart';
 import 'package:quizwiz/src/features/cards/data/data.dart';
-import 'package:quizwiz/src/features/cards/presentation/widgets/review_result_widgets/review_bar.dart';
+import 'package:quizwiz/src/features/cards/presentation/presentation.dart';
 
 class ReviewResultScreen extends StatelessWidget {
   final (Flashcard card, FlashcardCollection collection) cardAndCollection;
