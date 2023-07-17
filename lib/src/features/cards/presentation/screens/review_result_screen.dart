@@ -23,9 +23,13 @@ class ReviewResultScreen extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          Text(
-            cardAndCollection.$1.answer,
-            style: Theme.of(context).textTheme.headlineMedium,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 5),
+            child: Text(
+              cardAndCollection.$1.answer,
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
           ),
           const Expanded(child: SizedBox()),
           Row(

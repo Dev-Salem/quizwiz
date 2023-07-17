@@ -47,26 +47,34 @@ class _WritingQuizScreenState extends State<WritingQuizScreen> {
                   const SizedBox(
                     height: 20,
                   ),
-                  SizedBox(
-                      height: size.maxHeight / 4,
+                  ConstrainedBox(
+                      constraints:
+                          BoxConstraints(maxHeight: size.maxHeight / 3),
                       child: Text(
                         question,
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.displaySmall,
                       )),
+                  SizedBox(
+                    height: 30,
+                  ),
                   _showAnswer
-                      ? Text(
-                          widget.flashcards[index].answer,
-                          style: Theme.of(context)
-                              .textTheme
-                              .displaySmall!
-                              .copyWith(
-                                  backgroundColor: _changeAnswerColor(
-                                      answer, _textController.text)),
+                      ? ConstrainedBox(
+                          constraints:
+                              BoxConstraints(maxHeight: size.maxHeight / 5),
+                          child: Text(
+                            widget.flashcards[index].answer,
+                            style: Theme.of(context)
+                                .textTheme
+                                .displaySmall!
+                                .copyWith(
+                                    backgroundColor: _changeAnswerColor(
+                                        answer, _textController.text)),
+                          ),
                         )
                       : const SizedBox(),
                   const SizedBox(
-                    height: 20,
+                    height: 50,
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25),

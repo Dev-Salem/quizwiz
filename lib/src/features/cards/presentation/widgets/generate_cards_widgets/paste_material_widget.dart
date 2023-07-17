@@ -25,7 +25,7 @@ class PastMaterialWidget extends StatelessWidget {
             child: TextFormField(
               controller: controller,
               minLines: 1,
-              maxLines: 10,
+              maxLines: 3,
               validator: (value) => value!.isEmpty ? "Empty Value" : null,
               decoration:
                   const InputDecoration(label: Text(AppStrings.pasteMaterial)),
