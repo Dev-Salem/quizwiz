@@ -11,11 +11,11 @@ class DioClient {
     dio.options.validateStatus = (int? status) {
       return status != null && status > 0;
     };
-    dio.options.baseUrl = NetworkConstants.baseUrl;
+    dio.options.baseUrl = NetworkConstants.gptBaseUrl;
     dio.options.headers = {
       'content-type': NetworkConstants.contentType,
-      'X-RapidAPI-Key': officialKey,
-      'X-RapidAPI-Host': NetworkConstants.headerHost
+      'X-RapidAPI-Key': gptApiKey,
+      'X-RapidAPI-Host': NetworkConstants.gptHeaderHost
     };
 
     try {
@@ -27,16 +27,20 @@ class DioClient {
       ]);
       return jsonDecode(response.data['text']);
     } on Exception catch (e) {
-      if (e is DioException) {
-        throw NetworkingException(e.message!);
-      } else if (e.toString().isNotEmpty) {
-        throw NetworkingException(e.toString());
-      } else {
-        throw const UnexpectedNetworkException(
-            "Unexpected Network Exception: Try To Connect To The Internet");
-      }
+      throw _customException(e);
     } finally {
       dio.close();
     }
+  }
+}
+
+Exception _customException(Exception e) {
+  if (e is DioException) {
+    return NetworkingException(e.message!);
+  } else if (e.toString().isNotEmpty) {
+    return NetworkingException(e.toString());
+  } else {
+    return const UnexpectedNetworkException(
+        "Unexpected Network Exception: Try Connecting To The Internet");
   }
 }

@@ -1,6 +1,6 @@
 class NetworkConstants {
-  static const String baseUrl = 'https://chatgpt-api8.p.rapidapi.com';
-  static const String headerHost = 'chatgpt-api8.p.rapidapi.com';
+  static const String gptBaseUrl = 'https://chatgpt-api8.p.rapidapi.com';
+  static const String gptHeaderHost = 'chatgpt-api8.p.rapidapi.com';
   static const String contentType = 'application/json';
   static String generateFlashcardsPrompt(String material) {
     return """

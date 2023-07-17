@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:quizwiz/src/core/core.dart';
-import 'package:quizwiz/src/features/cards/controller/controller.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:quizwiz/src/features/cards/presentation/presentation.dart';
 
 class GenerateCardsScreen extends StatefulWidget {
   final String collectionUuid;
@@ -13,6 +12,7 @@ class GenerateCardsScreen extends StatefulWidget {
 class _GenerateCardsScreenState extends State<GenerateCardsScreen> {
   late final TextEditingController _controller;
   final formKey = GlobalKey<FormState>();
+  String index = 'text';
   @override
   void initState() {
     super.initState();
@@ -28,39 +28,50 @@ class _GenerateCardsScreenState extends State<GenerateCardsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: Form(
-              key: formKey,
-              child: TextFormField(
-                controller: _controller,
-                minLines: 1,
-                maxLines: 10,
-                validator: (value) => value!.isEmpty ? "Empty Value" : null,
-                decoration: const InputDecoration(
-                    label: Text(AppStrings.pasteMaterial)),
+        appBar: AppBar(),
+        body: LayoutBuilder(builder: (context, size) {
+          return Column(
+            children: [
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Expanded(
+                    child: RadioListTile.adaptive(
+                        title: const Text("Plain Text"),
+                        value: "text",
+                        groupValue: index,
+                        onChanged: (value) {
+                          setState(() {
+                            index = value ?? index;
+                          });
+                        }),
+                  ),
+                  Expanded(
+                    child: RadioListTile.adaptive(
+                        title: const Text("Upload PDF"),
+                        value: "pdf",
+                        groupValue: index,
+                        onChanged: (value) {
+                          setState(() {
+                            index = value ?? index;
+                          });
+                        }),
+                  ),
+                ],
               ),
-            ),
-          ),
-          ElevatedButton.icon(
-              onPressed: () async {
-                if (formKey.currentState!.validate() == true) {
-                  context
-                      .read<CardsBloc>()
-                      .add(GenerateFlashcardsEvent(material: _controller.text));
-                  Navigator.of(context).pushReplacementNamed(
-                      RouterConstance.goToGeneratedFlashcards,
-                      arguments: widget.collectionUuid);
-                }
-              },
-              icon: const Icon(Icons.rocket),
-              label: const Text(AppStrings.generate))
-        ],
-      ),
-    );
+              SizedBox(
+                height: size.maxHeight * 0.25,
+              ),
+              index == 'text'
+                  ? PastMaterialWidget(
+                      controller: _controller,
+                      collectionUuid: widget.collectionUuid,
+                      formKey: formKey)
+                  : UploadFileWidget(
+                      collectionUuid: widget.collectionUuid,
+                    )
+            ],
+          );
+        }));
   }
 }

@@ -29,7 +29,9 @@ class GeneratedFlashcardWidget extends StatelessWidget {
           onPressed: () {
             context.read<CardsBloc>().add(SaveAllGenerateFlashcardsEvent(
                 flashcards: flashcards, collectionUuid: collectionUuid));
-            Navigator.of(context).pushReplacementNamed('/');
+            Navigator.of(context).pushReplacementNamed(
+                RouterConstance.goToFlashcardsList,
+                arguments: collectionUuid);
           },
           icon: const Icon(Icons.add),
           label: const Text(AppStrings.addAll)),

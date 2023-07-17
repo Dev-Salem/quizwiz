@@ -13,10 +13,13 @@ class DioRemoteDataSource implements BaseRemoteDataSource {
     try {
       final result = await DioClient.fetchChatCompletion(material);
       return List<Flashcard>.from(result.map((x) => Flashcard.fromMap(x)));
-    } on NetworkingException {
-      rethrow;
-    } on Exception {
-      throw const JsonDeserializationException("Invalid API output, Try again");
+    } on Exception catch (e) {
+      if (e is NetworkingException || e is UnexpectedNetworkException) {
+        rethrow;
+      } else {
+        throw const JsonDeserializationException(
+            "Invalid API response, Try Again");
+      }
     }
   }
 }

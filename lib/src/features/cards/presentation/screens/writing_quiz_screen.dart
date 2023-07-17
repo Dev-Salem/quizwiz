@@ -36,6 +36,7 @@ class _WritingQuizScreenState extends State<WritingQuizScreen> {
       ),
       body: LayoutBuilder(builder: (context, size) {
         return PageView.builder(
+            physics: const NeverScrollableScrollPhysics(),
             controller: _pageController,
             itemCount: widget.flashcards.length,
             itemBuilder: (context, index) {

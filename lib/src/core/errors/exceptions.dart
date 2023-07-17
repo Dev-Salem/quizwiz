@@ -25,9 +25,17 @@ class JsonDeserializationException implements Exception {
   String toString() => message;
 }
 
-class UnexpectedNetworkException {
+class UnexpectedNetworkException implements Exception {
   final String message;
   const UnexpectedNetworkException(this.message);
+  @override
+  String toString() => message;
+}
+
+class PickingFileException {
+  final String message;
+  const PickingFileException(
+      {this.message = "Invalid File: Pick a PDF or an Image"});
   @override
   String toString() => message;
 }

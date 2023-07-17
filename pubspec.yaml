@@ -8,6 +8,7 @@ environment:
   sdk: '>=3.0.3 <4.0.0'
 
 dependencies:
+  connectivity_plus: ^4.0.1
   cupertino_icons: ^1.0.2
   dartz: ^0.10.1
   dio: ^5.2.1+1
@@ -25,6 +26,7 @@ dependencies:
   jiffy: ^6.2.1
   lottie: ^2.4.0
   path_provider: ^2.0.15
+  pdf_text: ^0.5.0
   uuid: ^3.0.7
 
 dev_dependencies:
