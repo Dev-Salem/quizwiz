@@ -13,7 +13,8 @@ class DioClient {
     final isConnected = await InternetConnectivity.isConnected();
     if (!isConnected) {
       log(isConnected.toString());
-      throw const NetworkingException("No Internet connection");
+      throw const NetworkingException(
+          NetworkConstants.noConnectionErrorMessage);
     }
 
     final dio = Dio();
@@ -50,13 +51,13 @@ class DioClient {
 Exception _customException(Exception e) {
   log(e.toString());
   if (e is FormatException) {
-    return const NetworkingException("Your input is too long");
+    return const NetworkingException(NetworkConstants.formatExceptionMessage);
   } else if (e is DioException) {
     return NetworkingException(e.message!);
   } else if (e.toString().isNotEmpty) {
     return NetworkingException(e.toString());
   } else {
     return const UnexpectedNetworkException(
-        "Unexpected Network Exception: Try Connecting To The Internet");
+        NetworkConstants.unexpectedErrorMessage);
   }
 }
