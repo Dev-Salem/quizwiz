@@ -22,7 +22,7 @@ class MultipleChoiceQuizBody extends StatelessWidget {
       physics: const NeverScrollableScrollPhysics(),
       itemCount: quiz.length,
       itemBuilder: (context, index) => LayoutBuilder(
-        builder: (context, constraints) => Column(
+        builder: (context, constraints) => ListView(
           children: [
             Container(
                 height: constraints.maxHeight / 3,
@@ -38,7 +38,8 @@ class MultipleChoiceQuizBody extends StatelessWidget {
                 onTap: () => onTap(index, quiz),
                 child: Container(
                   width: constraints.maxWidth,
-                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
                   margin: const EdgeInsets.symmetric(vertical: 5),
                   alignment: Alignment.center,
                   color: option == quiz[index].rightAnswer && showCorrectAnswer

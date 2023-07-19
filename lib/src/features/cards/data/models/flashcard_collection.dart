@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:isar/isar.dart';
+import 'package:uuid/uuid.dart';
 
 part 'flashcard_collection.g.dart';
 
@@ -76,8 +77,8 @@ class Flashcard {
 
   factory Flashcard.fromMap(Map<String, dynamic> map) {
     return Flashcard(
-      question: map['term'] as String,
-      answer: map['definition'] as String,
-    );
+        question: map['term'] as String,
+        answer: map['definition'] as String,
+        uuid: const Uuid().v4());
   }
 }

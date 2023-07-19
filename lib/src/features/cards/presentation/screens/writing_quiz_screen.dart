@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/features/cards/data/data.dart';
@@ -42,28 +43,29 @@ class _WritingQuizScreenState extends State<WritingQuizScreen> {
             itemBuilder: (context, index) {
               String question = widget.flashcards[index].question;
               String answer = widget.flashcards[index].answer;
-              return Column(
+              return ListView(
                 children: [
                   const SizedBox(
                     height: 20,
                   ),
                   ConstrainedBox(
                       constraints:
-                          BoxConstraints(maxHeight: size.maxHeight / 3),
-                      child: Text(
+                          BoxConstraints(maxHeight: size.maxHeight * 0.25),
+                      child: AutoSizeText(
                         question,
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.displaySmall,
                       )),
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
                   _showAnswer
                       ? ConstrainedBox(
                           constraints:
-                              BoxConstraints(maxHeight: size.maxHeight / 5),
-                          child: Text(
+                              BoxConstraints(maxHeight: size.maxHeight * 0.2),
+                          child: AutoSizeText(
                             widget.flashcards[index].answer,
+                            textAlign: TextAlign.center,
                             style: Theme.of(context)
                                 .textTheme
                                 .displaySmall!
@@ -92,12 +94,17 @@ class _WritingQuizScreenState extends State<WritingQuizScreen> {
                           labelText: "Definition / Answer"),
                     ),
                   ),
-                  const Expanded(child: SizedBox()),
+                  SizedBox(
+                    height: size.maxHeight * 0.2,
+                  ),
                   _showAnswer
-                      ? ElevatedButton.icon(
-                          onPressed: () => _onPressed(index),
-                          icon: const Icon(Icons.arrow_forward),
-                          label: const Text("Next"))
+                      ? Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: ElevatedButton.icon(
+                              onPressed: () => _onPressed(index),
+                              icon: const Icon(Icons.arrow_forward),
+                              label: const Text("Next")),
+                        )
                       : const SizedBox(),
                   const SizedBox(
                     height: 20,

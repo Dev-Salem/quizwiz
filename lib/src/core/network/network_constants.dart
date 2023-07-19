@@ -5,7 +5,7 @@ class NetworkConstants {
   static String generateFlashcardsPrompt(String material) {
     return """
 pretend to be an expert in summarizing studying material.
-create a valid JSON array of objects for $material , use only the material provided,
+create a valid JSON array of objects for material provided , use only the material provided,
 following this format [no prose, only the result in json format]:
 
 [
@@ -19,6 +19,8 @@ following this format [no prose, only the result in json format]:
   }
 
 ]
+-----------------
+material: $material
  """;
   }
 }
