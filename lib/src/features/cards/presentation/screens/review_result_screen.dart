@@ -80,8 +80,7 @@ class ReviewResultScreen extends StatelessWidget {
           reviewResult: result))
       ..add(GetDueReviewsEvent(collection: cardAndCollection.$2));
 
-    Navigator.of(buildContext).pushReplacementNamed(
-        RouterConstance.goToPracticeCards,
+    Navigator.of(buildContext).pushReplacementNamed(Routes.goToPracticeCards,
         arguments: cardAndCollection.$2);
   }
 }

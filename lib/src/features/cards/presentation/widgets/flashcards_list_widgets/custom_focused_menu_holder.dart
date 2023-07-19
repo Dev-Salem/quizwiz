@@ -38,7 +38,7 @@ class CustomFocusedMenuHolder extends StatelessWidget {
               title: const Text("Edit"),
               onPressed: () {
                 Navigator.of(context).pushReplacementNamed(
-                    RouterConstance.goToEditFlashcard,
+                    Routes.goToEditFlashcard,
                     arguments: EditFlashcardParameters(
                         front: collection.cards[index].question,
                         back: collection.cards[index].answer,

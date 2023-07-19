@@ -27,8 +27,7 @@ class UploadFileWidget extends StatelessWidget {
 
   void generateAndNavigate(BuildContext context, String text) {
     context.read<CardsBloc>().add(GenerateFlashcardsEvent(material: text));
-    Navigator.of(context).pushReplacementNamed(
-        RouterConstance.goToGeneratedFlashcards,
+    Navigator.of(context).pushReplacementNamed(Routes.goToGeneratedFlashcards,
         arguments: collectionUuid);
   }
 

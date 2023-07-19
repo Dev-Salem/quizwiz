@@ -62,7 +62,7 @@ class _CreateFlashcardsScreenState extends State<CreateFlashcardsScreen> {
                     TextButton.icon(
                         onPressed: () {
                           Navigator.of(context).pushReplacementNamed(
-                              RouterConstance.goToGenerateFlashcards,
+                              Routes.goToGenerateFlashcards,
                               arguments: widget.collectionUuid);
                         },
                         icon: const Icon(Icons.rocket),
@@ -84,7 +84,7 @@ class _CreateFlashcardsScreenState extends State<CreateFlashcardsScreen> {
                         onPressed: () {
                           if (_addFlashcard()) {
                             Navigator.of(context).pushReplacementNamed(
-                                RouterConstance.goToCreateFlashcards,
+                                Routes.goToCreateFlashcards,
                                 arguments: widget.collectionUuid);
                           }
                         },

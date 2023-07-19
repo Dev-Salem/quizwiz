@@ -26,12 +26,11 @@ class PracticeCardsScreen extends StatelessWidget {
                   : PageView.builder(
                       itemCount: state.flashcards.length,
                       itemBuilder: (context, index) => InkWell(
-                            onTap: () => Navigator.of(context).pushNamed(
-                                RouterConstance.goToReviewResult,
-                                arguments: (
-                                  state.flashcards[index],
-                                  collection
-                                )),
+                            onTap: () => Navigator.of(context)
+                                .pushNamed(Routes.goToReviewResult, arguments: (
+                              state.flashcards[index],
+                              collection
+                            )),
                             child: Center(
                               child: Text(
                                 state.flashcards[index].question,

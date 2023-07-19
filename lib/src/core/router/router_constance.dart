@@ -1,4 +1,4 @@
-class RouterConstance {
+class Routes {
   static const goToCreateFlashcards = '/create_flashcards';
   static const goToFlashcardsList = '/flashcards_list';
   static const goToPracticeCards = '/practice_flashcards';
