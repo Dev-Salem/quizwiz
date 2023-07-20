@@ -13,7 +13,7 @@ class CardCalculation {
     switch (result) {
       case ReviewResult.again:
         card.repetitions = 0;
-        card.interval = 1;
+        card.interval = 0;
         card.dueTime = now + _toMilliseconds(card.interval);
         break;
       case ReviewResult.hard:
