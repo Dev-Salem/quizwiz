@@ -2,15 +2,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  ThemeMode _theme = ThemeMode.dark;
-  ThemeMode get theme => _theme;
-  void changeTheme() {
-    _theme == ThemeMode.dark
-        ? _theme = ThemeMode.light
-        : _theme = ThemeMode.dark;
-  }
-
-  static lightTheme() => FlexThemeData.light(
+  static ThemeData lightTheme() => FlexThemeData.light(
         scheme: FlexScheme.materialBaseline,
         surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
         blendLevel: 7,
@@ -23,7 +15,8 @@ class AppTheme {
         useMaterial3: true,
         swapLegacyOnMaterial3: true,
       ).copyWith(appBarTheme: const AppBarTheme(centerTitle: true));
-  static darkTheme() => FlexThemeData.dark(
+
+  static ThemeData darkTheme() => FlexThemeData.dark(
         scheme: FlexScheme.materialBaseline,
         surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
         blendLevel: 13,
