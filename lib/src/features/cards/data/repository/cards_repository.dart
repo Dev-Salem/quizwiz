@@ -7,7 +7,7 @@ class CardsRepository implements BaseCardsRepository {
   final FlashcardLocalDataSource _flashcardDataSource;
   final CollectionLocalDataSource _collectionDataSource;
   final BaseRemoteDataSource _remoteDataSource;
-  CardsRepository(
+  const CardsRepository(
     this._flashcardDataSource,
     this._collectionDataSource,
     this._remoteDataSource,

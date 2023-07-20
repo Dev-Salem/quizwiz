@@ -1,10 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
-
 import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/features/cards/data/data.dart';
 
-abstract class CardsEvents extends Equatable {
+sealed class CardsEvents extends Equatable {
   const CardsEvents();
   @override
   List<Object?> get props => [];

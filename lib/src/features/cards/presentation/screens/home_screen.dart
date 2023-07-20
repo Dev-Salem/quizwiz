@@ -1,5 +1,4 @@
 import 'package:quizwiz/src/core/core.dart';
-import 'package:quizwiz/src/core/theme/cubit/theme_cubit.dart';
 import 'package:quizwiz/src/features/cards/controller/controller.dart';
 import 'package:quizwiz/src/features/cards/presentation/presentation.dart';
 

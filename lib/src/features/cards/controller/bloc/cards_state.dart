@@ -13,7 +13,7 @@ class CardsState extends Equatable {
   final String flashcardErrorMessage;
   final List<Flashcard> flashcards;
 
-  //state of the multiple choice quiz
+  //state of [MultipleChoiceQuiz]
   final RequestState quizRequestState;
   final String quizErrorMessage;
   final List<MultipleChoiceQuiz> multipleChoices;

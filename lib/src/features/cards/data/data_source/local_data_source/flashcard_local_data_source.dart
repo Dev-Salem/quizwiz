@@ -1,11 +1,6 @@
-import 'package:isar/isar.dart';
 import 'package:quizwiz/src/core/core.dart';
-import 'package:quizwiz/src/core/errors/exceptions.dart';
-import 'package:quizwiz/src/features/cards/data/models/card_calculation.dart';
-import 'package:quizwiz/src/features/cards/data/models/edit_flashcard_parameters.dart';
-import 'package:quizwiz/src/features/cards/data/models/flashcard_collection.dart';
 import 'package:dartz/dartz.dart';
-import 'package:quizwiz/src/features/cards/data/models/multiple_choice_quiz.dart';
+import 'package:quizwiz/src/features/cards/data/data.dart';
 import 'package:uuid/uuid.dart';
 
 abstract class FlashcardLocalDataSource {
@@ -63,6 +58,7 @@ class IsarFlashcardDataSource implements FlashcardLocalDataSource {
       return DateTime.fromMillisecondsSinceEpoch(card.dueTime)
           .isBefore(DateTime.now());
     }).toList();
+    cards.shuffle();
     return cards;
   }
 
