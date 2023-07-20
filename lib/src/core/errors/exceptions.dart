@@ -10,9 +10,9 @@ class LocalStorageException implements Exception {
   String toString() => message;
 }
 
-class NetworkingException implements Exception {
+class NetworkException implements Exception {
   final String message;
-  const NetworkingException(this.message);
+  const NetworkException(this.message);
 
   @override
   String toString() => message;
@@ -28,14 +28,6 @@ class JsonDeserializationException implements Exception {
 class UnexpectedNetworkException implements Exception {
   final String message;
   const UnexpectedNetworkException(this.message);
-  @override
-  String toString() => message;
-}
-
-class PickingFileException {
-  final String message;
-  const PickingFileException(
-      {this.message = "Invalid File: Pick a PDF or an Image"});
   @override
   String toString() => message;
 }

@@ -1,5 +1,5 @@
 export 'package:quizwiz/src/core/services/service_locator.dart';
-export 'package:quizwiz/src/core/router/router_constance.dart';
+export 'package:quizwiz/src/core/router/routes.dart';
 export 'package:quizwiz/src/core/router/route_generator.dart';
 export 'package:quizwiz/src/core/errors/failure.dart';
 export 'package:quizwiz/src/core/network/api_client.dart';

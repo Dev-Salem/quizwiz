@@ -14,7 +14,7 @@ class DioRemoteDataSource implements BaseRemoteDataSource {
       final result = await DioClient.fetchChatCompletion(material);
       return List<Flashcard>.from(result.map((x) => Flashcard.fromMap(x)));
     } on Exception catch (e) {
-      if (e is NetworkingException || e is UnexpectedNetworkException) {
+      if (e is NetworkException || e is UnexpectedNetworkException) {
         rethrow;
       } else {
         throw const JsonDeserializationException(

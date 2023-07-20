@@ -13,8 +13,7 @@ class DioClient {
     final isConnected = await InternetConnectivity.isConnected();
     if (!isConnected) {
       log(isConnected.toString());
-      throw const NetworkingException(
-          NetworkConstants.noConnectionErrorMessage);
+      throw const NetworkException(NetworkConstants.noConnectionErrorMessage);
     }
 
     final dio = Dio();
@@ -51,11 +50,11 @@ class DioClient {
 Exception _customException(Exception e) {
   log(e.toString());
   if (e is FormatException) {
-    return const NetworkingException(NetworkConstants.formatExceptionMessage);
+    return const NetworkException(NetworkConstants.formatExceptionMessage);
   } else if (e is DioException) {
-    return NetworkingException(e.message!);
+    return NetworkException(e.message!);
   } else if (e.toString().isNotEmpty) {
-    return NetworkingException(e.toString());
+    return NetworkException(e.toString());
   } else {
     return const UnexpectedNetworkException(
         NetworkConstants.unexpectedErrorMessage);

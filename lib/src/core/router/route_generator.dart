@@ -1,4 +1,4 @@
-import 'package:quizwiz/src/core/router/router_constance.dart';
+import 'package:quizwiz/src/core/router/routes.dart';
 import 'package:quizwiz/src/core/widgets/error_widget.dart';
 import 'package:quizwiz/src/features/cards/data/data.dart';
 import 'package:quizwiz/src/features/cards/presentation/presentation.dart';
