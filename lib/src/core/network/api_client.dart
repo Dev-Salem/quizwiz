@@ -25,6 +25,7 @@ class DioClient {
       ..receiveTimeout = timeout
       ..headers = {
         'content-type': NetworkConstants.contentType,
+        //TODO: Get An API Key
         'X-RapidAPI-Key': gptApiKey,
         'X-RapidAPI-Host': NetworkConstants.gptHeaderHost
       };

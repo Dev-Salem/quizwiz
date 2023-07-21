@@ -12,7 +12,9 @@ class GeneratedFlashcardsScreen extends StatelessWidget {
       builder: (context, state) {
         switch (state.flashcardRequestState) {
           case RequestState.loading:
-            return const LoadingWidget();
+            return const LoadingWidget(
+              message: "Making Flashcards...",
+            );
           case RequestState.error:
             return CustomErrorWidget(
               errorMessage: state.flashcardErrorMessage,
