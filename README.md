@@ -1,14 +1,14 @@
 ## Description
 QuizWiz is a flashcard app that utilizes the power of AI to make flashcards from documents
 
-## Features
+## 📌 Features
 - Create, edit, and combine collections (deck).
-- Create cards manually or by uploading pdf files/pasting material.
+- Create cards manually or by uploading pdf files/pasting materials.
 - Review cards based on SM-2 algorithm 
 - Practice reviewed cards using multiple choice or by writing them manually.
 - Light and dark themes.
 
-## Screenshots
+## 📸 Screenshots
 
 |  ![Create Collection](https://s12.gifyu.com/images/SWyEz.gif)|  ![Edit, delete, combine collections and cards](https://s11.gifyu.com/images/SWyEb.gif) |
 |-------|--------|
@@ -20,7 +20,7 @@ QuizWiz is a flashcard app that utilizes the power of AI to make flashcards from
 
 
 
-## Packages & Technologies
+## 📦 Packages & Technologies
 
 | Description    |   Package |
 | ---------| -------|
@@ -30,43 +30,51 @@ QuizWiz is a flashcard app that utilizes the power of AI to make flashcards from
 | Theming | [flex_color_scheme](https://pub.dev/packages/flex_color_scheme) |
 | Internet Connection | [connectivity_plus](https://pub.dev/packages/connectivity_plus) |
 | Functional Programming | [dartz](https://pub.dev/packages/dartz) |
+| database | [Isar](https://pub.dev/packages/isar) |
 
   
-## Project Structure  
+## 🩻 Project Structure  
 
 ```
 lib
 |
-|_ src
+|_ 📁src
 	|
-	|__ core
-	|	|__ errors <- define errors and exceptions
-	|	|__ netwrok <- encapsulate networking logic
-	|	|__ router <- generated router & route names
-	|	|__ services <- dependency injection & internet connection
-	|	|__ theme <- define themes & dynamic theming
-	|	|__ utils <- constatns (enums, strings, etc..)
-	|	|__ widgets <- widgets that are used in multiple screens
+	|__ 📁core
+	|	|__ 📁errors <- define errors and exceptions
+	|	|__ 📁network <- encapsulate networking logic
+	|	|__ 📁router <- generated router & route names
+	|	|__ 📁services <- dependency injection & internet connection
+	|	|__ 📁theme <- define themes & dynamic theming
+	|	|__ 📁utils <- constants (enums, strings, etc..)
+	|	|__ 📁widgets <- widgets that are used in multiple screens
 	|
-	|__ features
-		|__ cards
-			|__ controller <- Bloc
-			|__ data <- data retrieval and caching
-			|	|__ models <- business logic
-			|	|__ data_source <- works with db and api
-			|	|__ repository <- combine and map data
-			|__ presentation <- screens and widgets
+	|__ 📁features
+		|
+		|__ 📁cards
+			|__ 📁controller <- Bloc
+			|__ 📁data <- data retrieval and caching
+			|	|__ 📁models <- business logic
+			|	|__ 📁data_source <- works with db and api
+			|	|__ 📁repository <- combine and map data
+			|__ 📁presentation <- screens and widgets
 ```
 
-## Run The App
+## 🏃‍♂️ Install & Run The App
+1. clone the project by running `git clone ` in your preferred directory
+2. Run `flutter pub get`
+3. Get an api key from [Rapid API](https://rapidapi.com/haxednet/api/chatgpt-api8) [1]
+4. Go to `lib/core/network/api_client.dart` and provide your key, (note: if you intend to publish the app make sure to store the key securely, [for more information](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjh3oK02p6AAxW7TaQEHVDhAmwQFnoECA0QAw&url=https%3A%2F%2Fcodewithandrea.com%2Farticles%2Fflutter-api-keys-dart-define-env-files%2F&usg=AOvVaw0UjTuo12ak9YdRK1uZigSe&opi=89978449) )
+5. Run `flutter_run`
 
-1. Run `flutter pub get`
-2. Get an api key from [rapid api](https://rapidapi.com/haxednet/api/chatgpt-api8) [1]
-3. Go to `lib/core/network/api_client.dart` and provide your key, (note: if you intend to publish the app make sure to store the key securely, [for more information](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjh3oK02p6AAxW7TaQEHVDhAmwQFnoECA0QAw&url=https%3A%2F%2Fcodewithandrea.com%2Farticles%2Fflutter-api-keys-dart-define-env-files%2F&usg=AOvVaw0UjTuo12ak9YdRK1uZigSe&opi=89978449) )
-4. Run `flutter_run`
+[1] if you want to use the official chat gpt api or other wrappers, head to `lib/core/network/network_constants.dart` and change the values of `gptBaseUrl`, `gptHeaderHost` 
 
-[1] if you want to use the official chat gpt api or other wrappers, head to `lib/core/network/netwrok_constants.dart` and change the values of `gptBaseUrl`, `gptHeaderHost` 
+## 🛠️ Limitations
+Due to the limitations of chatgpt 3.5 turbo, the API is only able to summarize ~3 pages at a time.
 
-## License
+## 💡 Contribution
+Fell free to add/request features by making a pull request, or by reporting bugs.
+
+## 🗞️ License
 MIT License
 
