@@ -1,5 +1,5 @@
 name: quizwiz
-description: A new Flutter project.
+description: QuizWiz is a flashcard app that utilizes the power of AI to make flashcards from documents.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
@@ -36,6 +36,12 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   isar_generator: ^3.1.0+1
+  flutter_launcher_icons: ^0.13.1
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon.jpeg"
 
 flutter:
 
