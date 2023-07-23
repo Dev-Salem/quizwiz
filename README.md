@@ -60,7 +60,7 @@ lib
 ```
 
 ## 🏃‍♂️ Install & Run The App
-1. clone the project by running `git clone ` in your preferred directory
+1. clone the project by running `git clone https://github.com/Dev-Salem/quizwiz.git` in your preferred directory
 2. Run `flutter pub get`
 3. Get an api key from [Rapid API](https://rapidapi.com/haxednet/api/chatgpt-api8) [1]
 4. Go to `lib/core/network/api_client.dart` and provide your key, (note: if you intend to publish the app make sure to store the key securely, [for more information](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjh3oK02p6AAxW7TaQEHVDhAmwQFnoECA0QAw&url=https%3A%2F%2Fcodewithandrea.com%2Farticles%2Fflutter-api-keys-dart-define-env-files%2F&usg=AOvVaw0UjTuo12ak9YdRK1uZigSe&opi=89978449) )
