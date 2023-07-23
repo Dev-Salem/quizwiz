@@ -50,7 +50,9 @@ Exception _customException(Exception e) {
   if (e is FormatException) {
     return const NetworkException(NetworkConstants.formatExceptionMessage);
   } else if (e is DioException) {
-    return NetworkException(e.message!);
+    return e.type == DioExceptionType.unknown
+        ? const NetworkException(NetworkConstants.invalidNetworkErrorMessage)
+        : NetworkException(e.message!);
   } else if (e.toString().isNotEmpty) {
     return NetworkException(e.toString());
   } else {

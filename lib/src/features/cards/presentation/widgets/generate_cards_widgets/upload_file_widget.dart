@@ -1,9 +1,9 @@
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:pdf_text/pdf_text.dart';
 import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/features/cards/controller/controller.dart';
+import 'package:read_pdf_text/read_pdf_text.dart';
 
 class UploadFileWidget extends StatelessWidget {
   final String collectionUuid;
@@ -41,7 +41,7 @@ class UploadFileWidget extends StatelessWidget {
   }
 
   Future<String> extractText(File file) async {
-    final pdf = await PDFDoc.fromFile(file);
-    return await pdf.text;
+    final text = await ReadPdfText.getPDFtext(file.path);
+    return text;
   }
 }

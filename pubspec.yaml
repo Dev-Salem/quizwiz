@@ -30,7 +30,7 @@ dependencies:
   lottie: ^2.4.0
   mockito: ^5.4.2
   path_provider: ^2.0.15
-  pdf_text: ^0.5.0
+  read_pdf_text: ^0.2.1
   uuid: ^3.0.7
 
 dev_dependencies:

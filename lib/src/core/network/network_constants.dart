@@ -6,6 +6,8 @@ class NetworkConstants {
       "Unexpected Network Exception: Try Connecting To The Internet";
   static const String formatExceptionMessage = "Your input is too long";
   static const String noConnectionErrorMessage = "No Internet connection";
+  static const String invalidNetworkErrorMessage =
+      "Invalid API response, try again";
   static String generateFlashcardsPrompt(String material) {
     return """
 pretend to be an expert in summarizing studying material.

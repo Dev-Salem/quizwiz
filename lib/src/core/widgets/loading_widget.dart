@@ -13,6 +13,9 @@ class LoadingWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const CircularProgressIndicator.adaptive(),
+            const SizedBox(
+              height: 10,
+            ),
             message != null ? Text(message!) : const SizedBox()
           ],
         ),
