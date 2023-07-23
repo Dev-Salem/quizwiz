@@ -1,5 +1,5 @@
 ## Description
-QuizWiz is a flashcard app that utilizes the power of AI to make flashcards from documents
+QuizWiz is a flashcard app that utilizes the power of AI to make flashcards from documents.
 
 ## 📌 Features
 - Create, edit, and combine collections (deck).
@@ -73,7 +73,10 @@ lib
 Due to the limitations of chatgpt 3.5 turbo, the API is only able to summarize ~3 pages at a time.
 
 ## 💡 Contribution
-Fell free to add/request features by making a pull request, or by reporting bugs.
+Feel free to add/request features by making a pull request, or by reporting bugs.
+
+## Roadmap
+[  ] add tests
 
 ## 🗞️ License
 MIT License

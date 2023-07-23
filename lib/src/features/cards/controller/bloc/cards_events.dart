@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/features/cards/data/data.dart';
 
-sealed class CardsEvents extends Equatable {
+class CardsEvents extends Equatable {
   const CardsEvents();
   @override
   List<Object?> get props => [];

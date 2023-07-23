@@ -1,19 +1,26 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/features/cards/presentation/presentation.dart';
 
 import 'features/cards/controller/controller.dart';
 
 class QuizWizApp extends StatelessWidget {
-  const QuizWizApp({super.key});
+  final CardsBloc cardsBloc;
+  final ThemeCubit themeCubit;
+  const QuizWizApp({
+    Key? key,
+    required this.cardsBloc,
+    required this.themeCubit,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (_) => sl<CardsBloc>()..add(const GetCollectionsEvent()),
+          create: (_) => cardsBloc,
         ),
-        BlocProvider(create: (_) => ThemeCubit())
+        BlocProvider(create: (_) => themeCubit)
       ],
       child: Builder(builder: (context) {
         return MaterialApp(
