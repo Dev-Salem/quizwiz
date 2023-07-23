@@ -74,7 +74,7 @@ Due to the limitations of chatgpt 3.5 turbo, the API is only able to summarize ~
 ## 💡 Contribution
 Feel free to add/request features by making a pull request, or by reporting bugs.
 
-## Roadmap
+## 🗺️ Roadmap
 [  ] add tests
 
 ## 🗞️ License
