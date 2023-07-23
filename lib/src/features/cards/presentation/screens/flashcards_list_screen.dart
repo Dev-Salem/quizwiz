@@ -31,6 +31,12 @@ class FlashcardsListScreen extends StatelessWidget {
                 appBar: AppBar(
                   title: Text(collection.name),
                 ),
+                floatingActionButton: FloatingActionButton(
+                  onPressed: () => Navigator.of(context).pushNamed(
+                      Routes.goToCreateFlashcards,
+                      arguments: collectionUuid),
+                  child: const Icon(Icons.add),
+                ),
                 body: collection.cards.isEmpty
                     ? const NoResultScreen(description: AppStrings.noCards)
                     : MasonryGridView.builder(
