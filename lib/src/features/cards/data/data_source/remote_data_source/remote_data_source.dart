@@ -1,4 +1,5 @@
 import 'package:quizwiz/src/core/core.dart';
+import 'package:quizwiz/src/core/utils/network_constants.dart';
 import 'package:quizwiz/src/features/cards/data/data.dart';
 
 abstract class BaseRemoteDataSource {
@@ -17,7 +18,7 @@ class DioRemoteDataSource implements BaseRemoteDataSource {
         rethrow;
       } else {
         throw const JsonDeserializationException(
-            "Invalid API response, Try Again");
+            NetworkConstants.invalidNetworkErrorMessage);
       }
     }
   }

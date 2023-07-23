@@ -42,7 +42,6 @@ lib
 	|
 	|__ 📁core
 	|	|__ 📁errors <- define errors and exceptions
-	|	|__ 📁network <- encapsulate networking logic
 	|	|__ 📁router <- generated router & route names
 	|	|__ 📁services <- dependency injection & internet connection
 	|	|__ 📁theme <- define themes & dynamic theming
