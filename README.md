@@ -66,7 +66,7 @@ lib
 4. Go to `lib/core/network/api_client.dart` and provide your key, (note: if you intend to publish the app make sure to store the key securely, [for more information](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjh3oK02p6AAxW7TaQEHVDhAmwQFnoECA0QAw&url=https%3A%2F%2Fcodewithandrea.com%2Farticles%2Fflutter-api-keys-dart-define-env-files%2F&usg=AOvVaw0UjTuo12ak9YdRK1uZigSe&opi=89978449) )
 5. Run `flutter_run`
 
-[1] if you want to use the official chat gpt api or other wrappers, head to `lib/core/network/network_constants.dart` and change the values of `gptBaseUrl`, `gptHeaderHost` 
+[1] if you want to use the official chat gpt api or other wrappers, head to `lib/core/utils/network_constants.dart` and change the values of `gptBaseUrl`, `gptHeaderHost` 
 
 ## 🛠️ Limitations
 Due to the limitations of chatgpt 3.5 turbo, the API is only able to summarize ~3 pages at a time.
