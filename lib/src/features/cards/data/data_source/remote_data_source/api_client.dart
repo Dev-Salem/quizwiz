@@ -1,9 +1,8 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
-import 'package:quizwiz/src/core/errors/exceptions.dart';
-import 'package:quizwiz/src/core/network/network_constants.dart';
-import 'package:quizwiz/src/core/network/private_key.dart';
-import 'package:quizwiz/src/core/services/internet_connection.dart';
+import 'package:quizwiz/src/core/core.dart';
+import 'package:quizwiz/src/core/utils/network_constants.dart';
+import 'package:quizwiz/src/core/utils/private_key.dart';
 
 class DioClient {
   static Future<List<dynamic>> generateFlashcards(String material,
