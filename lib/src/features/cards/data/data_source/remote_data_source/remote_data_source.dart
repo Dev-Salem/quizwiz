@@ -1,5 +1,4 @@
 import 'package:quizwiz/src/core/core.dart';
-import 'package:quizwiz/src/core/utils/network_constants.dart';
 import 'package:quizwiz/src/features/cards/data/data.dart';
 
 abstract class BaseRemoteDataSource {
