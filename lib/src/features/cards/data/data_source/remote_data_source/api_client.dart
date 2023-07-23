@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:quizwiz/src/core/core.dart';
-import 'package:quizwiz/src/core/utils/network_constants.dart';
 import 'package:quizwiz/src/core/utils/private_key.dart';
 
 class DioClient {
