@@ -2,6 +2,7 @@
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/features/cards/controller/controller.dart';
+import 'package:quizwiz/src/features/cards/data/data.dart';
 import 'package:quizwiz/src/features/cards/presentation/presentation.dart';
 
 class FlashcardsListScreen extends StatelessWidget {
@@ -27,32 +28,40 @@ class FlashcardsListScreen extends StatelessWidget {
                   (element) => element.uuid == collectionUuid,
                 )
                 .single;
-            return Scaffold(
-                appBar: AppBar(
-                  title: Text(collection.name),
-                ),
-                floatingActionButton: FloatingActionButton(
-                  onPressed: () => Navigator.of(context).pushNamed(
-                      Routes.goToCreateFlashcards,
-                      arguments: collectionUuid),
-                  child: const Icon(Icons.add),
-                ),
-                body: collection.cards.isEmpty
-                    ? const NoResultScreen(description: AppStrings.noCards)
-                    : MasonryGridView.builder(
-                        padding: const EdgeInsets.all(15),
-                        gridDelegate:
-                            const SliverSimpleGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                        ),
-                        itemCount: collection.cards.length,
-                        itemBuilder: (context, index) {
-                          return CustomFocusedMenuHolder(
-                              collection: collection,
-                              index: index,
-                              child: FlashcardWidget(
-                                  card: collection.cards[index]));
-                        }));
+            //place recent cards to the top
+            List<Flashcard> flashcards = collection.cards.reversed.toList();
+            return WillPopScope(
+              onWillPop: () async {
+                Navigator.of(context).pushReplacementNamed('/');
+                return true;
+              },
+              child: Scaffold(
+                  appBar: AppBar(
+                    title: Text(collection.name),
+                  ),
+                  floatingActionButton: FloatingActionButton(
+                    onPressed: () => Navigator.of(context).pushNamed(
+                        Routes.goToCreateFlashcards,
+                        arguments: collectionUuid),
+                    child: const Icon(Icons.add),
+                  ),
+                  body: flashcards.isEmpty
+                      ? const NoResultScreen(description: AppStrings.noCards)
+                      : MasonryGridView.builder(
+                          padding: const EdgeInsets.all(15),
+                          gridDelegate:
+                              const SliverSimpleGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                          ),
+                          itemCount: flashcards.length,
+                          itemBuilder: (context, index) {
+                            return CustomFocusedMenuHolder(
+                                collection: collection,
+                                index: index,
+                                child:
+                                    FlashcardWidget(card: flashcards[index]));
+                          })),
+            );
         }
       },
     );
