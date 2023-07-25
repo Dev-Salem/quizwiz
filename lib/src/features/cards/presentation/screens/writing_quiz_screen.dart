@@ -1,7 +1,6 @@
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/material.dart';
 import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/features/cards/data/data.dart';
+import 'package:quizwiz/src/features/cards/presentation/presentation.dart';
 
 class WritingQuizScreen extends StatefulWidget {
   final List<Flashcard> flashcards;
@@ -43,73 +42,52 @@ class _WritingQuizScreenState extends State<WritingQuizScreen> {
             itemBuilder: (context, index) {
               String question = widget.flashcards[index].question;
               String answer = widget.flashcards[index].answer;
-              return ListView(
-                children: [
-                  const SizedBox(
-                    height: 20,
+              return SingleChildScrollView(
+                child: IntrinsicHeight(
+                  child: Column(
+                    children: [
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      DisplayQuestionWidget(question: question, size: size),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      _showAnswer
+                          ? DisplayAnswerWidget(
+                              answer: answer,
+                              size: size,
+                              textBackgroundColor: _changeAnswerColor(
+                                  answer, _textController.text))
+                          : SizedBox(
+                              height: size.maxHeight * 0.2,
+                            ),
+                      const SizedBox(
+                        height: 50,
+                      ),
+                      AnswerFormField(
+                          controller: _textController,
+                          enabled: !_showAnswer,
+                          onSubmit: (value) => _showAnswer = true),
+                      SizedBox(
+                        height: size.maxHeight * 0.2,
+                      ),
+                      _showAnswer
+                          ? Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              child: ElevatedButton.icon(
+                                  onPressed: () => _onPressed(index),
+                                  icon: const Icon(Icons.arrow_forward),
+                                  label: const Text("Next")),
+                            )
+                          : const SizedBox(),
+                      const SizedBox(
+                        height: 20,
+                      )
+                    ],
                   ),
-                  ConstrainedBox(
-                      constraints:
-                          BoxConstraints(maxHeight: size.maxHeight * 0.25),
-                      child: AutoSizeText(
-                        question,
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.displaySmall,
-                      )),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  _showAnswer
-                      ? ConstrainedBox(
-                          constraints:
-                              BoxConstraints(maxHeight: size.maxHeight * 0.2),
-                          child: AutoSizeText(
-                            widget.flashcards[index].answer,
-                            textAlign: TextAlign.center,
-                            style: Theme.of(context)
-                                .textTheme
-                                .displaySmall!
-                                .copyWith(
-                                    backgroundColor: _changeAnswerColor(
-                                        answer, _textController.text)),
-                          ),
-                        )
-                      : const SizedBox(),
-                  const SizedBox(
-                    height: 50,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25),
-                    child: TextFormField(
-                      controller: _textController,
-                      minLines: 1,
-                      maxLines: 3,
-                      enabled: !_showAnswer,
-                      textInputAction: TextInputAction.done,
-                      onFieldSubmitted: (value) {
-                        _showAnswer = true;
-                      },
-                      autofocus: true,
-                      decoration: const InputDecoration(
-                          labelText: "Definition / Answer"),
-                    ),
-                  ),
-                  SizedBox(
-                    height: size.maxHeight * 0.2,
-                  ),
-                  _showAnswer
-                      ? Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: ElevatedButton.icon(
-                              onPressed: () => _onPressed(index),
-                              icon: const Icon(Icons.arrow_forward),
-                              label: const Text("Next")),
-                        )
-                      : const SizedBox(),
-                  const SizedBox(
-                    height: 20,
-                  )
-                ],
+                ),
               );
             });
       }),
@@ -118,7 +96,7 @@ class _WritingQuizScreenState extends State<WritingQuizScreen> {
 
   void _onPressed(int index) {
     ///Navigate to home screen if the user reached the las question,
-    /// other go to the next question
+    /// otherwise go to the next question
     if (_pageController.page == widget.flashcards.length - 1) {
       Navigator.of(context).pushReplacementNamed('/');
     } else {

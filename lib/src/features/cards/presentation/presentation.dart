@@ -21,3 +21,6 @@ export 'package:quizwiz/src/features/cards/presentation/widgets/practice_cards_w
 export 'package:quizwiz/src/features/cards/presentation/widgets/review_result_widgets/review_bar.dart';
 export 'package:quizwiz/src/features/cards/presentation/widgets/generate_cards_widgets/paste_material_widget.dart';
 export 'package:quizwiz/src/features/cards/presentation/widgets/generate_cards_widgets/upload_file_widget.dart';
+export 'package:quizwiz/src/features/cards/presentation/widgets/writing_quiz_widgets/answer_form_field.dart';
+export 'package:quizwiz/src/features/cards/presentation/widgets/writing_quiz_widgets/display_answer_widget.dart';
+export 'package:quizwiz/src/features/cards/presentation/widgets/writing_quiz_widgets/display_question_widget.dart';
