@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/features/cards/controller/controller.dart';
 import 'package:quizwiz/src/features/cards/data/data.dart';
 
@@ -15,5 +16,6 @@ class ServiceLocator {
     sl.registerLazySingleton(() => BaseCardsRepository(sl(), sl(), sl()));
     //bloc
     sl.registerFactory<CardsBloc>(() => CardsBloc(sl(), sl()));
+    sl.registerFactory(() => ThemeCubit());
   }
 }

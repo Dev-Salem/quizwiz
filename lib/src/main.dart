@@ -9,7 +9,7 @@ Future<void> main() async {
   await _initialize();
   runApp(QuizWizApp(
     cardsBloc: sl<CardsBloc>()..add(const GetCollectionsEvent()),
-    themeCubit: ThemeCubit(),
+    themeCubit: sl(),
   ));
 }
 
