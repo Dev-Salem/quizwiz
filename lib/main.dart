@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:quizwiz/src/app_entry.dart';
+import 'package:quizwiz/src/app.dart';
 import 'package:quizwiz/src/core/core.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:quizwiz/src/features/cards/controller/controller.dart';
-import 'features/cards/data/data.dart';
+import 'src/features/cards/data/data.dart';
 
 Future<void> main() async {
   await _initialize();
