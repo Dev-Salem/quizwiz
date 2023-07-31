@@ -4,30 +4,10 @@ import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/core/utils/private_key.dart';
 
 class DioClient {
-  static Future<List<dynamic>> generateFlashcards(String material,
-      {int maxTokens = 200}) async {
-    const timeout = Duration(minutes: 2);
-    final isConnected = await InternetConnectivity.isConnected();
-    if (!isConnected) {
-      throw const NetworkException(NetworkConstants.noConnectionErrorMessage);
-    }
-
-    final dio = Dio();
-    dio.options.validateStatus = (int? status) {
-      return status != null && status > 0;
-    };
-    dio.options
-      ..baseUrl = NetworkConstants.gptBaseUrl
-      ..sendTimeout = timeout
-      ..connectTimeout = timeout
-      ..receiveTimeout = timeout
-      ..headers = {
-        'content-type': NetworkConstants.contentType,
-        //TODO: Get An API Key
-        'X-RapidAPI-Key': gptApiKey,
-        'X-RapidAPI-Host': NetworkConstants.gptHeaderHost
-      };
-
+  static Future<List<dynamic>> generateFlashcards(String material) async {
+    _checkInternetConnection();
+    final dio = _createDioInstance(
+        NetworkConstants.gptBaseUrl, const Duration(minutes: 2));
     try {
       final response = await dio.post('/', data: [
         {
@@ -56,5 +36,31 @@ Exception _customException(Exception e) {
   } else {
     return const UnexpectedNetworkException(
         NetworkConstants.unexpectedErrorMessage);
+  }
+}
+
+Dio _createDioInstance(final String url, final Duration timeout) {
+  final dio = Dio();
+  dio.options.validateStatus = (int? status) {
+    return status != null && status > 0;
+  };
+  dio.options
+    ..baseUrl = url
+    ..sendTimeout = timeout
+    ..connectTimeout = timeout
+    ..receiveTimeout = timeout
+    ..headers = {
+      'content-type': NetworkConstants.contentType,
+      //TODO: Get An API Key
+      'X-RapidAPI-Key': gptApiKey,
+      'X-RapidAPI-Host': NetworkConstants.gptHeaderHost
+    };
+  return dio;
+}
+
+Future<void> _checkInternetConnection() async {
+  final isConnected = await InternetConnectivity.isConnected();
+  if (!isConnected) {
+    throw const NetworkException(NetworkConstants.noConnectionErrorMessage);
   }
 }
