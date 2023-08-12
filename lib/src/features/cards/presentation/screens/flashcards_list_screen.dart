@@ -28,7 +28,7 @@ class FlashcardsListScreen extends StatelessWidget {
                   (element) => element.uuid == collectionUuid,
                 )
                 .single;
-            //place recent cards to the top
+            //place recent cards at the top
             List<Flashcard> flashcards = collection.cards.reversed.toList();
             return WillPopScope(
               onWillPop: () async {

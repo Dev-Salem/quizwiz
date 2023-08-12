@@ -17,6 +17,7 @@ class CustomForms extends StatelessWidget {
       child: Column(
         children: [
           TextFormField(
+            key: const Key("front"),
             controller: frontController,
             maxLines: 2,
             minLines: 1,
@@ -30,6 +31,7 @@ class CustomForms extends StatelessWidget {
             height: 30,
           ),
           TextFormField(
+            key: const Key("back"),
             maxLines: 4,
             minLines: 1,
             controller: backController,

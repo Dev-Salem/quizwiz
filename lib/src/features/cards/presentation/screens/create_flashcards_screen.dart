@@ -60,6 +60,7 @@ class _CreateFlashcardsScreenState extends State<CreateFlashcardsScreen> {
                         frontController: frontController,
                         backController: backController),
                     TextButton.icon(
+                        key: const Key(AppStrings.generateWithAI),
                         onPressed: () {
                           Navigator.of(context).pushReplacementNamed(
                               Routes.goToGenerateFlashcards,
@@ -69,6 +70,7 @@ class _CreateFlashcardsScreenState extends State<CreateFlashcardsScreen> {
                         label: const Text(AppStrings.generateWithAI)),
                     SizedBox(height: size.maxHeight * 0.2),
                     FilledButton(
+                        key: const Key(AppStrings.addCard),
                         onPressed: () {
                           if (_addFlashcard()) {
                             Navigator.of(context).pushReplacementNamed(
@@ -81,6 +83,7 @@ class _CreateFlashcardsScreenState extends State<CreateFlashcardsScreen> {
                       height: 20,
                     ),
                     FilledButton(
+                        key: const Key(AppStrings.addAnotherCard),
                         onPressed: () {
                           if (_addFlashcard()) {
                             Navigator.of(context).pushReplacementNamed(
