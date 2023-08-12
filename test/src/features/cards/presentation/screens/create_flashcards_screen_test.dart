@@ -1,8 +1,8 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
 import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/features/cards/controller/controller.dart';
+import 'package:quizwiz/src/features/cards/data/data.dart';
 import 'package:quizwiz/src/features/cards/presentation/presentation.dart';
 
 class CardsBlocMock extends MockBloc<CardsEvents, CardsState>
@@ -10,14 +10,14 @@ class CardsBlocMock extends MockBloc<CardsEvents, CardsState>
 
 void main() {
   late Widget createFlashcardsScreen;
-  late CardsBlocMock blocMock;
+  late CardsBloc blocMock;
   setUp(() {
     blocMock = CardsBlocMock();
-    createFlashcardsScreen = MaterialApp(
-      onGenerateRoute: ((settings) => RouteGenerator.generateRoute(settings)),
-      home: BlocProvider<CardsBloc>.value(
-        value: blocMock,
-        child: const CreateFlashcardsScreen(collectionUuid: ""),
+    createFlashcardsScreen = BlocProvider.value(
+      value: blocMock,
+      child: MaterialApp(
+        onGenerateRoute: ((settings) => RouteGenerator.generateRoute(settings)),
+        home: const CreateFlashcardsScreen(collectionUuid: ""),
       ),
     );
   });
@@ -32,7 +32,7 @@ void main() {
       expect(find.byType(ListView), findsWidgets);
     });
     testWidgets(
-        "When [GenerateWithAI] button is clicked, navigate to [GenerateCardsScreen] ",
+        "When GenerateWithAI button is clicked, expect to navigate to [GenerateCardsScreen] ",
         (tester) async {
       await tester.pumpWidget(createFlashcardsScreen);
       final generateButton = find.byKey(const Key(AppStrings.generateWithAI));
@@ -41,32 +41,65 @@ void main() {
       expect(find.byType(GenerateCardsScreen), findsOneWidget);
     });
 
-    // testWidgets(
-    //     "When [AddCard] button is clicked, navigate to [FlashcardListScreen] ",
-    //     (tester) async {
-    //   whenListen(
-    //       blocMock,
-    //       Stream.value(const CardsState(
-    //         collectionsRequestState: RequestState.success,
-    //       )),
-    //       initialState: const CardsState());
-    //   await tester.pumpWidget(createFlashcardsScreen);
-    //   var addCardButton = find.byKey(const Key(AppStrings.addCard));
-    //   expect(addCardButton, findsOneWidget);
-    //   await tester.enterText(find.byKey(const Key("front")), "text 1");
-    //   await tester.enterText(find.byKey(const Key("back")), "text 2");
-    //   await tester.tap(addCardButton);
-    //   await tester.pumpAndSettle();
-    //   await expectLater(find.byType(FlashcardsListScreen), findsOneWidget);
-    // });
+    testWidgets('''When entering texts into [TextFormField],
+         expect non-null values in [TextEditingController] and true value from the validator''',
+        (tester) async {
+      await tester.pumpWidget(createFlashcardsScreen);
+      var frontTextFormField = find.byKey(const Key("front"));
+      var backTextFormField = find.byKey(const Key("back"));
+      await tester.enterText(frontTextFormField, "Question");
+      await tester.enterText(backTextFormField, "Answer");
+      var customFormsFinder =
+          tester.widget<CustomForms>(find.byType(CustomForms));
+      expect(customFormsFinder.frontController.text, "Question");
+      expect(customFormsFinder.backController.text, "Answer");
+      expect(customFormsFinder.formKey.currentState?.validate(), true);
+    });
 
-    // testWidgets(
-    //     "When [AddCard] button is clicked, navigate to [GenerateCardsScreen] ",
-    //     (tester) async {
-    //   await tester.pumpWidget(createFlashcardsScreen);
-    //   final generateButton = find.byKey(const Key(AppStrings.generateWithAI));
-    //   await tester.tap(generateButton);
-    //   await tester.pumpAndSettle();
-    // });
+    testWidgets('''When leaving [TextFormField] empty,
+         expect false from the validator''', (tester) async {
+      await tester.pumpWidget(createFlashcardsScreen);
+      var customFormsFinder =
+          tester.widget<CustomForms>(find.byType(CustomForms));
+      expect(customFormsFinder.formKey.currentState?.validate(), false);
+    });
+
+    testWidgets(
+        "When AddCard button is clicked and the validation is true, expect to navigate to [FlashcardListScreen] ",
+        (tester) async {
+      await tester.pumpWidget(createFlashcardsScreen);
+      var frontTextFormField = find.byKey(const Key("front"));
+      var backTextFormField = find.byKey(const Key("back"));
+      await tester.enterText(frontTextFormField, "Question");
+      await tester.enterText(backTextFormField, "Answer");
+      await tester.tap(find.byKey(const Key(AppStrings.addCard)));
+      whenListen(
+          blocMock,
+          Stream.value(CardsState(
+              collectionsRequestState: RequestState.success,
+              collections: [FlashcardCollection(name: "", uuid: "")])),
+          initialState: const CardsState());
+      await tester.pumpAndSettle();
+      expect(find.byType(FlashcardsListScreen), findsOneWidget);
+    });
+
+    testWidgets(
+        "When AddAnotherCard button is clicked and the validation is true, expect to push [CreateFlashcardScreen] ",
+        (tester) async {
+      await tester.pumpWidget(createFlashcardsScreen);
+      var frontTextFormField = find.byKey(const Key("front"));
+      var backTextFormField = find.byKey(const Key("back"));
+      await tester.enterText(frontTextFormField, "Question");
+      await tester.enterText(backTextFormField, "Answer");
+      await tester.tap(find.byKey(const Key(AppStrings.addAnotherCard)));
+      whenListen(
+          blocMock,
+          Stream.value(CardsState(
+              collectionsRequestState: RequestState.success,
+              collections: [FlashcardCollection(name: "", uuid: "")])),
+          initialState: const CardsState());
+      await tester.pumpAndSettle();
+      expect(find.byType(CreateFlashcardsScreen), findsOneWidget);
+    });
   });
 }
