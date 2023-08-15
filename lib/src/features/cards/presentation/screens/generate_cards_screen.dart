@@ -37,6 +37,7 @@ class _GenerateCardsScreenState extends State<GenerateCardsScreen> {
                 children: [
                   Expanded(
                     child: RadioListTile.adaptive(
+                        key: const Key('text'),
                         title: const Text("Plain Text"),
                         value: "text",
                         groupValue: index,
@@ -48,6 +49,7 @@ class _GenerateCardsScreenState extends State<GenerateCardsScreen> {
                   ),
                   Expanded(
                     child: RadioListTile.adaptive(
+                        key: const Key('pdf'),
                         title: const Text("Upload PDF"),
                         value: "pdf",
                         groupValue: index,
