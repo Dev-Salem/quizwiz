@@ -93,7 +93,7 @@ void main() {
     });
 
     testWidgets(
-        "When tapping a [FloatingActionButton] and filling out [TextFormField] then tap create, expect a new collection to appear",
+        "When tapping a [FloatingActionButton] and filling out [TextFormField] then tapping create, expect a new collection to appear",
         (tester) async {
       //first: render the page with [NoResultScreen] (No collections at all)
       whenListen(
