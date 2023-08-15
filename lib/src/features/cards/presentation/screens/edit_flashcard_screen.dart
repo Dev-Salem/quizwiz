@@ -58,6 +58,7 @@ class _EditFlashcardScreenState extends State<EditFlashcardScreen> {
                         formKey: key),
                     SizedBox(height: size.maxHeight * 0.2),
                     FilledButton(
+                        key: const Key(AppStrings.editFlashcard),
                         onPressed: () {
                           if (_editFlashcard()) {
                             Navigator.of(context).pushReplacementNamed(
