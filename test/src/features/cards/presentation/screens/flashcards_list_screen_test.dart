@@ -25,7 +25,8 @@ void main() {
   tearDown(() {
     mockBloc.close();
   });
-  group("Test flash_cards_screen when it's loading, loaded and has error", () {
+  group("Test flash_cards_screen when it's loading, loaded and has error - ",
+      () {
     testWidgets(
         "when [collectionsRequestState] is loading, expect [LoadingWidget]",
         (tester) async {

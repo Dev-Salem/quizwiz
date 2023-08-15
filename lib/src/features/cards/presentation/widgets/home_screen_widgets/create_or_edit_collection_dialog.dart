@@ -23,6 +23,7 @@ class CreateOrEditCollectionDialog extends StatelessWidget {
       actionsAlignment: MainAxisAlignment.spaceBetween,
       actions: [
         TextButton(
+            key: const Key(AppStrings.cancel),
             onPressed: () => Navigator.of(context).pop(),
             child: const Text(
               AppStrings.cancel,
@@ -36,6 +37,7 @@ class CreateOrEditCollectionDialog extends StatelessWidget {
           child: Column(
             children: [
               TextFormField(
+                key: const Key(AppStrings.nameTextFieldLabel),
                 controller: nameController,
                 maxLength: 30,
                 decoration: const InputDecoration(
@@ -46,6 +48,7 @@ class CreateOrEditCollectionDialog extends StatelessWidget {
                 height: 20,
               ),
               TextFormField(
+                key: const Key(AppStrings.descriptionTextFieldLabel),
                 controller: descriptionController,
                 maxLength: 70,
                 decoration: const InputDecoration(
