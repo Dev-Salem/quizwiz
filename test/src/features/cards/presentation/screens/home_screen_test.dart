@@ -18,7 +18,8 @@ void main() {
       child: const MaterialApp(home: HomeScreen()),
     );
   });
-  group("Test home_screen page when it's loading, loaded and has error - ", () {
+  group("Test home_screen page when it's loading, loaded and has an error - ",
+      () {
     testWidgets(
         "when [collectionsRequestState] is loading, expect LoadingWidget",
         (tester) async {
