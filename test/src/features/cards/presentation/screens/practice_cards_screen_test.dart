@@ -1,9 +1,4 @@
-import 'package:bloc_test/bloc_test.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:quizwiz/src/core/core.dart';
-import 'package:quizwiz/src/features/cards/controller/controller.dart';
-import 'package:quizwiz/src/features/cards/data/data.dart';
-import 'package:quizwiz/src/features/cards/presentation/presentation.dart';
+import '../../../../tests_imports.dart';
 
 class CardsBlocMock extends MockBloc<CardsEvents, CardsState>
     implements CardsBloc {}
