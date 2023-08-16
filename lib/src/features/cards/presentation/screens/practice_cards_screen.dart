@@ -19,27 +19,38 @@ class PracticeCardsScreen extends StatelessWidget {
           ),
           body: BlocBuilder<CardsBloc, CardsState>(
             builder: (context, state) {
-              return state.flashcards.isEmpty
-                  ? NoFlashcardsToReview(
-                      collection: collection,
-                    )
-                  : PageView.builder(
-                      itemCount: state.flashcards.length,
-                      itemBuilder: (context, index) => InkWell(
-                            onTap: () => Navigator.of(context)
-                                .pushNamed(Routes.goToReviewResult, arguments: (
-                              state.flashcards[index],
-                              collection
-                            )),
-                            child: Center(
-                              child: Text(
-                                state.flashcards[index].question,
-                                textAlign: TextAlign.center,
-                                style:
-                                    Theme.of(context).textTheme.displayMedium,
-                              ),
-                            ),
-                          ));
+              switch (state.flashcardRequestState) {
+                case RequestState.loading:
+                  return const LoadingWidget();
+                case RequestState.error:
+                  return CustomErrorWidget(
+                    errorMessage: state.flashcardErrorMessage,
+                  );
+                case RequestState.success:
+                  return state.flashcards.isEmpty
+                      ? NoFlashcardsToReview(
+                          collection: collection,
+                        )
+                      : PageView.builder(
+                          itemCount: state.flashcards.length,
+                          itemBuilder: (context, index) => InkWell(
+                                onTap: () => Navigator.of(context).pushNamed(
+                                    Routes.goToReviewResult,
+                                    arguments: (
+                                      state.flashcards[index],
+                                      collection
+                                    )),
+                                child: Center(
+                                  child: Text(
+                                    state.flashcards[index].question,
+                                    textAlign: TextAlign.center,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .displayMedium,
+                                  ),
+                                ),
+                              ));
+              }
             },
           )),
     );
