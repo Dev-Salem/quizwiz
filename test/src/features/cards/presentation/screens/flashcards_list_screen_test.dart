@@ -69,20 +69,15 @@ void main() {
       expect(find.byType(NoResultScreen), findsOneWidget);
       expect(find.byType(FloatingActionButton), findsOneWidget);
     });
-    //TODO: Fix this
     testWidgets(
         "when [collectionsRequestState] has error, expect [CustomErrorWidget]",
         (tester) async {
-      whenListen(
-          mockBloc,
-          Stream.value(const CardsState(
+      whenListen(mockBloc, const Stream<CardsState>.empty(),
+          initialState: const CardsState(
               collectionsRequestState: RequestState.error,
-              collectionsErrorMessage: "Some Error")),
-          initialState: const CardsState());
+              collectionsErrorMessage: "Some Error"));
       await tester.pumpWidget(flashcardWidget);
-      expect(find.byType(LoadingWidget), findsOneWidget);
-      await tester.pump();
-      //expect(find.byType(LoadingWidget), findsOneWidget);
+      expect(find.byType(CustomErrorWidget), findsOneWidget);
     });
   });
 }
