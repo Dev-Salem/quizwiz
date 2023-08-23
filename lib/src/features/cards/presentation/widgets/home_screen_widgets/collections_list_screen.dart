@@ -22,7 +22,7 @@ class CollectionsListScreen extends StatelessWidget {
               ),
           child: FocusedMenuHolder(
             onPressed: () {
-              Navigator.of(context).pushNamed(Routes.goToFlashcardsList,
+              Navigator.of(context).pushNamed(Routes.flashcardsList,
                   arguments: collections[index].uuid);
             },
             menuItems: [

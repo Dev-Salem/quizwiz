@@ -42,13 +42,13 @@ class CollectionCardWidget extends StatelessWidget {
                             .read<CardsBloc>()
                             .add(GetDueReviewsEvent(collection: collection));
                         Navigator.of(context).pushReplacementNamed(
-                            Routes.goToPracticeCards,
+                            Routes.practiceCards,
                             arguments: collection);
                       },
                       child: const Text(AppStrings.review)),
                   FilledButton(
                       onPressed: () => Navigator.of(context).pushNamed(
-                          Routes.goToCreateFlashcards,
+                          Routes.createFlashcards,
                           arguments: collection.uuid),
                       child: const Text(AppStrings.addCard))
                 ],

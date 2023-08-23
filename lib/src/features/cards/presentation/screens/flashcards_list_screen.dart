@@ -41,7 +41,7 @@ class FlashcardsListScreen extends StatelessWidget {
                   ),
                   floatingActionButton: FloatingActionButton(
                     onPressed: () => Navigator.of(context).pushNamed(
-                        Routes.goToCreateFlashcards,
+                        Routes.createFlashcards,
                         arguments: collectionUuid),
                     child: const Icon(Icons.add),
                   ),

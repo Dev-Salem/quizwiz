@@ -31,7 +31,7 @@ class ChooseQuizDialog extends StatelessWidget {
                     context.read<CardsBloc>().add(
                         GetMultipleQuizOptionsEvent(collection: collection));
                     Navigator.of(context).pushNamed(
-                      Routes.goToQuiz,
+                      Routes.quiz,
                     );
                   }
                 }),
@@ -41,8 +41,8 @@ class ChooseQuizDialog extends StatelessWidget {
                 onPressed: () {
                   var shuffledCards = [...collection.cards];
                   shuffledCards.shuffle();
-                  Navigator.of(context).pushNamed(Routes.goToWritingQuiz,
-                      arguments: shuffledCards);
+                  Navigator.of(context)
+                      .pushNamed(Routes.writingQuiz, arguments: shuffledCards);
                 }),
           ],
         )

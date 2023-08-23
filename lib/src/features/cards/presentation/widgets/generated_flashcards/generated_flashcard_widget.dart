@@ -19,7 +19,7 @@ class GeneratedFlashcardWidget extends StatelessWidget {
               key: key,
               onPressed: () {
                 Navigator.of(context).pushReplacementNamed(
-                    Routes.goToFlashcardsList,
+                    Routes.flashcardsList,
                     arguments: collectionUuid);
               },
               child: const Text(AppStrings.done))
@@ -29,8 +29,7 @@ class GeneratedFlashcardWidget extends StatelessWidget {
           onPressed: () {
             context.read<CardsBloc>().add(SaveAllGenerateFlashcardsEvent(
                 flashcards: flashcards, collectionUuid: collectionUuid));
-            Navigator.of(context).pushReplacementNamed(
-                Routes.goToFlashcardsList,
+            Navigator.of(context).pushReplacementNamed(Routes.flashcardsList,
                 arguments: collectionUuid);
           },
           icon: const Icon(Icons.add),

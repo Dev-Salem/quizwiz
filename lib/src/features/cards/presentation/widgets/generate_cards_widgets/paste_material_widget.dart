@@ -39,7 +39,7 @@ class PastMaterialWidget extends StatelessWidget {
                     .read<CardsBloc>()
                     .add(GenerateFlashcardsEvent(material: controller.text));
                 Navigator.of(context).pushReplacementNamed(
-                    Routes.goToGeneratedFlashcards,
+                    Routes.generatedFlashcards,
                     arguments: collectionUuid);
               }
             },

@@ -63,7 +63,7 @@ class _CreateFlashcardsScreenState extends State<CreateFlashcardsScreen> {
                         key: const Key(AppStrings.generateWithAI),
                         onPressed: () {
                           Navigator.of(context).pushReplacementNamed(
-                              Routes.goToGenerateFlashcards,
+                              Routes.generateFlashcards,
                               arguments: widget.collectionUuid);
                         },
                         icon: const Icon(Icons.rocket),
@@ -74,7 +74,7 @@ class _CreateFlashcardsScreenState extends State<CreateFlashcardsScreen> {
                         onPressed: () {
                           if (_addFlashcard()) {
                             Navigator.of(context).pushReplacementNamed(
-                                Routes.goToFlashcardsList,
+                                Routes.flashcardsList,
                                 arguments: widget.collectionUuid);
                           }
                         },
@@ -87,7 +87,7 @@ class _CreateFlashcardsScreenState extends State<CreateFlashcardsScreen> {
                         onPressed: () {
                           if (_addFlashcard()) {
                             Navigator.of(context).pushReplacementNamed(
-                                Routes.goToCreateFlashcards,
+                                Routes.createFlashcards,
                                 arguments: widget.collectionUuid);
                           }
                         },

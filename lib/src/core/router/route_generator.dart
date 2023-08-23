@@ -9,26 +9,26 @@ class RouteGenerator {
     switch (settings.name) {
       case '/':
         return MaterialPageRoute(builder: (context) => const HomeScreen());
-      case Routes.goToCreateFlashcards:
+      case Routes.createFlashcards:
         var uuid = settings.arguments as String;
         return MaterialPageRoute(
             builder: (context) => CreateFlashcardsScreen(
                   collectionUuid: uuid,
                 ));
-      case Routes.goToFlashcardsList:
+      case Routes.flashcardsList:
         var collectionUuid = settings.arguments as String;
         return MaterialPageRoute(
           builder: (context) =>
               FlashcardsListScreen(collectionUuid: collectionUuid),
         );
-      case Routes.goToPracticeCards:
+      case Routes.practiceCards:
         var collection = settings.arguments as FlashcardCollection;
         return MaterialPageRoute(
           builder: (context) => PracticeCardsScreen(
             collection: collection,
           ),
         );
-      case Routes.goToReviewResult:
+      case Routes.reviewResult:
         var cardAndCollection = settings.arguments as (
           Flashcard card,
           FlashcardCollection collection
@@ -38,27 +38,27 @@ class RouteGenerator {
             cardAndCollection: cardAndCollection,
           ),
         );
-      case Routes.goToEditFlashcard:
+      case Routes.editFlashcard:
         var parameters = settings.arguments as EditFlashcardParameters;
         return MaterialPageRoute(
             builder: (context) => EditFlashcardScreen(
                   parameters: parameters,
                 ));
-      case Routes.goToGenerateFlashcards:
+      case Routes.generateFlashcards:
         var collectionUuid = settings.arguments as String;
         return MaterialPageRoute(
             builder: (context) => GenerateCardsScreen(
                   collectionUuid: collectionUuid,
                 ));
-      case Routes.goToQuiz:
+      case Routes.quiz:
         return MaterialPageRoute(
             builder: (context) => const MultipleChoiceQuizScreen());
-      case Routes.goToGeneratedFlashcards:
+      case Routes.generatedFlashcards:
         var collectionUuid = settings.arguments as String;
         return MaterialPageRoute(
             builder: (context) =>
                 GeneratedFlashcardsScreen(collectionUuid: collectionUuid));
-      case Routes.goToWritingQuiz:
+      case Routes.writingQuiz:
         var flashcards = settings.arguments as List<Flashcard>;
         return MaterialPageRoute(
           builder: (context) => WritingQuizScreen(flashcards: flashcards),

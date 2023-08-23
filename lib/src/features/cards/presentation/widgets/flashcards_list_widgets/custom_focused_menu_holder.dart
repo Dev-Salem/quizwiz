@@ -37,8 +37,7 @@ class CustomFocusedMenuHolder extends StatelessWidget {
               backgroundColor: Theme.of(context).cardColor,
               title: const Text(AppStrings.edit),
               onPressed: () {
-                Navigator.of(context).pushReplacementNamed(
-                    Routes.goToEditFlashcard,
+                Navigator.of(context).pushReplacementNamed(Routes.editFlashcard,
                     arguments: EditFlashcardParameters(
                         question: collection.cards[index].question,
                         answer: collection.cards[index].answer,

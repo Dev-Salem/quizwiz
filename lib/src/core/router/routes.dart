@@ -1,11 +1,11 @@
 class Routes {
-  static const goToCreateFlashcards = '/create_flashcards';
-  static const goToFlashcardsList = '/flashcards_list';
-  static const goToPracticeCards = '/practice_flashcards';
-  static const goToReviewResult = '/review_result';
-  static const goToEditFlashcard = '/edit_flashcard';
-  static const goToGenerateFlashcards = '/generate_flashcards';
-  static const goToQuiz = '/multiple_choice_quiz';
-  static const goToGeneratedFlashcards = '/generated_flashcards';
-  static const goToWritingQuiz = '/writing_quiz';
+  static const createFlashcards = '/create_flashcards';
+  static const flashcardsList = '/flashcards_list';
+  static const practiceCards = '/practice_flashcards';
+  static const reviewResult = '/review_result';
+  static const editFlashcard = '/edit_flashcard';
+  static const generateFlashcards = '/generate_flashcards';
+  static const quiz = '/multiple_choice_quiz';
+  static const generatedFlashcards = '/generated_flashcards';
+  static const writingQuiz = '/writing_quiz';
 }

@@ -64,7 +64,7 @@ class _EditFlashcardScreenState extends State<EditFlashcardScreen> {
                         onPressed: () {
                           if (_editFlashcard()) {
                             Navigator.of(context).pushReplacementNamed(
-                                Routes.goToFlashcardsList,
+                                Routes.flashcardsList,
                                 arguments: widget.parameters.collection.uuid);
                           }
                         },
