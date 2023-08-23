@@ -22,7 +22,7 @@ void main() {
         home: EditFlashcardScreen(
             parameters: EditFlashcardParameters(
                 question: "question",
-                back: "back",
+                answer: "answer",
                 collection: collection,
                 flashcard: initialFlashcard)),
       ),
@@ -43,13 +43,13 @@ void main() {
         (tester) async {
       await tester.pumpWidget(createFlashcardsScreen);
       var questionTextFormField = find.byKey(const Key("question"));
-      var backTextFormField = find.byKey(const Key("back"));
+      var answerTextFormField = find.byKey(const Key("answer"));
       await tester.enterText(questionTextFormField, "Question");
-      await tester.enterText(backTextFormField, "Answer");
+      await tester.enterText(answerTextFormField, "Answer");
       var customFormsFinder =
           tester.widget<CustomForms>(find.byType(CustomForms));
       expect(customFormsFinder.questionController.text, "Question");
-      expect(customFormsFinder.backController.text, "Answer");
+      expect(customFormsFinder.answerController.text, "Answer");
       expect(customFormsFinder.formKey.currentState?.validate(), true);
     });
 
@@ -66,9 +66,9 @@ void main() {
         (tester) async {
       await tester.pumpWidget(createFlashcardsScreen);
       var questionTextFormField = find.byKey(const Key("question"));
-      var backTextFormField = find.byKey(const Key("back"));
+      var answerTextFormField = find.byKey(const Key("answer"));
       await tester.enterText(questionTextFormField, "Edited");
-      await tester.enterText(backTextFormField, "Edited");
+      await tester.enterText(answerTextFormField, "Edited");
       whenListen(
           blocMock,
           Stream.value(CardsState(

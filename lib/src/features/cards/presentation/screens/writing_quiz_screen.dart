@@ -57,7 +57,7 @@ class _WritingQuizScreenState extends State<WritingQuizScreen> {
                           ? DisplayAnswerWidget(
                               answer: answer,
                               size: size,
-                              textBackgroundColor: _changeAnswerColor(
+                              textbackgroundColor: _changeAnswerColor(
                                   answer, _textController.text))
                           : SizedBox(
                               height: size.maxHeight * 0.2,

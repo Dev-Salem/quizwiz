@@ -75,7 +75,7 @@ class CardsBloc extends Bloc<CardsEvents, CardsState> {
   _addFlashcards(AddFlashcardsEvent event, Emitter<CardsState> emit) async {
     emit(state.copyWith(collectionsRequestState: RequestState.loading));
     final result = await _baseCardsRepository.addFlashcard(
-        event.question, event.back, event.collectionUuid);
+        event.question, event.answer, event.collectionUuid);
     result.fold(
         (l) => emit(state.copyWith(
             collectionsErrorMessage: l.message,

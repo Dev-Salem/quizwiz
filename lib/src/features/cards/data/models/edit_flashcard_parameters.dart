@@ -3,25 +3,25 @@ import 'package:quizwiz/src/features/cards/data/data.dart';
 
 class EditFlashcardParameters {
   final String question;
-  final String back;
+  final String answer;
   final FlashcardCollection collection;
   final Flashcard flashcard;
   const EditFlashcardParameters({
     required this.question,
-    required this.back,
+    required this.answer,
     required this.collection,
     required this.flashcard,
   });
 
   EditFlashcardParameters copyWith({
     String? question,
-    String? back,
+    String? answer,
     FlashcardCollection? collection,
     Flashcard? flashcard,
   }) {
     return EditFlashcardParameters(
       question: question ?? this.question,
-      back: back ?? this.back,
+      answer: answer ?? this.answer,
       collection: collection ?? this.collection,
       flashcard: flashcard ?? this.flashcard,
     );

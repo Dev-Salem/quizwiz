@@ -93,7 +93,7 @@ void main() {
 
     testWidgets(
         '''When [quizRequestState] is success and tapping the right option,
-         expect to highlight the right answer with green background color''',
+         expect to highlight the right answer with green answerground color''',
         (tester) async {
       whenListen(mockBloc, const Stream<CardsState>.empty(),
           initialState: CardsState(
@@ -119,7 +119,7 @@ void main() {
 
     testWidgets(
         '''When [quizRequestState] is success and tapping any other option,
-         expect to highlight the right answer with green background color''',
+         expect to highlight the right answer with green answerground color''',
         (tester) async {
       whenListen(mockBloc, const Stream<CardsState>.empty(),
           initialState: CardsState(

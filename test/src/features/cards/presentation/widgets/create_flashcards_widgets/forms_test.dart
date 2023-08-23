@@ -6,7 +6,7 @@ void main() {
         home: Scaffold(
           body: CustomForms(
               questionController: TextEditingController(),
-              backController: TextEditingController(),
+              answerController: TextEditingController(),
               formKey: GlobalKey()),
         ),
       ));
@@ -25,13 +25,13 @@ void main() {
       await tester.pumpWidget(customForms);
       await tester.enterText(
           find.byKey(const Key('question')), "question text");
-      await tester.enterText(find.byKey(const Key("back")), "back text");
+      await tester.enterText(find.byKey(const Key("answer")), "answer text");
       final questionController =
           tester.widget<TextFormField>(find.byKey(const Key("question")));
-      final backController =
-          tester.widget<TextFormField>(find.byKey(const Key("back")));
+      final answerController =
+          tester.widget<TextFormField>(find.byKey(const Key("answer")));
       expect(questionController.controller?.text, "question text");
-      expect(backController.controller?.text, "back text");
+      expect(answerController.controller?.text, "answer text");
     });
   });
 }

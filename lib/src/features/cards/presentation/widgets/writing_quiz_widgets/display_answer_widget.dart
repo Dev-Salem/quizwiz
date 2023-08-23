@@ -5,12 +5,12 @@ import 'package:flutter/material.dart';
 class DisplayAnswerWidget extends StatelessWidget {
   final String answer;
   final BoxConstraints size;
-  final Color textBackgroundColor;
+  final Color textbackgroundColor;
   const DisplayAnswerWidget({
     Key? key,
     required this.answer,
     required this.size,
-    required this.textBackgroundColor,
+    required this.textbackgroundColor,
   }) : super(key: key);
 
   @override
@@ -23,7 +23,7 @@ class DisplayAnswerWidget extends StatelessWidget {
         style: Theme.of(context)
             .textTheme
             .displaySmall!
-            .copyWith(backgroundColor: textBackgroundColor),
+            .copyWith(backgroundColor: textbackgroundColor),
       ),
     );
   }

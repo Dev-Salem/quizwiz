@@ -32,7 +32,7 @@ class NoFlashcardsToReview extends StatelessWidget {
                     onPressed: () {
                       Navigator.of(context).pushReplacementNamed('/');
                     },
-                    child: const Text(AppStrings.goBack)),
+                    child: const Text(AppStrings.goanswer)),
                 const Expanded(child: SizedBox()),
                 FilledButton.icon(
                     onPressed: () => showDialog(

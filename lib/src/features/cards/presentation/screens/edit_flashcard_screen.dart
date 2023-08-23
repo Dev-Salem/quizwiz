@@ -13,20 +13,20 @@ class EditFlashcardScreen extends StatefulWidget {
 
 class _EditFlashcardScreenState extends State<EditFlashcardScreen> {
   late final TextEditingController questionController;
-  late final TextEditingController backController;
+  late final TextEditingController answerController;
   final key = GlobalKey<FormState>();
   @override
   void initState() {
     super.initState();
     questionController =
         TextEditingController(text: widget.parameters.question);
-    backController = TextEditingController(text: widget.parameters.back);
+    answerController = TextEditingController(text: widget.parameters.answer);
   }
 
   @override
   void dispose() {
     questionController.dispose();
-    backController.dispose();
+    answerController.dispose();
     super.dispose();
   }
 
@@ -34,7 +34,8 @@ class _EditFlashcardScreenState extends State<EditFlashcardScreen> {
     if (key.currentState!.validate()) {
       context.read<CardsBloc>().add(EditFlashcardsEvent(
           parameters: widget.parameters.copyWith(
-              question: questionController.text, back: backController.text)));
+              question: questionController.text,
+              answer: answerController.text)));
       return true; //if card was added successfully, return true to navigate
     }
     return false;
@@ -55,7 +56,7 @@ class _EditFlashcardScreenState extends State<EditFlashcardScreen> {
                     ),
                     CustomForms(
                         questionController: questionController,
-                        backController: backController,
+                        answerController: answerController,
                         formKey: key),
                     SizedBox(height: size.maxHeight * 0.2),
                     FilledButton(

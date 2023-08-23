@@ -23,7 +23,7 @@ class CustomErrorWidget extends StatelessWidget {
                   context.read<CardsBloc>().add(const GetCollectionsEvent());
                   Navigator.of(context).pushReplacementNamed('/');
                 },
-                child: const Text(AppStrings.goBack))
+                child: const Text(AppStrings.goanswer))
           ],
         ),
       ),

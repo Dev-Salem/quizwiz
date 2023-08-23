@@ -106,7 +106,7 @@ class IsarFlashcardDataSource implements FlashcardLocalDataSource {
           .where((element) => element.uuid == parameters.flashcard.uuid);
       //create the updated card
       final newCard = findCard.single
-          .copyWith(question: parameters.question, answer: parameters.back);
+          .copyWith(question: parameters.question, answer: parameters.answer);
       //create a new card list without the old card
       List<Flashcard> newList = parameters.collection.cards
           .where((element) => element.uuid != parameters.flashcard.uuid)

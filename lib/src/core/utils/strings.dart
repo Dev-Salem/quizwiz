@@ -18,7 +18,7 @@ class AppStrings {
   static const String noCollection =
       "Nothing's Here, Start Making Collections!";
   static const String noFlashcardsToReview = "No Flashcards To Review Today";
-  static const String goBack = "Go Back";
+  static const String goanswer = "Go answer";
   static const String practice = "Practice";
   static const String noCards = "No Cards Here, Try Adding New Cards";
   static const String done = "Done";

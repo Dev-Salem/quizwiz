@@ -62,7 +62,7 @@ class GeneratedFlashcardWidget extends StatelessWidget {
                                     AddFlashcardsEvent(
                                         collectionUuid: collectionUuid,
                                         question: flashcards[index].question,
-                                        back: flashcards[index].answer));
+                                        answer: flashcards[index].answer));
                                 customSnackBar("Flashcard Is Added", context);
                               },
                               icon: const Icon(Icons.add))
