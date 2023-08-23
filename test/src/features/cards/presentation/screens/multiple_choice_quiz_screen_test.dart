@@ -84,9 +84,10 @@ void main() {
               multipleChoices: quizzes));
       await tester.pumpWidget(multipleChoiceScreen);
       await tester.tap(find.text(quizzes[0].rightAnswer));
-
+      await tester.pump(const Duration(milliseconds: 2000));
+      await tester.pumpAndSettle();
       expect(find.text(quizzes[1].question), findsOneWidget);
-      expect(find.widgetWithText(Container, quizzes[0].rightAnswer),
+      expect(find.widgetWithText(Container, quizzes[1].rightAnswer),
           findsOneWidget);
     });
 

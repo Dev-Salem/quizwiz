@@ -35,7 +35,7 @@ class CustomFocusedMenuHolder extends StatelessWidget {
               }),
           FocusedMenuItem(
               backgroundColor: Theme.of(context).cardColor,
-              title: const Text("Edit"),
+              title: const Text(AppStrings.edit),
               onPressed: () {
                 Navigator.of(context).pushReplacementNamed(
                     Routes.goToEditFlashcard,
