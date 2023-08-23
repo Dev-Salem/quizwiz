@@ -14,19 +14,19 @@ class CreateFlashcardsScreen extends StatefulWidget {
 }
 
 class _CreateFlashcardsScreenState extends State<CreateFlashcardsScreen> {
-  late final TextEditingController frontController;
+  late final TextEditingController questionController;
   late final TextEditingController backController;
   final key = GlobalKey<FormState>();
   @override
   void initState() {
     super.initState();
-    frontController = TextEditingController();
+    questionController = TextEditingController();
     backController = TextEditingController();
   }
 
   @override
   void dispose() {
-    frontController.dispose();
+    questionController.dispose();
     backController.dispose();
     super.dispose();
   }
@@ -35,7 +35,7 @@ class _CreateFlashcardsScreenState extends State<CreateFlashcardsScreen> {
     if (key.currentState!.validate()) {
       context.read<CardsBloc>().add(AddFlashcardsEvent(
           collectionUuid: widget.collectionUuid,
-          front: frontController.text,
+          question: questionController.text,
           back: backController.text));
       return true; //if card was added successfully, return true to navigate
     }
@@ -57,7 +57,7 @@ class _CreateFlashcardsScreenState extends State<CreateFlashcardsScreen> {
                     ),
                     CustomForms(
                         formKey: key,
-                        frontController: frontController,
+                        questionController: questionController,
                         backController: backController),
                     TextButton.icon(
                         key: const Key(AppStrings.generateWithAI),

@@ -40,7 +40,7 @@ class CustomFocusedMenuHolder extends StatelessWidget {
                 Navigator.of(context).pushReplacementNamed(
                     Routes.goToEditFlashcard,
                     arguments: EditFlashcardParameters(
-                        front: collection.cards[index].question,
+                        question: collection.cards[index].question,
                         back: collection.cards[index].answer,
                         collection: collection,
                         flashcard: collection.cards[index]));

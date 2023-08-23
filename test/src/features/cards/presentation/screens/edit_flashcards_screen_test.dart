@@ -21,7 +21,7 @@ void main() {
         onGenerateRoute: ((settings) => RouteGenerator.generateRoute(settings)),
         home: EditFlashcardScreen(
             parameters: EditFlashcardParameters(
-                front: "front",
+                question: "question",
                 back: "back",
                 collection: collection,
                 flashcard: initialFlashcard)),
@@ -42,13 +42,13 @@ void main() {
          expect non-null values in [TextEditingController] and true value from the validator''',
         (tester) async {
       await tester.pumpWidget(createFlashcardsScreen);
-      var frontTextFormField = find.byKey(const Key("front"));
+      var questionTextFormField = find.byKey(const Key("question"));
       var backTextFormField = find.byKey(const Key("back"));
-      await tester.enterText(frontTextFormField, "Question");
+      await tester.enterText(questionTextFormField, "Question");
       await tester.enterText(backTextFormField, "Answer");
       var customFormsFinder =
           tester.widget<CustomForms>(find.byType(CustomForms));
-      expect(customFormsFinder.frontController.text, "Question");
+      expect(customFormsFinder.questionController.text, "Question");
       expect(customFormsFinder.backController.text, "Answer");
       expect(customFormsFinder.formKey.currentState?.validate(), true);
     });
@@ -65,9 +65,9 @@ void main() {
         "When Edit button is clicked and the validation is true, expect to navigate to [FlashcardListScreen] ",
         (tester) async {
       await tester.pumpWidget(createFlashcardsScreen);
-      var frontTextFormField = find.byKey(const Key("front"));
+      var questionTextFormField = find.byKey(const Key("question"));
       var backTextFormField = find.byKey(const Key("back"));
-      await tester.enterText(frontTextFormField, "Edited");
+      await tester.enterText(questionTextFormField, "Edited");
       await tester.enterText(backTextFormField, "Edited");
       whenListen(
           blocMock,

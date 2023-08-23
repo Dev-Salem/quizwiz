@@ -31,11 +31,11 @@ class CreateCollectionsEvent extends CardsEvents {
 
 class AddFlashcardsEvent extends CardsEvents {
   final String collectionUuid;
-  final String front;
+  final String question;
   final String back;
   const AddFlashcardsEvent({
     required this.collectionUuid,
-    required this.front,
+    required this.question,
     required this.back,
   });
 }

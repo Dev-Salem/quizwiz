@@ -5,7 +5,7 @@ void main() {
   setUp(() => customForms = MaterialApp(
         home: Scaffold(
           body: CustomForms(
-              frontController: TextEditingController(),
+              questionController: TextEditingController(),
               backController: TextEditingController(),
               formKey: GlobalKey()),
         ),
@@ -23,13 +23,14 @@ void main() {
         "when filling out [TextFormField], expect the same values in the controller",
         (tester) async {
       await tester.pumpWidget(customForms);
-      await tester.enterText(find.byKey(const Key('front')), "front text");
+      await tester.enterText(
+          find.byKey(const Key('question')), "question text");
       await tester.enterText(find.byKey(const Key("back")), "back text");
-      final frontController =
-          tester.widget<TextFormField>(find.byKey(const Key("front")));
+      final questionController =
+          tester.widget<TextFormField>(find.byKey(const Key("question")));
       final backController =
           tester.widget<TextFormField>(find.byKey(const Key("back")));
-      expect(frontController.controller?.text, "front text");
+      expect(questionController.controller?.text, "question text");
       expect(backController.controller?.text, "back text");
     });
   });

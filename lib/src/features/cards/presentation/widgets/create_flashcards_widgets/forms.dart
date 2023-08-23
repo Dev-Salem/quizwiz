@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 class CustomForms extends StatelessWidget {
-  final TextEditingController frontController;
+  final TextEditingController questionController;
   final TextEditingController backController;
   final GlobalKey<FormState> formKey;
   const CustomForms(
       {super.key,
-      required this.frontController,
+      required this.questionController,
       required this.backController,
       required this.formKey});
 
@@ -17,14 +17,14 @@ class CustomForms extends StatelessWidget {
       child: Column(
         children: [
           TextFormField(
-            key: const Key("front"),
-            controller: frontController,
+            key: const Key("question"),
+            controller: questionController,
             maxLines: 2,
             minLines: 1,
             validator: (value) =>
                 value!.isEmpty ? "Invalid Input: Empty Field" : null,
             decoration: const InputDecoration(
-              label: Text("Term (Front)"),
+              label: Text("Term (question)"),
             ),
           ),
           const SizedBox(
