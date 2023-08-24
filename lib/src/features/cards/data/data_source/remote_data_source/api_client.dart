@@ -5,10 +5,11 @@ import 'package:quizwiz/src/core/utils/private_key.dart';
 
 class DioClient {
   static Future<List<dynamic>> generateFlashcards(String material) async {
-    _checkInternetConnection();
-    final dio = _createDioInstance(
-        NetworkConstants.gptBaseUrl, const Duration(minutes: 2));
+    late final Dio dio;
     try {
+      _checkInternetConnection();
+      dio = _createDioInstance(
+          NetworkConstants.gptBaseUrl, const Duration(minutes: 2));
       final response = await dio.post('/', data: [
         {
           "role": "user",
