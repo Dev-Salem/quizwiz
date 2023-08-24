@@ -1,6 +1,4 @@
 import 'package:focused_menu/focused_menu.dart';
-import 'package:focused_menu/modals.dart';
-
 import '../../../../../tests_imports.dart';
 
 void main() {
