@@ -129,10 +129,10 @@ void main() {
       await tester.pumpWidget(generatedFlashcards);
       expect(find.byType(LoadingWidget), findsOneWidget);
       await tester.pump();
-      await tester.tap(find.byType(IconButton));
+      await tester.tap(find.byKey(const Key('0')));
       await tester.pump();
       expect(
-          find.widgetWithText(SnackBar, "Flashcard Is Added"), findsOneWidget);
+          find.widgetWithText(SnackBar, "Flashcard Was Added"), findsOneWidget);
     });
   });
 }
