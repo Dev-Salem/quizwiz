@@ -1,3 +1,5 @@
+import 'dart:io';
+import 'package:file_picker/file_picker.dart';
 import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/features/cards/controller/controller.dart';
 import 'package:quizwiz/src/features/cards/presentation/presentation.dart';
@@ -42,6 +44,16 @@ class _CreateFlashcardsScreenState extends State<CreateFlashcardsScreen> {
     return false;
   }
 
+  void generateFlashcards(File? file) {
+    if (file != null) {
+      context.read<CardsBloc>().add(GenerateFlashcardsEvent(file: file));
+      Navigator.of(context).pushReplacementNamed(Routes.generatedFlashcards,
+          arguments: widget.collectionUuid);
+    } else {
+      customSnackBar("No File was selected", context);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,10 +73,9 @@ class _CreateFlashcardsScreenState extends State<CreateFlashcardsScreen> {
                         answerController: answerController),
                     TextButton.icon(
                         key: const Key(AppStrings.generateWithAI),
-                        onPressed: () {
-                          Navigator.of(context).pushReplacementNamed(
-                              Routes.generateFlashcards,
-                              arguments: widget.collectionUuid);
+                        onPressed: () async {
+                          final file = await _pickFile();
+                          generateFlashcards(file);
                         },
                         icon: const Icon(Icons.rocket),
                         label: const Text(AppStrings.generateWithAI)),
@@ -95,4 +106,13 @@ class _CreateFlashcardsScreenState extends State<CreateFlashcardsScreen> {
                   ],
                 )));
   }
+}
+
+Future<File?> _pickFile() async {
+  FilePickerResult? result = await FilePicker.platform
+      .pickFiles(type: FileType.custom, allowedExtensions: ['pdf']);
+  if (result != null) {
+    return File(result.files.single.path!);
+  }
+  return null;
 }

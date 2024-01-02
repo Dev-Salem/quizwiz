@@ -1,5 +1,6 @@
 import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/features/cards/data/data.dart';
+import 'dart:io';
 
 abstract class BaseCardsRepository {
   factory BaseCardsRepository(
@@ -32,7 +33,7 @@ abstract class BaseCardsRepository {
         String description
       }) collection);
   EitherMultiple getMultipleChoiceOptions(FlashcardCollection collection);
-  EitherFlashcards generateFlashcards(String material);
+  EitherFlashcards generateFlashcards(File file);
   EitherUnit saveAllGeneratedFlashcard(
       String collectionUuid, List<Flashcard> flashcards);
   EitherUnit combineCollections(FlashcardCollection mainCollection,

@@ -8,10 +8,9 @@ class NetworkConstants {
   static const String noConnectionErrorMessage = "No Internet connection";
   static const String invalidNetworkErrorMessage =
       "Invalid API response, try again";
-  static String generateFlashcardsPrompt(String material) {
-    return """
+  static const String generateFlashcardsPrompt = """
 pretend to be an expert in summarizing studying material.
-create a valid JSON array of objects for material provided , use only the material provided,
+create a valid JSON array of objects for material provided , use only the material provided, provide as much flashcards as possible
 following this format [no prose, only the result in json format]:
 
 [
@@ -25,8 +24,5 @@ following this format [no prose, only the result in json format]:
   }
 
 ]
------------------
-material: $material
  """;
-  }
 }

@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:io';
+
 import 'package:equatable/equatable.dart';
 import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/features/cards/data/data.dart';
@@ -88,9 +90,9 @@ class GetMultipleQuizOptionsEvent extends CardsEvents {
 }
 
 class GenerateFlashcardsEvent extends CardsEvents {
-  final String material;
+  final File file;
   const GenerateFlashcardsEvent({
-    required this.material,
+    required this.file,
   });
 }
 

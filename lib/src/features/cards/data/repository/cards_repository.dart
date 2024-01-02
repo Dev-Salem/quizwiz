@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/features/cards/data/data.dart';
@@ -130,9 +132,9 @@ class CardsRepository implements BaseCardsRepository {
   }
 
   @override
-  EitherFlashcards generateFlashcards(String material) async {
+  EitherFlashcards generateFlashcards(File file) async {
     try {
-      final result = await _remoteDataSource.generateFlashcards(material);
+      final result = await _remoteDataSource.generateFlashcards(file);
       return Right(result);
     } catch (e) {
       return Left(NetworkFailure(message: e.toString()));

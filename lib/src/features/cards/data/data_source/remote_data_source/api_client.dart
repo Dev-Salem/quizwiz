@@ -1,67 +1,84 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
+import 'dart:io';
 import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:quizwiz/src/core/core.dart';
-import 'package:quizwiz/src/core/utils/private_key.dart';
 
-class DioClient {
-  static Future<List<dynamic>> generateFlashcards(String material) async {
-    late final Dio dio;
+class ApiProvider {
+  final Dio _dio;
+  ApiProvider(this._dio);
+
+  Future<dynamic> getResult(
+    File file,
+  ) async {
     try {
-      _checkInternetConnection();
-      dio = _createDioInstance(
-          NetworkConstants.gptBaseUrl, const Duration(minutes: 2));
-      final response = await dio.post('/', data: [
-        {
-          "role": "user",
-          "content": NetworkConstants.generateFlashcardsPrompt(material)
-        }
-      ]);
-      return jsonDecode(response.data['text']);
-    } on Exception catch (e) {
-      throw _customException(e);
+      final apiKey = dotenv.get("chatPdfApi");
+      _dio.options.headers = {
+        'x-api-key': apiKey,
+        'Content-Type': 'application/json'
+      };
+      final sourceId = await _uploadFile(file, apiKey);
+      final result =
+          await _generateFlashcards(apiKey: apiKey, fileSourceId: sourceId);
+      await _deleteFile(sourceId, apiKey);
+      return result;
+    } on Exception {
+      rethrow;
     } finally {
-      dio.close();
+      // _dio.close();
     }
   }
-}
 
-Exception _customException(Exception e) {
-  if (e is FormatException) {
-    return const NetworkException(NetworkConstants.formatExceptionMessage);
-  } else if (e is DioException) {
-    return e.type == DioExceptionType.unknown
-        ? const NetworkException(NetworkConstants.invalidNetworkErrorMessage)
-        : NetworkException(e.message!);
-  } else if (e.toString().isNotEmpty) {
-    return NetworkException(e.toString());
-  } else {
-    return const UnexpectedNetworkException(
-        NetworkConstants.unexpectedErrorMessage);
+  Future<String> _uploadFile(File file, apiKey) async {
+    try {
+      final fileName = file.path.split('/').last;
+      FormData formData = FormData.fromMap({
+        'file': await MultipartFile.fromFile(
+          file.path,
+          filename: fileName,
+        ),
+      });
+      Response response = await _dio.post(
+        "https://api.chatpdf.com/v1/sources/add-file",
+        data: formData,
+      );
+      return response.data['sourceId'];
+    } on Exception {
+      rethrow;
+    }
   }
-}
 
-Dio _createDioInstance(final String url, final Duration timeout) {
-  final dio = Dio();
-  dio.options.validateStatus = (int? status) {
-    return status != null && status > 0;
-  };
-  dio.options
-    ..baseUrl = url
-    ..sendTimeout = timeout
-    ..connectTimeout = timeout
-    ..receiveTimeout = timeout
-    ..headers = {
-      'content-type': NetworkConstants.contentType,
-      //TODO: Get An API Key
-      'X-RapidAPI-Key': gptApiKey,
-      'X-RapidAPI-Host': NetworkConstants.gptHeaderHost
+  Future<dynamic> _generateFlashcards(
+      {required String apiKey, required String fileSourceId}) async {
+    try {
+      final data = {
+        "sourceId": fileSourceId,
+        "messages": [
+          {"role": 'user', "content": NetworkConstants.generateFlashcardsPrompt}
+        ]
+      };
+      Response response = await _dio.post(
+        'https://api.chatpdf.com/v1/chats/message',
+        data: data,
+      );
+      return jsonDecode(response.data['content']);
+    } on Exception {
+      rethrow;
+    }
+  }
+
+  Future<void> _deleteFile(String fileSourceId, apiKey) async {
+    final data = {
+      'sources': [fileSourceId]
     };
-  return dio;
-}
-
-Future<void> _checkInternetConnection() async {
-  final isConnected = await InternetConnectivity.isConnected();
-  if (!isConnected) {
-    throw const NetworkException(NetworkConstants.noConnectionErrorMessage);
+    try {
+      _dio.post(
+        'https://api.chatpdf.com/v1/sources/delete',
+        data: data,
+      );
+    } on Exception {
+      rethrow;
+    }
   }
 }
