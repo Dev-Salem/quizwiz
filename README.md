@@ -79,7 +79,7 @@ Feel free to add/request features by making a pull request, or by reporting bugs
 
 [⏳] migrate to Go_Router
 
-[⏳] use a new API (e.g ChatPDF)
+[✅] use a new API (e.g ChatPDF)
 
 ## 🗞️ License
 MIT License
