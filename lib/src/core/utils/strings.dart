@@ -1,5 +1,6 @@
 class AppStrings {
   static const notFoundAsset = "assets/93134-not-found.json";
+  static const completedTaskAsset = 'assets/1697293737915 -completed.json';
   static const String errorMessage = 'Something went wrong';
   static const String review = 'Review';
   static const String homeScreen = "Home Screen";
@@ -18,7 +19,7 @@ class AppStrings {
   static const String noCollection =
       "Nothing's Here, Start Making Collections!";
   static const String noFlashcardsToReview = "No Flashcards To Review Today";
-  static const String goanswer = "Go answer";
+  static const String goBack = "Go Back";
   static const String practice = "Practice";
   static const String noCards = "No Cards Here, Try Adding New Cards";
   static const String done = "Done";
