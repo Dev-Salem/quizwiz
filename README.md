@@ -75,7 +75,11 @@ Due to the limitations of chatgpt 3.5 turbo, the API is only able to summarize ~
 Feel free to add/request features by making a pull request, or by reporting bugs.
 
 ## 🗺️ Roadmap
-[  ] add tests
+[✅] add widget tests
+
+[⏳] migrate to Go_Router
+
+[⏳] use a new API (e.g ChatPDF)
 
 ## 🗞️ License
 MIT License
