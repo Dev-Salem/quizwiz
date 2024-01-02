@@ -13,7 +13,7 @@ class ApiProvider {
     File file,
   ) async {
     try {
-      final apiKey = dotenv.get("chatPdfApi");
+      final apiKey = dotenv.get(NetworkConstants.apiKeyName);
       _dio.options.headers = {
         'x-api-key': apiKey,
         'Content-Type': 'application/json'
@@ -40,12 +40,12 @@ class ApiProvider {
         ),
       });
       Response response = await _dio.post(
-        "https://api.chatpdf.com/v1/sources/add-file",
+        NetworkConstants.addFileEndPoint,
         data: formData,
       );
       return response.data['sourceId'];
-    } on Exception {
-      rethrow;
+    } on Exception catch (e) {
+      throw NetworkException(e.toString());
     }
   }
 
@@ -59,7 +59,7 @@ class ApiProvider {
         ]
       };
       Response response = await _dio.post(
-        'https://api.chatpdf.com/v1/chats/message',
+        NetworkConstants.chatEndPoint,
         data: data,
       );
       return jsonDecode(response.data['content']);
@@ -74,7 +74,7 @@ class ApiProvider {
     };
     try {
       _dio.post(
-        'https://api.chatpdf.com/v1/sources/delete',
+        NetworkConstants.deleteFileEndPoint,
         data: data,
       );
     } on Exception {

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:quizwiz/src/core/core.dart';
 import 'package:quizwiz/src/features/cards/data/data.dart';
 import 'dart:io';
 
@@ -15,8 +16,11 @@ class DioRemoteDataSource implements BaseRemoteDataSource {
       final List<dynamic> result = await api.getResult(file);
       final flashcards = result.map((e) => Flashcard.fromMap(e)).toList();
       return flashcards;
-    } on Exception {
-      rethrow;
+    } on NetworkException catch (e) {
+      throw NetworkException("Failed To Connect: ${e.message}");
+    } on Exception catch (e) {
+      throw JsonDeserializationException(
+          "Invalid API response: ${e.toString()}");
     }
   }
 }
