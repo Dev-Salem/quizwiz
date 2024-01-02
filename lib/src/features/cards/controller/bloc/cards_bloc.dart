@@ -176,8 +176,7 @@ class CardsBloc extends Bloc<CardsEvents, CardsState> {
   _generateFlashcards(
       GenerateFlashcardsEvent event, Emitter<CardsState> emit) async {
     emit(state.copyWith(flashcardRequestState: RequestState.loading));
-    final result =
-        await _baseCardsRepository.generateFlashcards(event.material);
+    final result = await _baseCardsRepository.generateFlashcards(event.file);
     result.fold(
         (l) => emit(state.copyWith(
             flashcardRequestState: RequestState.error,

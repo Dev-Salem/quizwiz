@@ -44,12 +44,6 @@ class RouteGenerator {
             builder: (context) => EditFlashcardScreen(
                   parameters: parameters,
                 ));
-      case Routes.generateFlashcards:
-        var collectionUuid = settings.arguments as String;
-        return MaterialPageRoute(
-            builder: (context) => GenerateCardsScreen(
-                  collectionUuid: collectionUuid,
-                ));
       case Routes.quiz:
         return MaterialPageRoute(
             builder: (context) => const MultipleChoiceQuizScreen());

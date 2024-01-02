@@ -77,8 +77,8 @@ class Flashcard {
 
   factory Flashcard.fromMap(Map<String, dynamic> map) {
     return Flashcard(
-        question: map['term'] as String,
-        answer: map['definition'] as String,
+        question: map['term'],
+        answer: map['definition'],
         uuid: const Uuid().v4());
   }
 }
